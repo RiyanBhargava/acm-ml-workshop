@@ -1,3 +1,3 @@
-# Template Title
+# Home page
 
-Template text
+Edit this later

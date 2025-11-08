@@ -134,48 +134,39 @@ They might develop a skewed understanding. Similarly, outliers can mislead machi
 
 Properties below these thresholds are likely data entry errors or exceptional cases we should exclude.
 
-### Statistical Outlier Removal: The Standard Deviation Method
+### Outlier Removal using Box Plots and IQR
 
-**Concept**: In a normal distribution, most values fall within 1 standard deviation of the mean.
+#### Box Plot Visualization
 
-**How it works**:
-1. Calculate the average (mean) price per sq ft for each location
-2. Calculate the standard deviation (how spread out the values are)
-3. Remove properties whose price per sq ft is more than 1 standard deviation away from the mean
+A box plot (or whisker plot) is a graphical representation that helps visualize the spread and skewness of numerical data.
+It displays:
 
-**Why per location?** A ₹10,000/sq ft property might be normal in an upscale area but an outlier in a budget neighborhood.
+- **Median (Q2)** — The middle value of the dataset.
+- **First Quartile (Q1)** — The 25th percentile (lower quartile).
+- **Third Quartile (Q3)** — The 75th percentile (upper quartile).
+- **Interquartile Range (IQR)** — The difference between Q3 and Q1 (IQR = Q3 - Q1).
+- **Whiskers and Points** — Points outside the whiskers represent potential outliers.
 
-**Visual Example**: 
-- Location A average: ₹5,000/sq ft, std dev: ₹1,000
-- We keep properties between ₹4,000 and ₹6,000/sq ft
-- We remove anything below ₹4,000 or above ₹6,000
+A box plot makes it easy to visually identify outliers — these are the points that appear outside the whiskers (i.e., far from the main cluster of data).
 
-### Comparative Outlier Removal (BHK Analysis)
+#### Interquartile Range (IQR) Method
+The IQR method is a statistical technique used to detect and remove outliers.
 
-**The Anomaly**: In the same neighborhood, a 2 BHK costs ₹80 lakhs while a 3 BHK (similar size) costs ₹65 lakhs.
+**Steps:**
 
-**Why is this wrong?** Generally, more bedrooms = higher price for similar square footage.
+1. Compute Q1 and Q3 — Find the 25th and 75th percentiles of the data.
 
-**Solution**: For each location, ensure that:
-- 2 BHK average price/sq ft ≥ 1 BHK average price/sq ft
-- 3 BHK average price/sq ft ≥ 2 BHK average price/sq ft
-- And so on...
+2. Calculate IQR
 
-Remove properties that violate this logical progression.
+    ```𝐼𝑄𝑅=𝑄3−𝑄1```
 
-### Bathroom-to-Bedroom Ratio
+3. Determine cutoff limits
 
-**Common Sense Rule**: A house shouldn't have more than 2 extra bathrooms compared to bedrooms.
+    ```Lower bound = Q1 - 1.5 × IQR```
 
-**Examples**:
-- ✅ 2 BHK with 2-3 bathrooms: Normal
-- ✅ 3 BHK with 3-4 bathrooms: Normal
-- ❌ 2 BHK with 6 bathrooms: Outlier
-- ❌ 1 BHK with 5 bathrooms: Outlier
+    ```Upper bound = Q3 + 1.5 × IQR```
 
-**Why?** Such properties are either data errors or extremely unusual cases that would confuse the model.
-
----
+4. Identify and remove outliers — Any value less than the lower bound or greater than the upper bound is considered an outlier.
 
 ## 4. Preparing Data for Machine Learning
 
@@ -339,7 +330,7 @@ df3['size'].unique() #This code will return all the unique values in the column 
 Extract numeric bedroom count:
 
 ```python
-df3['bhk'] = df3['size'].apply(lambda x: int(x.split(' ')[0]))
+df3['bhk'] = df3['size'].str.split(' ').str[0].astype(int)
 ```
 
 ### Step 9: Handle Range Values in 'total_sqft'
@@ -411,9 +402,11 @@ Group locations with fewer than 10 occurrences:
 ```python
 len(location_stats[location_stats <= 10]) #We can observe that there are 1052 locations whose repetition is less than 10 out of 1293 locations...So we can classify them as 'Others'
 
-location_stats_less_than_10 = location_stats[location_stats <= 10]
+# Assuming location_stats is a Series like: location -> count
+location_stats_less_than_10 = location_stats[location_stats <= 10].index  # use .index
 
-df5.location = df5.location.apply(lambda x: 'other' if x in location_stats_less_than_10 else x)
+# Now replace rare locations
+df5['location'] = df5['location'].where(~df5['location'].isin(location_stats_less_than_10), 'other')
 
 len(df5.location.unique())
 ```
@@ -426,111 +419,61 @@ df6 = df5[~(df5.total_sqft/df5.bhk<300)]
 df6.shape
 ```
 
-### Step 13: Remove Outliers Using Standard Deviation
+### Step 13: Remove Outliers Using Box plots and IQR Method
+- Box plots to check outliers
 
+```
+plt.figure(figsize=(18,5))
+plt.subplot(1,3,1)
+sns.boxplot(df6['bath'])
+plt.title('Bathrooms')
+
+plt.subplot(1,3,2)
+sns.boxplot(df6['bhk'])
+plt.title('BHK')
+
+plt.subplot(1,3,3)
+sns.boxplot(df6['price_per_sqft'])
+plt.title('price_per_sqft')
+
+plt.tight_layout()
+plt.show()
+```
+- Removing outliers
 ```python
-df6.price_per_sqft.describe()
+# Remove outliers using IQR for bath, bhk, price_per_sqft
+def remove_iqr_outliers(df, column):
+    Q1 = df[column].quantile(0.25)
+    Q3 = df[column].quantile(0.75)
+    IQR = Q3 - Q1
+    return df[(df[column] >= Q1 - 1.5 * IQR) & (df[column] <= Q3 + 1.5 * IQR)]
+
+df6_no_bath_outliers = remove_iqr_outliers(df6, 'bath')
+df6_no_bhk_outliers = remove_iqr_outliers(df6_no_bath_outliers, 'bhk')
+df7 = remove_iqr_outliers(df6_no_bhk_outliers, 'price_per_sqft')
+
+print("Shape after outlier removal:", df7.shape)
+
+```
+- This ensures that the dataset is cleaner and more consistent, improving the accuracy and robustness of further data analysis or model training.
+
+### Step 14 : Performing one hot encoding
+```python
+dummies = pd.get_dummies(df7.location) #One-hot encoding
+dummies.head(3)
+
+df8 = pd.concat([df7, dummies.drop('other',axis="columns")],axis='columns')
+df8.head()
+
+df9 =df8.drop('location', axis="columns")
+df9.head()
 ```
 
-Remove price outliers per location:
-
+### Step 15 : Download the preprocessed dataset and be ready for the next stage of model training
 ```python
-def remove_pps_outliers(df): #pps is nothing but price per sqft
-    df_out = pd.DataFrame()
-    for key, subdf in df.groupby('location'):
-        m = np.mean(subdf.price_per_sqft) #mean
-        st = np.std(subdf.price_per_sqft) #standard deviation
-        reduced_df = subdf[(subdf.price_per_sqft>(m-st)) & (subdf.price_per_sqft<=(m+st))] #Anything that is deviating more than one standard deviation is removed
-        df_out = pd.concat([df_out,reduced_df],ignore_index=True) #That is being concatenated here
-    return df_out
-df7 = remove_pps_outliers(df6)
-df7.shape
-```
-
-### Step 14: Visualize BHK Outliers with Scatter Plot
-
-```python
-def plot_scatter_chart(df,location):
-    bhk2 = df[(df.location==location) & (df.bhk==2)]
-    bhk3 = df[(df.location==location) & (df.bhk==3)]
-    matplotlib.rcParams['figure.figsize'] = (15,10)
-    plt.scatter(bhk2.total_sqft,bhk2.price,color='blue',label='2 BHK', s=50)
-    plt.scatter(bhk3.total_sqft,bhk3.price,marker='+', color='green',label='3 BHK', s=50)
-    plt.xlabel("Total Square Feet Area")
-    plt.ylabel("Price (Lakh Indian Rupees)")
-    plt.title(location)
-    plt.legend()
-    
-plot_scatter_chart(df7,"Rajaji Nagar")
-```
-
-### Step 15: Remove BHK-Based Outliers
-
-```python
-def remove_bhk_outliers(df):
-    exclude_indices = np.array([])
-    for location, location_df in df.groupby('location'):
-        bhk_stats = {}
-        for bhk, bhk_df in location_df.groupby('bhk'):
-            bhk_stats[bhk] = {
-                'mean': np.mean(bhk_df.price_per_sqft),
-                'std': np.std(bhk_df.price_per_sqft),
-                'count': bhk_df.shape[0]
-            }
-        for bhk, bhk_df in location_df.groupby('bhk'):
-            stats = bhk_stats.get(bhk-1)
-            if stats and stats['count']>5:
-                exclude_indices = np.append(exclude_indices, bhk_df[bhk_df.price_per_sqft<(stats['mean'])].index.values)
-    return df.drop(exclude_indices,axis='index')
-
-df8 = remove_bhk_outliers(df7)
-df8.shape
-```
-
-Visualize the improvement:
-
-```python
-plot_scatter_chart(df8,"Rajaji Nagar")
-```
-
-### Step 16: Visualize Price Distribution
-
-```python
-import matplotlib
-matplotlib.rcParams["figure.figsize"] = (20,10)
-plt.hist(df8.price_per_sqft,rwidth=0.8)
-plt.xlabel("Price Per Square Feet")
-plt.ylabel("Count")
-```
-
-### Step 17: Remove Bathroom Outliers
-
-```python
-df8.bath.unique()
-```
-
-Visualize bathroom distribution:
-
-```python
-plt.hist(df8.bath,rwidth=0.8)
-plt.xlabel("Number of bathrooms")
-plt.ylabel("Count")
-```
-
-Remove properties with excessive bathrooms:
-
-```python
-df9 = df8[df8.bath<df8.bhk+2]
-df9.shape
-```
-
-### Step 18: Final Cleanup - Remove Unnecessary Columns
-
-```python
-df10 = df9.drop(['size','price_per_sqft'],axis='columns')
-
-#df10 is now our final dataset
-df10
+df9.to_csv('preprocessed_data.csv', index=False)
+from google.colab import files
+files.download('preprocessed_data.csv')
 ```
 
 ---
@@ -556,4 +499,4 @@ In **Day 2**, we'll take this beautifully cleaned dataset and:
 - Evaluate model performance
 - Make actual price predictions
 
-See you tomorrow! 🚀
+See you nect week! 🚀

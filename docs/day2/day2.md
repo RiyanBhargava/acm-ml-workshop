@@ -1,949 +1,911 @@
-# Day 2: Model Building and Evaluation
-
-## Welcome Back!
-
-Yesterday, we learned the crucial art of data cleaning and feature engineering. Today, we're going to build on that foundation and create actual machine learning models that can predict house prices! This is where the magic happens - where data transforms into intelligent predictions.
-
-## Understanding Machine Learning Models
-
-Before we dive in, let's demystify what a machine learning model actually is.
-
-### What is a Machine Learning Model?
-
-Think of a machine learning model as a mathematical recipe that learns patterns from data. It's like teaching a child to recognize animals:
-
-1. **Show examples**: "This is a cat, this is a dog, this is a bird"
-2. **Child learns patterns**: "Cats have pointy ears, dogs bark, birds have wings"
-3. **Test understanding**: Show a new picture - can the child identify it?
-
-Machine learning works similarly:
-1. **Training**: Feed the model data (features + prices)
-2. **Learning**: Model finds mathematical relationships between features and prices
-3. **Prediction**: Given new features, model predicts the price
+# ML Workshop Day 2: Model Training and Analysis
+## Complete Documentation Guide
 
 ---
 
-## The Training-Testing Split
-
-### Why Split the Data?
-
-Imagine studying for an exam using practice questions, then taking the same exam with the exact same questions. Your score wouldn't truly reflect your understanding - you might have just memorized answers!
-
-**The Principle**: Never test a model on data it has seen during training.
-
-**The Solution**: Split data into two parts:
-- **Training Set (80%)**: Used to teach the model patterns
-- **Testing Set (20%)**: Used to evaluate how well it learned
-
-### How Does This Work?
-
-Let's say you have 1,000 houses:
-- Train on 800 houses: Model learns "In Location A, 2 BHK with 1000 sq ft typically costs ₹50 lakhs"
-- Test on 200 new houses: Does the model predict correctly for houses it hasn't seen?
-
-**Key Insight**: Good performance on training data is easy. Good performance on test data means the model truly understands patterns, not just memorized examples.
+## 📋 Table of Contents
+1. Overview
+2. Dataset Information
+3. Overfitting and Underfitting
+4. Train-Test Split
+5. Types of ML Problems
+6. Regression Models
+7. Classification Models
+8. Evaluation Metrics
+9. Model Comparison
+10. Key Insights
 
 ---
 
-## Regression: The Foundation
+## 🎯 Overview
 
-### What is Regression?
+This workshop introduces fundamental machine learning concepts with practical implementation. You'll learn how to:
+- Split data for training and testing
+- Implement multiple regression and classification models
+- Evaluate model performance
+- Compare and select the best model
 
-Regression is a type of machine learning used when you want to predict a **continuous numerical value** (like price, temperature, or salary).
-
-**Contrast with Classification**:
-- Regression: "This house costs ₹65.5 lakhs" (continuous number)
-- Classification: "This email is spam/not spam" (category)
-
-### The Regression Goal
-
-Find a mathematical function that best describes the relationship between:
-- **Input (X)**: Square feet, bedrooms, bathrooms, location
-- **Output (y)**: Price
-
-**In mathematical terms**: y = f(X)
-
-We want to find the function f that makes the most accurate predictions.
+**Dataset**: Real estate pricing data 
 
 ---
 
-## Model 1: Linear Regression
+## 📊 Dataset Information
 
-### The Concept
+### Original Dataset
+- **Total Records**: 10,835 properties
+- **Features**: 246 (after preprocessing)
+- **Target Variable**: `price` (continuous numerical value) - that we want to predict
 
-Linear Regression assumes a straight-line relationship between features and the target.
+### Feature Preparation
+```python
+# Separating features and target
+X = df[feature_cols]  # All columns except 'price'
+y = df['price']       # Target variable
 
-**Simple Example**: 
-- Hypothesis: Price = (Price per sq ft × Square feet) + Base price
-- If price per sq ft = ₹5,000 and base price = ₹10 lakhs
-- For 1,000 sq ft: Price = (5,000 × 1,000) + 10,00,000 = ₹60 lakhs
-
-**In Real Life**: The relationship involves multiple features:
-Price = (coefficient₁ × sqft) + (coefficient₂ × bedrooms) + (coefficient₃ × bathrooms) + ... + intercept
-
-### How Linear Regression Learns
-
-1. **Initialize**: Start with random coefficients
-2. **Predict**: Calculate predicted prices using current coefficients
-3. **Calculate Error**: Compare predictions with actual prices
-4. **Adjust**: Modify coefficients to reduce error
-5. **Repeat**: Continue until error is minimized
-
-**Analogy**: It's like adjusting the temperature knobs on a shower until the water is perfect - small adjustments based on feedback.
-
-### Strengths of Linear Regression
-
-- ✅ Simple and interpretable
-- ✅ Fast to train
-- ✅ Works well when relationships are approximately linear
-- ✅ Requires less data than complex models
-
-### Limitations
-
-- ❌ Assumes linear relationships (reality is often non-linear)
-- ❌ Sensitive to outliers (though we removed most!)
-- ❌ May underfit complex patterns
+# Dataset shape
+Features: (10835, 244)
+Target: (10835,)
+```
 
 ---
 
-## Model 2: Decision Tree Regression
+## Overfitting and Underfitting
+When building machine learning models, the goal is to **capture the true underlying patterns in data** so the model can **generalize** to new, unseen examples.  
 
-### Thinking in Trees
+However, models can sometimes go wrong in two common ways:
 
-Decision Trees make predictions by asking a series of yes/no questions.
+1. **Underfitting**
+2. **Overfitting** 
 
-**Real-Life Example**: Deciding if a house is expensive:
-1. Is it in a prime location? 
-   - Yes → Go to question 2
-   - No → Predict "Budget range"
-2. Is it larger than 2000 sq ft?
-   - Yes → Predict "Premium range"
-   - No → Predict "Mid range"
+![Underfit,Goodfit and Overfit curves](../assets/image13.png)
 
-### How Decision Trees Work for Regression
+Striking the **right balance** between underfitting and overfitting is key to building robust machine learning models.
 
-Instead of categories, trees predict numbers by splitting data into groups.
+### Overfitting
+Overfitting happens when a model learns too much from the training data, including details that don’t matter (like noise or outliers).
 
-**Example Process**:
-1. **First Split**: "Is square footage > 1500?"
-   - Left branch (≤1500): Average price = ₹40 lakhs
-   - Right branch (>1500): Average price = ₹75 lakhs
+**Example :**
+- Imagine fitting a very complicated curve to a set of points. The curve will go through every point, but it won’t represent the actual pattern.
+- As a result, the model works great on training data but fails when tested on new data.
 
-2. **Second Split on Left Branch**: "Are bedrooms ≤ 2?"
-   - Yes: Predict ₹35 lakhs
-   - No: Predict ₹50 lakhs
+![An example of overfit curve](../assets/image14.png)
 
-3. **Continue splitting** until groups are homogeneous or stopping criteria are met
+**Reasons for Overfitting:**
 
-### Key Parameters
+1. High variance and low bias.
+2. The model is too complex.
+3. The size of the training data.
 
-**Criterion**: How to measure the quality of a split
-- **Squared Error**: Minimize variance in each group (how spread out the prices are)
-- **Friedman MSE**: Similar but with adjustments for better performance
+### Underfitting
 
-**Splitter**: How to choose the split point
-- **Best**: Always choose the split that most reduces error (thorough but slower)
-- **Random**: Choose from random splits (faster but potentially less optimal)
+Underfitting is the opposite of overfitting. It happens when a model is too simple to capture what’s going on in the data.
 
-### Strengths of Decision Trees
+**Example:**
+- Imagine drawing a straight line to fit points that actually follow a curve. The line misses most of the pattern.
+- In this case, the model doesn’t work well on either the training or testing data.
 
-- ✅ Capture non-linear relationships naturally
-- ✅ Easy to understand and visualize
-- ✅ Handle feature interactions automatically
-- ✅ No need for feature scaling
+![An example of underfit curve](../assets/image15.png)
 
-### Limitations
+**Reasons for Underfitting:**
 
-- ❌ Prone to overfitting (memorizing training data)
-- ❌ Small changes in data can drastically change the tree
-- ❌ Can create overly complex models
+1. The model is too simple, So it may be not capable to represent the complexities in the data.
+2. The input features which is used to train the model is not the adequate representations of underlying factors influencing the target variable.
+3. The size of the training dataset used is not enough.
+4. Features are not scaled.
+
+## 🔀 Train-Test Split
+
+### What is Train-Test Split?
+
+Train-test split divides your dataset into two parts:
+
+![Visual Representation of Train-Test Split](../assets/image1.png)
+
+
+**Training Set (80%)**: Used to teach the model
+- Model learns patterns from this data
+- Used for fitting/training algorithms
+
+**Testing Set (20%)**: Used to evaluate the model
+- Model has never seen this data
+- Tests how well model generalizes to new data
+
+### Implementation
+```python
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, 
+    test_size=0.2,      # 20% for testing
+    random_state=42     # For reproducibility
+)
+```
+
+### Why Split Data?
+- **Prevents Overfitting**: Model doesn't memorize training data
+- **Tests Generalization**: Evaluates performance on unseen data
+- **Realistic Performance**: Simulates real-world predictions
+
+---
+## Types of Machine Learning Problems
+In supervised learning, problems are usually divided into two types : 
+- Regression Problem
+- Classification Problem
+
+### Regression Problem
+- **Goal :** To predict a continuous numeric value.
+- Regression models try to find relationships between input variables (features) and a continuous output.
+
+- Examples:
+
+    - Predicting house prices 🏠
+    - Estimating temperature 🌡️
+    - Forecasting stock prices 📈  
+
+
+- Common Algorithms:
+
+    1. Linear Regression    
+    2. Decision Tree Regressor
+    3. Random Forest Regressor
+    4. Support Vector Regressor (SVR)
+
+- Evaluation Metrics:
+
+    1. Mean Squared Error (MSE)
+    2. Root Mean Squared Error (RMSE)
+    3. Mean Absolute Error (MAE)
+    4. R² Score
+
+### Classification Problem
+- **Goal :** To predict a discrete label or category.
+- Classification models learn to separate data into different classes.
+
+- Examples:
+
+    - Email spam detection ✉️
+    - Disease diagnosis (positive/negative) 🧬
+    - Image recognition (cat vs. dog) 🐱🐶 
+
+
+- Common Algorithms:
+
+    1. Logistic Regression
+    2. Decision Tree Classifier
+    3. Random Forest Classifier
+    4. Support Vector Machine (SVM)
+    5. k-Nearest Neighbors (KNN)
+
+- Evaluation Metrics:
+
+    1. Accuracy
+    2. Precision & Recall
+    3. F1 Score
+    4. Confusion Matrix
 
 ---
 
-## Model 3: Random Forest Regression
+## 📈 Regression Models
 
-### The Wisdom of Crowds
+Regression predicts **continuous numerical values** (e.g., house prices, temperature, sales).
 
-Imagine asking one person for house price advice vs. asking 100 real estate experts and averaging their opinions. Which would you trust more?
+--- 
 
-Random Forest uses this "wisdom of crowds" principle by creating many decision trees and averaging their predictions.
+### 1. Linear Regression
 
-### How Random Forest Works
+**How it works**: Finds the best straight line through your data points.
 
-**The Process**:
-1. **Create multiple datasets**: Randomly sample data with replacement (bootstrap sampling)
-2. **Build many trees**: Train a decision tree on each sampled dataset
-3. **Random feature selection**: Each tree only considers a random subset of features at each split
-4. **Aggregate predictions**: Average all tree predictions for final output
+**Mathematical Formula**: 
+```
+ŷ = β₀ + β₁x₁ + β₂x₂ + ... + βₙxₙ
 
-**Example**: 
-- Tree 1 predicts: ₹60 lakhs
-- Tree 2 predicts: ₹58 lakhs
-- Tree 3 predicts: ₹62 lakhs
-- ...
-- Tree 100 predicts: ₹59 lakhs
-- **Final prediction**: Average = ₹60 lakhs
+Where:
+ŷ = predicted value
+β₀ = intercept (bias)
+β₁, β₂, ..., βₙ = coefficients (weights)
+x₁, x₂, ..., xₙ = feature values
+```
 
-### Why is This Better?
+Simple form: ```y = mx + b```
+- Simple and interpretable
+- Assumes linear relationship between features and target
 
-**Analogy**: If one doctor misdiagnoses, it's a problem. But if 100 doctors independently examine a patient and vote on the diagnosis, the collective opinion is usually more reliable.
+![Linear Regression Diagram](../assets/image2.png)
 
-**Benefits of Randomness**:
-- Different trees make different mistakes
-- Errors cancel out when averaged
-- More stable and robust predictions
+**Strengths**:
+- Fast to train
+- Easy to interpret
+- Works well with linear relationships
 
-### Key Parameters
+**Weaknesses**:
+- Cannot capture complex non-linear patterns
+- Sensitive to outliers - basically those values that are much out of range when compared to normal values
 
-**n_estimators**: Number of trees in the forest
-- More trees = Better performance (but slower)
-- Typical values: 100-500
-
-**max_depth**: Maximum depth of each tree
-- Controls how complex each individual tree can be
-- Prevents overfitting
-
-**max_features**: Number of features to consider at each split
-- 'auto' or 'sqrt': √(total features)
-- 'log2': log₂(total features)
-- Adds randomness and reduces correlation between trees
-
-### Strengths of Random Forest
-
-- ✅ Highly accurate (often best out-of-the-box performance)
-- ✅ Resistant to overfitting
-- ✅ Handles non-linear relationships
-- ✅ Works well with high-dimensional data
-- ✅ Provides feature importance rankings
-- ✅ Robust to outliers and noise
-
-### Limitations
-
-- ❌ Slower to train and predict than simpler models
-- ❌ Less interpretable (black box)
-- ❌ Requires more memory
-- ❌ Can be overkill for simple problems
-
-### When to Use Random Forest
-
-- You need high accuracy
-- Data has complex non-linear patterns
-- You have sufficient computational resources
-- Feature interactions are important
-- You want to know which features matter most
-
+**Use cases :**
+- Predicting house prices based on area, location, etc.  
+- Estimating sales revenue from advertising spend.  
+- Forecasting demand or performance metrics. 
 ---
 
-## Model 4: Support Vector Machine (SVM) Regression
+### 2. Decision Tree Regressor
 
-### The Concept: Finding the Best Fit Tube
-
-Unlike linear regression which tries to minimize distance to a line, SVM regression creates a "tube" around predictions and tries to fit as many data points as possible within this tube.
-
-**Analogy**: Imagine drawing a road with margins. SVM tries to make the road narrow enough to be precise, but wide enough that most houses fit comfortably inside.
-
-### How SVM Regression Works
-
-1. **Define a margin (ε-tube)**: Create a tolerance zone around predictions
-2. **Fit data within tube**: Points inside the tube have zero error
-3. **Penalize outliers**: Points outside the tube contribute to the error
-4. **Find optimal tube**: Balance between tube width and number of violations
+**How it works**: Creates a tree of yes/no questions to make predictions.
 
 **Example**:
-- If ε = ₹5 lakhs, and prediction is ₹50 lakhs
-- Actual prices between ₹45-55 lakhs are considered "good enough" (zero error)
-- Prices outside this range are penalized
+```
+Is size > 2000 sq ft?
+  ├─ Yes → Is location = downtown?
+  │         ├─ Yes → Predict $500k
+  │         └─ No → Predict $350k
+  └─ No → Predict $250k
+```
 
-### The Kernel Trick
 
-SVM's superpower is handling non-linear relationships through **kernels**:
+![Decision Tree Diagram](../assets/image3.png)
 
-**Linear Kernel**: Standard straight-line relationships
-**RBF (Radial Basis Function) Kernel**: Can model complex curved relationships
-- Each data point becomes a "center of influence"
-- Nearby points have more impact on predictions
-- Creates smooth, flexible boundaries
+**Mathematical Formula :**
+```
+Prediction at leaf node = (1/n) Σᵢ₌₁ⁿ yᵢ
 
-**Polynomial Kernel**: Models polynomial relationships
-- Good for relationships like: Price ∝ (sqft)²
+Where:
+n = number of samples in the leaf
+yᵢ = actual values in the leaf
+(Takes the mean of training samples that reach that leaf)
 
-### Key Parameters
+Split criterion (MSE):
+MSE = (1/n) Σᵢ₌₁ⁿ (yᵢ - ŷ)²
+```
+**Strengths**:
+- Handles non-linear relationships
+- Easy to visualize and understand
+- No feature scaling needed
 
-**C (Regularization)**: Controls trade-off between simplicity and accuracy
-- High C: Fit training data closely (risk overfitting)
-- Low C: Prefer simpler model (may underfit)
+**Weaknesses**:
+- Can overfit easily
+- Sensitive to small data changes
+- May create overly complex trees
 
-**epsilon (ε)**: Width of the tube
-- Larger ε: More tolerant (simpler model)
-- Smaller ε: Less tolerant (tries to fit more precisely)
-
-**kernel**: Type of kernel function
-- 'linear': For linear relationships
-- 'rbf': Most common, handles non-linearity
-- 'poly': For polynomial relationships
-
-### Strengths of SVM
-
-- ✅ Effective in high-dimensional spaces
-- ✅ Memory efficient (uses support vectors, not all data)
-- ✅ Versatile (different kernels for different data)
-- ✅ Works well when features >> samples
-
-### Limitations
-
-- ❌ Slow on large datasets (>10,000 samples)
-- ❌ Requires feature scaling
-- ❌ Choosing right kernel and parameters is tricky
-- ❌ Less interpretable than linear models
-- ❌ Sensitive to noisy data
-
-### When to Use SVM
-
-- Medium-sized datasets (hundreds to thousands of samples)
-- High-dimensional data
-- Clear margin of separation exists
-- You need a robust model against outliers
-
+**Use cases :**
+- Predicting sales based on season, location, and marketing.  
+- Modeling complex, non-linear data patterns.  
 ---
 
-## Model 5: K-Nearest Neighbors (KNN) Regression
+### 3. Random Forest Regressor
 
-### The "Ask Your Neighbors" Approach
+**How it works**: Creates many decision trees and averages their predictions.
 
-KNN is beautifully simple: To predict a house price, look at the K most similar houses and average their prices!
+**Think of it as**: A committee of experts voting on the answer
+- Each tree sees slightly different data
+- Final prediction = average of all trees
+- Reduces overfitting compared to single tree
 
-**Real-Life Analogy**: You want to price your house. You find the 5 most similar houses in your database (same size, location, bedrooms) and average their prices. That's your estimate!
+![Random Forest Regressor Diagram](../assets/image4.png)
 
-### How KNN Works
+**Mathematical Formula :**
+```
+ŷ = (1/T) Σₜ₌₁ᵀ hₜ(x)
 
-1. **Get new house features**: sqft, bedrooms, bathrooms, location
-2. **Calculate distance**: Measure "similarity" to all houses in training data
-3. **Find K nearest neighbors**: Select K most similar houses
-4. **Average their prices**: That's your prediction!
+Where:
+T = number of trees in the forest
+hₜ(x) = prediction from tree t
+ŷ = final prediction (average of all trees)
+```
+**Strengths**:
+- More accurate than single decision tree
+- Handles complex relationships
+- Reduces overfitting
+- Shows feature importance
+
+**Weaknesses**:
+- Slower to train
+- Less interpretable
+- Requires more memory
+
+**Use Cases :**
+- Predicting house prices, insurance claim amounts.  
+- Forecasting demand or energy consumption. 
+---
+
+### 4. Support Vector Regressor (SVR)
+
+**How it works**: 
+- Fits a line or curve that predicts most of the data within a “tube” of tolerance (𝜖).
+- Focuses only on points that lie on or outside the tube (support vectors).
+- Can handle nonlinear patterns using kernel functions (like RBF).
+
+**Key Concept**: 
+- Uses kernel tricks for non-linear patterns
+- Focuses on data points that define boundaries
+- RBF kernel used in your implementation
+
+**Mathematical Formula :**
+```
+Minimize: (1/2)||w||² + C Σᵢ₌₁ⁿ (ξᵢ + ξᵢ*)
+
+Subject to:
+|yᵢ - (w·xᵢ + b)| ≤ ε + ξᵢ
+
+Where:
+w = weight vector
+ε = epsilon (tube width)
+C = penalty parameter
+ξᵢ = slack variables
+```
+
+![Support Vector Regressor Diagram](../assets/image5.png)
+
+**Strengths**:
+- Effective in high-dimensional spaces
+- Memory efficient
+- Robust to outliers
+
+**Weaknesses**:
+- Slower on large datasets
+- Needs feature scaling
+- Difficult to interpret
+
+**Use Cases :**
+- Predicting stock prices or exchange rates.  
+- Estimating real estate prices where outliers exist. 
+---
+
+### 5. K-Nearest Neighbors (KNN) Regressor
+
+**How it works**: Predicts based on the K closest training examples.
 
 **Example** (K=5):
-- Your house: 1500 sqft, 3 BHK, Koramangala
-- 5 most similar houses in data:
-  - House A: ₹58 lakhs (1480 sqft, 3 BHK, Koramangala)
-  - House B: ₹62 lakhs (1520 sqft, 3 BHK, Koramangala)
-  - House C: ₹60 lakhs (1500 sqft, 3 BHK, Koramangala)
-  - House D: ₹59 lakhs (1490 sqft, 3 BHK, Koramangala)
-  - House E: ₹61 lakhs (1510 sqft, 3 BHK, Koramangala)
-- **Prediction**: (58+62+60+59+61)/5 = ₹60 lakhs
+- Find 5 nearest houses to your property
+- Average their prices
+- That's your prediction
 
-### Measuring Distance
+**Mathematical Formula :**
+```
+ŷ = (1/K) Σᵢ₌₁ᴷ yᵢ
 
-**Euclidean Distance** (most common):
-- Like measuring straight-line distance on a map
-- Distance = √[(sqft₁-sqft₂)² + (bath₁-bath₂)² + ...]
+Where:
+K = number of nearest neighbors
+yᵢ = value of i-th nearest neighbor
 
-**Manhattan Distance**:
-- Like driving through city blocks (only horizontal/vertical)
-- Distance = |sqft₁-sqft₂| + |bath₁-bath₂| + ...
+Distance (Euclidean):
+d(x, xᵢ) = √(Σⱼ₌₁ⁿ (xⱼ - xᵢⱼ)²)
+```
 
-### Key Parameters
+![KNN Regressor Diagram](../assets/image6.png)
 
-**n_neighbors (K)**: Number of neighbors to consider
-- Small K (e.g., 3): Sensitive to noise, captures local patterns
-- Large K (e.g., 20): Smoother predictions, less noise sensitivity
-- **Finding right K**: Use cross-validation!
+**Strengths**:
+- Simple to understand
+- No training phase (lazy learning)
+- Naturally handles non-linear patterns
 
-**weights**: How to weight neighbors
-- 'uniform': All K neighbors contribute equally
-- 'distance': Closer neighbors have more influence
+**Weaknesses**:
+- Slow predictions on large datasets
+- Needs feature scaling
+- Sensitive to irrelevant features
 
-**metric**: Distance calculation method
-- 'euclidean': Standard straight-line distance
-- 'manhattan': City-block distance
-
-### Strengths of KNN
-
-- ✅ Simple and intuitive
-- ✅ No training phase (lazy learner)
-- ✅ Naturally handles non-linear relationships
-- ✅ Can be very accurate with right K
-- ✅ Works for both regression and classification
-
-### Limitations
-
-- ❌ Slow predictions (must calculate all distances)
-- ❌ Requires lots of memory (stores all training data)
-- ❌ Sensitive to irrelevant features
-- ❌ **Curse of dimensionality**: Performance degrades with many features
-- ❌ Requires feature scaling
-
-### When to Use KNN
-
-- Small to medium datasets
-- Need quick model without training
-- Relationships are local (similar inputs → similar outputs)
-- Data is low-dimensional (< 20 features)
-- Interpretability matters (can explain by showing neighbors)
+**Use Cases :**
+- Estimating house rent based on nearby similar properties.  
+- Predicting temperature using data from nearby weather stations.
 
 ---
 
-## Model 6: Naive Bayes Regression
+## 🎯 Classification Models
 
-### Understanding Naive Bayes
+Classification predicts **categories/classes** (e.g., spam/not spam, disease/healthy, high/medium/low price).
 
-Naive Bayes is typically used for classification, but we can adapt it for regression using **Gaussian Naive Bayes** by discretizing the target variable.
+### 1. Logistic Regression
 
-**The "Naive" Assumption**: All features are independent given the target.
+**How it works**: Despite the name, it's for classification! Predicts probability of belonging to a class.
 
-**Example**: The model assumes that:
-- Number of bedrooms doesn't affect the impact of square footage
-- Location is independent of bathrooms
-- (This is "naive" because in reality, these ARE related!)
-
-### How Naive Bayes Works
-
-**The Bayesian Approach**:
-1. **Prior belief**: What do we know about house prices in general?
-2. **New evidence**: What features does this specific house have?
-3. **Updated belief**: Combine prior knowledge with new evidence using Bayes' Theorem
-
-**Bayes' Theorem**:
+**Example**: Predicting if house is "expensive" or "affordable"
 ```
-P(Price | Features) = P(Features | Price) × P(Price) / P(Features)
+Probability = 1 / (1 + e^(-score))
+If probability > 0.5 → Expensive
+If probability ≤ 0.5 → Affordable
 ```
 
-**In Simple Terms**:
-- "Given these features, what's the most likely price range?"
-- The model learns probability distributions for each feature
-- Combines them (naively assuming independence) for prediction
+**Mathematical Formula :**
+```
+P(y=1|x) = 1 / (1 + e^(-z))
 
-### For Regression: Gaussian Naive Bayes
+Where:
+z = β₀ + β₁x₁ + β₂x₂ + ... + βₙxₙ
+P(y=1|x) = probability of class 1
+e = Euler's number (≈2.718)
 
-To use Naive Bayes for price prediction:
-1. **Discretize prices**: Group into ranges (₹20-40L, ₹40-60L, ₹60-80L, etc.)
-2. **Calculate probabilities**: For each price range, what's the probability distribution of features?
-3. **Predict**: For new house, find most probable price range
-4. **Return value**: Use mean of that range
+Decision: If P(y=1|x) > 0.5 → Class 1
+          If P(y=1|x) ≤ 0.5 → Class 0
+```
 
-**Alternative**: Use the probabilities as weights to calculate expected value.
+![Logistic Regression Diagram](../assets/image7.png)
 
-### Key Assumptions
+**Strengths**:
+- Fast and efficient
+- Provides probability scores
+- Easy to interpret
 
-1. **Feature Independence**: Features don't influence each other's relationship with price
-2. **Gaussian Distribution**: Features follow normal (bell curve) distribution within each class
-3. **Sufficient Data**: Need enough examples in each price range
+**Weaknesses**:
+- Assumes linear decision boundary
+- Not effective for complex relationships
 
-### Strengths of Naive Bayes
-
-- ✅ Very fast training and prediction
-- ✅ Works well with limited data
-- ✅ Handles high-dimensional data
-- ✅ Probabilistic predictions (gives confidence)
-- ✅ Simple and interpretable
-
-### Limitations
-
-- ❌ Strong (naive) independence assumption rarely holds
-- ❌ Not naturally designed for regression
-- ❌ Requires discretization (loses information)
-- ❌ Assumes Gaussian distribution
-- ❌ Generally less accurate than other regression methods
-
-### When to Use Naive Bayes
-
-- Need very fast predictions
-- Limited training data
-- High-dimensional data
-- Want probabilistic outputs
-- Baseline model for comparison
-- Real-time applications
-
-**Note**: For house price prediction specifically, Naive Bayes is not the best choice, but understanding it is valuable for your ML toolkit!
+**When to use**: Binary classification with linearly separable data
 
 ---
 
-## Comparing All Six Models
+### 2. Decision Tree Classifier
 
-| Model | Accuracy | Speed | Interpretability | Best For |
-|-------|----------|-------|-----------------|----------|
-| **Linear Regression** | Moderate | ⚡⚡⚡ Fast | 🔍🔍🔍 High | Linear relationships, baseline |
-| **Decision Tree** | Good | ⚡⚡ Moderate | 🔍🔍 Medium | Non-linear, interpretable rules |
-| **Random Forest** | Excellent | ⚡ Slow | 🔍 Low | High accuracy, robust |
-| **SVM** | Excellent | ⚡ Slow | 🔍 Low | High-dimensional, complex patterns |
-| **KNN** | Good | ⚡ Slow | 🔍🔍 Medium | Local patterns, small datasets |
-| **Naive Bayes** | Moderate | ⚡⚡⚡ Fast | 🔍🔍 Medium | Fast baseline, probabilistic |
+**How it works**: Same tree structure as regression, but predicts categories.
 
-### Practical Recommendations
+**Example**:
+Is size > 2000 sq ft?
+  ├─ Yes → Is location = downtown?
+  │         ├─ Yes → Class: Luxury
+  │         └─ No → Class: Standard
+  └─ No → Class: Budget
 
-**For House Price Prediction**:
-1. **Start with**: Linear Regression (fast baseline)
-2. **Try next**: Random Forest (likely best performance)
-3. **If high accuracy needed**: SVM with RBF kernel
-4. **If interpretability matters**: Decision Tree
-5. **If data is limited**: KNN with proper K selection
-6. **For quick prototype**: Naive Bayes
+**Mathematical Formula :**
+```
+Gini Impurity = 1 - Σᵢ₌₁ᶜ pᵢ²
 
-**General Strategy**:
-- Try multiple models
-- Use cross-validation for fair comparison
-- Consider trade-offs (accuracy vs. speed vs. interpretability)
-- Choose based on your specific requirements
+Where:
+c = number of classes
+pᵢ = proportion of class i in node
+
+Entropy (alternative):
+H = -Σᵢ₌₁ᶜ pᵢ log₂(pᵢ)
+
+(Tree splits to minimize impurity)
+```
+
+![Decision Tree Classifier](../assets/image8.png)
+
+**Strengths**:
+- Handles non-linear boundaries
+- Interpretable
+- Works with categorical data
+
+**Weaknesses**:
+- Overfits easily
+- Unstable with small data changes
+
+**When to use**: When you need interpretability and have categorical data
 
 ---
 
-## Model Evaluation: How Do We Measure Success?
+### 3. Random Forest Classifier
 
-### The R² Score (R-Squared)
+**How it works**: Ensemble of decision trees voting on the class.
 
-R² tells us: **"What percentage of price variation does my model explain?"**
+**Voting Example** (5 trees):
+- Tree 1: Luxury
+- Tree 2: Standard
+- Tree 3: Luxury
+- Tree 4: Luxury
+- Tree 5: Standard
+- **Final Prediction**: Luxury (majority vote: 3/5)
 
-**Scale**: 0 to 1 (or 0% to 100%)
-- **R² = 1.0 (100%)**: Perfect predictions
-- **R² = 0.8 (80%)**: Model explains 80% of price variations
-- **R² = 0.0 (0%)**: Model no better than just guessing the average
+**Mathematical Formula :**
+```
+ŷ = mode{h₁(x), h₂(x), ..., hₜ(x)}
 
-**Example Interpretation**:
-- R² = 0.84 means: "Our model accounts for 84% of why prices vary. The remaining 16% is due to factors we haven't captured or random noise."
+Where:
+T = number of trees
+hₜ(x) = prediction from tree t
+mode = most frequent class (majority vote)
 
-### What's a Good R² Score?
+For probabilities:
+P(class=c|x) = (1/T) Σₜ₌₁ᵀ I(hₜ(x) = c)
+```
 
-- **R² > 0.9**: Excellent (but check for overfitting!)
-- **R² = 0.7-0.9**: Good for most real-world problems
-- **R² = 0.5-0.7**: Moderate (room for improvement)
-- **R² < 0.5**: Poor (rethink features or model)
+![Random Forest Classifier](../assets/image9.png)
 
-For house prices with many unpredictable factors, **R² ≈ 0.8** is quite good!
+**Strengths**:
+- High accuracy
+- Reduces overfitting
+- Shows feature importance
+- Handles imbalanced data well
+
+**Weaknesses**:
+- Slower than single tree
+- Less interpretable
+- More memory intensive
+
+**When to use**: When accuracy is priority and you have sufficient data
 
 ---
 
-## K-Fold Cross-Validation: The Ultimate Test
+### 4. Support Vector Machine (SVM) Classifier
 
-### The Problem with Single Train-Test Split
+**How it works**: Finds the best boundary (hyperplane) that separates classes with maximum margin.
 
-What if, by chance, your test set contains only easy-to-predict houses? Your model might seem better than it actually is!
-
-**Analogy**: Imagine evaluating a student's knowledge based on just one quiz. One quiz might be unusually easy or hard. Multiple quizzes give a better picture.
-
-### How K-Fold Cross-Validation Works
-
-**K-Fold (K=5 example)**:
-
-1. **Split data into 5 equal parts** (folds)
-2. **Iteration 1**: Train on folds 1,2,3,4 → Test on fold 5
-3. **Iteration 2**: Train on folds 1,2,3,5 → Test on fold 4
-4. **Iteration 3**: Train on folds 1,2,4,5 → Test on fold 3
-5. **Iteration 4**: Train on folds 1,3,4,5 → Test on fold 2
-6. **Iteration 5**: Train on folds 2,3,4,5 → Test on fold 1
-7. **Final Score**: Average of all 5 test scores
-
-### Why This is Better
-
-- **Robustness**: Every data point gets to be in the test set once
-- **Reliability**: Multiple evaluations reduce luck factor
-- **Confidence**: If all 5 scores are similar (e.g., all around 0.82), you can trust the model
-- **Variance Detection**: If scores vary wildly (0.5, 0.9, 0.6, 0.85, 0.7), something's wrong
-
-**In Our Project**: We get 5 different R² scores and can see consistency:
+**Mathematical Formula :**
 ```
-[0.81, 0.82, 0.84, 0.83, 0.81]
+Minimize: (1/2)||w||² + C Σᵢ₌₁ⁿ ξᵢ
+
+Subject to:
+yᵢ(w·xᵢ + b) ≥ 1 - ξᵢ
+
+Where:
+w = weight vector (perpendicular to hyperplane)
+b = bias
+C = penalty parameter
+ξᵢ = slack variables
+yᵢ ∈ {-1, +1} = class labels
 ```
-Average ≈ 0.82, with low variance → Trustworthy model!
+
+![SVM Classifier](../assets/image10.png)
+
+**Strengths**:
+- Effective in high dimensions
+- Works well with clear margins
+- Memory efficient
+
+**Weaknesses**:
+- Slow on large datasets
+- Needs parameter tuning
+- Requires feature scaling
+
+**When to use**: High-dimensional data with clear separation
 
 ---
 
-## GridSearchCV: Finding the Best Model Configuration
+### 5. K-Nearest Neighbors (KNN) Classifier
 
-### The Hyperparameter Problem
+**How it works**: Assigns class based on K nearest neighbors' majority vote.
 
-Each model has settings (hyperparameters) that affect performance:
-- Linear Regression: Should we fit an intercept?
-- Lasso: What alpha value?
-- Decision Tree: Criterion? Splitter?
+**Example** (K=5):
+- Find 5 nearest houses
+- 3 are "Luxury", 2 are "Standard"
+- Predict: "Luxury" (majority)
 
-**The Question**: Which combination of settings works best?
+**Mathematical Formula :**
+```
+ŷ = mode{y₁, y₂, ..., yₖ}
 
-### What is GridSearchCV?
+Where:
+K = number of nearest neighbors
+yᵢ = class of i-th nearest neighbor
+mode = most frequent class
 
-GridSearchCV systematically tests all combinations of parameters using cross-validation.
+Distance (Euclidean):
+d(x, xᵢ) = √(Σⱼ₌₁ⁿ (xⱼ - xᵢⱼ)²)
+```
 
-**Example**: For Lasso with:
-- Alpha options: [1, 2]
-- Selection options: ['random', 'cyclic']
+![KNN Classifier](../assets/image11.png)
 
-**Grid of possibilities**:
-1. Alpha=1, Selection='random'
-2. Alpha=1, Selection='cyclic'
-3. Alpha=2, Selection='random'
-4. Alpha=2, Selection='cyclic'
+**Strengths**:
+- Simple and intuitive
+- No training needed
+- Naturally handles multi-class
 
-**For each combination**: Run 5-fold cross-validation, get average score.
+**Weaknesses**:
+- Slow for large datasets
+- Sensitive to feature scaling
+- Curse of dimensionality
 
-**Final Result**: "Best combination is Alpha=1, Selection='cyclic' with R²=0.82"
-
-### Why This is Powerful
-
-- ✅ Eliminates guesswork
-- ✅ Finds optimal configuration automatically
-- ✅ Prevents overfitting to a single train-test split (uses cross-validation)
-- ✅ Compares models fairly
+**When to use**: Small to medium datasets with good feature engineering
 
 ---
 
-## Model Performance Comparison
+### 6. Naive Bayes Classifier
 
-After running GridSearchCV on all six models with optimal parameters, here's how they compare:
+**How it works**: Uses Bayes' Theorem assuming features are independent.
 
-| Model | R² Score | Training Time | Prediction Speed | Complexity |
-|-------|----------|---------------|------------------|------------|
-| Linear Regression | ~0.82 | Fast | Very Fast | Low |
-| Decision Tree | ~0.71 | Fast | Very Fast | Medium |
-| Random Forest | ~0.85 | Slow | Moderate | High |
-| SVM | ~0.80 | Very Slow | Fast | High |
-| KNN | ~0.75 | None (Lazy) | Very Slow | Low |
-| Naive Bayes | ~0.65 | Very Fast | Very Fast | Low |
+**Mathematical Formula**: 
 
-**Key Findings**:
-- 🏆 **Winner: Random Forest** - Best accuracy (~0.85) but slower
-- 🥈 **Runner-up: Linear Regression** - Great balance of simplicity, speed, and accuracy (~0.82)
-- 📊 **Most Interpretable**: Decision Tree
-- ⚡ **Fastest**: Naive Bayes and Linear Regression
-- 🎯 **Best for Production**: Linear Regression or Random Forest (depending on requirements)
+**Bayes' Theorem:**
+```P(A | B) = [ P(B | A) * P(A) ] / P(B)```
 
-**For Our House Price Problem**: We'll use **Linear Regression** for its excellent balance of performance, speed, and interpretability!
+**For Naïve Bayes Classification:**
+```
+P(C | X) = [ P(X | C) * P(C) ] / P(X)
+
+Where:
+- P(C | X) → Posterior probability of class C given predictor X  
+- P(X | C) → Likelihood of predictor given class  
+- P(C) → Prior probability of class  
+- P(X) → Probability of predictor (same for all classes)
+```
+**Naïve (Independence) Assumption:**
+```P(X | C) = P(x₁, x₂, ..., xₙ | C) = Π P(xᵢ | C)```
+
+**Final Formula:**
+```P(C | X) ∝ P(C) * Π P(xᵢ | C)```
+
+![Naive Bayes Classifier](../assets/image12.png)
+
+**Example**: Weather Prediction (Naïve Bayes)
+
+- We want to predict whether someone will **play tennis (Yes/No)** based on the **weather conditions**.
+
+- Suppose we have features:
+   - Outlook = Sunny, Overcast, or Rain  
+   - Temperature = Hot, Mild, or Cool  
+   - Humidity = High or Normal  
+
+- We want to find:  
+```P(Play = Yes | Outlook = Sunny, Humidity = High)```
+
+- Using Naïve Bayes:
+```
+P(Play = Yes | Outlook = Sunny, Humidity = High) ∝ 
+P(Play = Yes) * P(Outlook = Sunny | Play = Yes) * P(Humidity = High | Play = Yes)
+```
+
+- Each probability is estimated from training data (frequency counts).  
+- The class (Yes or No) with the higher probability becomes the prediction.
+
+
+**Strengths**:
+- Very fast
+- Works well with text data
+- Needs little training data
+- Handles multi-class naturally
+
+**Weaknesses**:
+- Assumes feature independence (often unrealistic)
+- Cannot learn feature interactions
+
+**When to use**: Text classification, spam detection, sentiment analysis
 
 ---
 
-## Making Predictions: Putting It All Together
+## 📊 Evaluation Metrics
 
-### The Prediction Function
+### Regression Metrics
 
-Once trained, we can predict prices for new houses. Here's what happens behind the scenes:
+#### 1. Mean Squared Error (MSE)
+**Formula**: Average of squared differences between predictions and actual values  
+```MSE = (1/n) * Σ (yᵢ - ŷᵢ)²```
 
-**Input**: Location, Square feet, Bathrooms, Bedrooms
-**Process**:
-1. Find location's column index (remember one-hot encoding?)
-2. Create an array with all features = 0
-3. Fill in: square feet, bathrooms, bedrooms
-4. Set location's column = 1
-5. Pass to model: model.predict([feature_array])
+**Interpretation**:
+- Lower is better
+- Heavily penalizes large errors
+- Units are squared (e.g., dollars²)
 
-**Output**: Predicted price in lakhs
+**Example**: 
+- Actual: $300k, Predicted: $310k → Error²: (10k)² = 100M
+- Actual: $300k, Predicted: $320k → Error²: (20k)² = 400M
+- MSE = (100M + 400M) / 2 = 250M
+---
 
-### Example Prediction
+#### 2. Root Mean Squared Error (RMSE)
+**Formula**: Square root of MSE  
+```RMSE = √[ (1/n) * Σ (yᵢ - ŷᵢ)² ]```
 
-**Input**: "1st Phase JP Nagar", 1000 sq ft, 2 bathrooms, 2 bedrooms
+**Interpretation**:
+- Lower is better
+- Same units as target (dollars, not dollars²)
+- More interpretable than MSE
 
-```python
-predict_price('1st Phase JP Nagar', 1000, 2, 2)
-# Output: 83.5 (₹83.5 lakhs)
-```
+**Example**:
+- From above, MSE = 250M  
+- RMSE = √250M ≈ 15.8k
+---
 
-**What just happened?**
-The model used the patterns it learned from 7,000+ houses to estimate that a 2 BHK, 1000 sq ft house in JP Nagar should cost around ₹83.5 lakhs.
+#### 3. Mean Absolute Error (MAE)
+**Formula**: Average of absolute differences  
+```MAE = (1/n) * Σ |yᵢ - ŷᵢ|```
+
+**Interpretation**:
+- Lower is better
+- Less sensitive to outliers than RMSE
+- Direct average error
+
+**Example:**  
+- Actual: $300k, Predicted: $310k → |Error| = 10k  
+- Actual: $300k, Predicted: $320k → |Error| = 20k  
+- MAE = (10k + 20k) / 2 = 15k
+---
+
+#### 4. R² Score (R-Squared)
+**Formula**: 1 - (Sum of Squared Residuals / Total Sum of Squares)  
+```R² = 1 - [ Σ (yᵢ - ŷᵢ)² / Σ (yᵢ - ȳ)² ]```
+
+**Interpretation**:
+- Range: -∞ to 1.0
+- 1.0 = Perfect predictions
+- 0.0 = Model no better than predicting mean
+- < 0 = Model worse than predicting mean
+
+**Example:**  
+- Total variance (Σ(yᵢ - ȳ)²) = 1000M  
+- Residual variance (Σ(yᵢ - ŷᵢ)²) = 250M  
+- R² = 1 - (250 / 1000) = 0.75 → Model explains 75% of variance
 
 ---
 
-## Model Persistence: Saving Your Work
+### Classification Metrics
 
-### Why Save Models?
+Let us assume we have:
 
-Training takes time and computational resources. Once you have a good model:
-- **Save it** so you don't have to retrain every time
-- **Deploy it** in applications (websites, mobile apps)
-- **Share it** with others
+| Actual        | Predicted     |
+|---------------|---------------|
+| Positive (1)  | Positive (1)  |
+| Negative (0)  | Positive (1)  |
+| Positive (1)  | Negative (0)  |
+| Negative (0)  | Negative (0)  |
 
-### Pickle: Python's Serialization Tool
 
-**Pickle** converts Python objects into a byte stream that can be saved to disk.
+So:  
+TP = 1, TN = 1, FP = 1, FN = 1
 
-```python
-import pickle
-with open('model.pickle', 'wb') as f:
-    pickle.dump(trained_model, f)
-```
+---
+#### 1. Accuracy
+**Formula**: (Correct Predictions) / (Total Predictions)  
+```Accuracy = (TP + TN) / (TP + TN + FP + FN)```
 
-**Later, load it back**:
-```python
-with open('model.pickle', 'rb') as f:
-    model = pickle.load(f)
-    # Now you can use model.predict() without retraining!
-```
+**Example**:
+Accuracy = (1 + 1) / (1 + 1 + 1 + 1) = 0.5 → **50% accuracy**
 
-### Saving Column Information
-
-The model also needs to know which columns exist and their order. Save this metadata:
-
-```python
-import json
-columns = {'data_columns': ['total_sqft', 'bath', 'bhk', 'location_1', ...]}
-with open("columns.json", "w") as f:
-    f.write(json.dumps(columns))
-```
-
-**Why?** When someone uses your model later, they'll know exactly which features to provide and in what order.
+**Limitation**: Misleading with imbalanced classes
 
 ---
 
-## Hands-On: Code Implementation
+#### 2. Confusion Matrix
+Compares predictions vs actual:
 
-Now let's see how we implement these concepts in code!
-
-### Step 1: One-Hot Encoding Locations
-
-```python
-dummies = pd.get_dummies(df10.location) #One-hot encoding
-dummies.head(3)
+```
+                Predicted
+              No    Yes
+Actual  No   [TN]  [FP]
+        Yes  [FN]  [TP]
 ```
 
-Combine with original data:
-
-```python
-df11 = pd.concat([df10, dummies.drop('other',axis="columns")],axis='columns')
-
-df11.head()
-```
-
-Remove original location column:
-
-```python
-df12 = df11.drop('location', axis="columns")
-
-df12.head()
-```
-
-### Step 2: Separate Features and Target
-
-```python
-X = df12.drop(['price'],axis='columns')
-y = df12.price
-```
-
-### Step 3: Train-Test Split
-
-```python
-from sklearn.model_selection import train_test_split
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=10)
-```
-
-**What this does**:
-- `test_size=0.2`: 20% for testing, 80% for training
-- `random_state=10`: Ensures reproducible splits (same random split each time)
-
-### Step 4: Train Linear Regression
-
-```python
-from sklearn.linear_model import LinearRegression
-lr_clf = LinearRegression()
-lr_clf.fit(X_train, y_train)
-
-lr_clf.score(X_test, y_test)
-```
-
-The `score()` method returns the R² value.
-
-### Step 5: Cross-Validation for Linear Regression
-
-```python
-from sklearn.model_selection import ShuffleSplit
-from sklearn.model_selection import cross_val_score
-
-cv = ShuffleSplit(n_splits=5, test_size=0.2, random_state=0)
-
-cross_val_score(LinearRegression(), X, y, cv=cv)
-```
-
-**Output**: Array of 5 R² scores, one for each fold.
-
-### Step 6: GridSearchCV to Compare All Models
-
-```python
-from sklearn.model_selection import GridSearchCV, ShuffleSplit
-from sklearn.linear_model import LinearRegression
-from sklearn.tree import DecisionTreeRegressor
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.svm import SVR
-from sklearn.neighbors import KNeighborsRegressor
-from sklearn.naive_bayes import GaussianNB
-from sklearn.preprocessing import KBinsDiscretizer
-import pandas as pd
-
-def find_best_model_using_gridsearchcv(X, y):
-    algos = {
-        'linear_regression': {
-            'model': LinearRegression(),
-            'params': {
-                'fit_intercept': [True, False]
-            }
-        },
-        'decision_tree': {
-            'model': DecisionTreeRegressor(),
-            'params': {
-                'criterion': ['squared_error', 'friedman_mse'],
-                'max_depth': [None, 10, 20, 30],
-                'min_samples_split': [2, 10, 20]
-            }
-        },
-        'random_forest': {
-            'model': RandomForestRegressor(),
-            'params': {
-                'n_estimators': [100, 200, 300],
-                'max_depth': [None, 10, 20],
-                'min_samples_split': [2, 5, 10]
-            }
-        },
-        'svm': {
-            'model': SVR(),
-            'params': {
-                'kernel': ['linear', 'rbf'],
-                'C': [0.1, 1, 10],
-                'epsilon': [0.01, 0.1, 1]
-            }
-        },
-        'knn': {
-            'model': KNeighborsRegressor(),
-            'params': {
-                'n_neighbors': [3, 5, 7, 10],
-                'weights': ['uniform', 'distance'],
-                'metric': ['euclidean', 'manhattan']
-            }
-        }
-    }
-    
-    scores = []
-    cv = ShuffleSplit(n_splits=5, test_size=0.2, random_state=0)
-    
-    for algo_name, config in algos.items():
-        print(f"Training {algo_name}...")
-        gs = GridSearchCV(config['model'], config['params'], cv=cv, return_train_score=False, n_jobs=-1)
-        gs.fit(X, y)
-        scores.append({
-            'model': algo_name,
-            'best_score': gs.best_score_,
-            'best_params': gs.best_params_
-        })
-        print(f"{algo_name}: {gs.best_score_:.4f}")
-
-    return pd.DataFrame(scores, columns=['model', 'best_score', 'best_params']).sort_values(by='best_score', ascending=False)
-
-# Run the comparison
-results = find_best_model_using_gridsearchcv(X, y)
-print("\n" + "="*50)
-print("FINAL RESULTS (sorted by score):")
-print("="*50)
-print(results)
-```
-
-**What this does**:
-1. Defines six models with different parameter options
-2. For each model, tries all parameter combinations
-3. Uses 5-fold cross-validation for each combination
-4. Returns results sorted by best score
-5. Uses parallel processing (n_jobs=-1) for speed
-
-**Note**: Random Forest and SVM may take several minutes to run due to parameter combinations!
-
-### Step 7: Create Prediction Function
-
-```python
-#Now for testing, how can we handle the location column?
-
-X.columns
-```
-
-Find location column index:
-
-```python
-np.where(X.columns=='2nd Phase Judicial Layout')[0][0] #This will return the index number
-```
-
-Complete prediction function:
-
-```python
-def predict_price(location, sqft, bath, bhk):    
-    loc_index = np.where(X.columns==location)[0][0]
-
-    x = np.zeros(len(X.columns))
-    x[0] = sqft
-    x[1] = bath
-    x[2] = bhk
-    if loc_index >= 0:
-        x[loc_index] = 1
-
-    return lr_clf.predict([x])[0]
-```
-
-### Step 8: Test the Model
-
-```python
-predict_price('1st Phase JP Nagar', 1000, 2, 2)
-```
-
-### Step 9: Export the Model
-
-```python
-import pickle
-with open('banglore_home_prices_model.pickle', 'wb') as f:
-    pickle.dump(lr_clf, f)
-```
-
-### Step 10: Export Column Information
-
-```python
-import json
-columns = {
-    'data_columns': [col.lower() for col in X.columns]
-}
-with open("columns.json", "w") as f:
-    f.write(json.dumps(columns))
-```
+- **TP**: True Positives (correctly predicted Yes)
+- **TN**: True Negatives (correctly predicted No)
+- **FP**: False Positives (predicted Yes, actually No)
+- **FN**: False Negatives (predicted No, actually Yes)
 
 ---
+
+#### 3. Precision
+**Formula**:   
+```TP / (TP + FP)```
+
+**Meaning**: "Of all positive predictions, how many were correct?"
+
+**Example**:
+ = 1 / (1 + 1) = 0.5 → **50% of predicted positives are correct**
+
+---
+
+#### 4. Recall (Sensitivity)
+**Formula**:   
+```TP / (TP + FN)```
+
+**Meaning**: "Of all actual positives, how many did we catch?"
+
+**Example :**
+= 1 / (1 + 1) = 0.5 → **50% of actual positives identified**
+
+---
+
+#### 5. F1-Score
+**Formula**:   
+```F1 = 2 * (Precision * Recall) / (Precision + Recall)```
+
+**Meaning**: Harmonic mean of precision and recall
+
+**Example :**
+F1 = 2 * (0.5 * 0.5) / (0.5 + 0.5) = 0.5
+
+**When to use**: Balances precision and recall, especially with imbalanced data
+
+---
+
+## 🏆 Model Comparison (Regression Results)
+
+### Regression Performance Ranking
+
+| Rank | Model | R² Score | RMSE | MAE |
+|------|-------|----------|------|-----|
+| 🥇 1 | Linear Regression | 0.7904 | 30.79 | 9.95 |
+| 🥈 2 | Random Forest | 0.7375 | 34.45 | 1.77 |
+| 🥉 3 | KNN | 0.6585 | 39.29 | 1.91 |
+| 4 | Decision Tree | 0.6268 | 41.08 | 3.14 |
+| 5 | SVR | 0.5188 | 46.64 | 3.88 |
+
+### Key Observations
+
+**Linear Regression wins because**:  
+
+- ✅ Highest R² score (79.04%)  
+- ✅ Lowest RMSE (best average error)  
+- ✅ Fast training and prediction  
+- ✅ Easy to interpret  
+
+**Interesting finding**: Despite lower MAE, Random Forest has better overall performance metrics than simpler models.
+
+---
+
+## 🏆 Model Comparison (Classification Results)
+
+### Classification Performance Ranking
+
+| Model                | Accuracy | Precision | Recall | F1 Score |
+|-----------------------|-----------|------------|---------|-----------|
+| Logistic Regression   | 0.9231    | 0.9479     | 0.9231  | 0.9271    |
+| Decision Tree         | 1.0000    | 1.0000     | 1.0000  | 1.0000    |
+| Random Forest         | 1.0000    | 1.0000     | 1.0000  | 1.0000    |
+| SVM                   | 0.6667    | 0.5041     | 0.6667  | 0.5698    |
+| KNN                   | 0.6410    | 0.6282     | 0.6410  | 0.6197    |
+| Naive Bayes           | 0.9487    | 0.9615     | 0.9487  | 0.9508    |
+
+### Confusion Matrix for all models 
+
+![Confusion Matrix for all Models](../assets/image16.png)
+
+### Key Observations
+
+🏆 **BEST CLASSIFICATION MODELS**
+
+| Model          | Accuracy | Precision | Recall | F1 Score |
+|----------------|-----------|------------|---------|-----------|
+| Decision Tree  | 1.0       | 1.0        | 1.0     | 1.0       |
+| Random Forest  | 1.0       | 1.0        | 1.0     | 1.0       |
+
+Decision Tree & Random Forest win because:
+
+✅ Perfect test accuracy on this dataset
+✅ Can capture complex, non-linear relationships
+✅ Handle both categorical and numerical features naturally
+✅ Robust and flexible for small datasets
+
+---
+
+### General ML Best Practices
+
+1. **Always split your data**
+   - Train-test split prevents overfitting
+   - Use cross-validation for robust evaluation
+
+2. **Try multiple models**
+   - Different models work better for different data
+   - No "one size fits all" solution
+
+3. **Understand your metrics**
+   - R² for overall model fit
+   - RMSE for average prediction error
+   - MAE for median error magnitude
+
+4. **Consider the business context**
+   - Is $31k error acceptable for your use case?
+   - Sometimes a simple, interpretable model is better than a complex one
+---
+
+## 📚 Summary
+
+**You've learned**:
+
+- ✅ Train-test split methodology
+- ✅ 5 regression algorithms
+- ✅ 6 classification algorithms 
+- ✅ Multiple evaluation metrics
+- ✅ Model comparison techniques
 
 ### 📥 Download Material
 
-- 📓 Download Notebook:  
-  [banglore_home_prices_final.ipynb](../files/day1/banglore_home_prices_final.ipynb)
+- 📓 Download Notebook for Regression Problem:  
+  [ML_Worshop_Day2](../files/day2/ML_Workshop_Day_2.ipynb)
 
-- 📊 Download Dataset (CSV):  
-  [bengaluru_house_prices.csv](../files/day1/bengaluru_house_prices.csv)
+- 📊 Download Preprocessed Dataset for Regression Problem(CSV):  
+  [preprocessed_dataset.csv](../files/day2/houseprice_preprocessed_data.csv)
 
-Run the cells, experiment with different parameters, and see how model performance changes!
+- 📓 Download Notebook for Regression Problem:  
+  [ML_Worshop_Day2](../files/day2/ML_Workshop_Day2_Classification.ipynb)
 
----
-
-## Key Takeaways
-
-Today you learned about **six powerful machine learning models**:
-
-1. **Train-Test Split**: Always evaluate models on unseen data to avoid overfitting
-2. **Linear Regression**: Simple, interpretable baseline - great for linear relationships
-3. **Decision Trees**: Interpretable rules, handles non-linearity, prone to overfitting
-4. **Random Forest**: Ensemble of trees, typically highest accuracy, "wisdom of crowds"
-5. **SVM (Support Vector Machine)**: Effective in high dimensions, kernel trick for non-linearity
-6. **KNN (K-Nearest Neighbors)**: Instance-based learning, simple but memory-intensive
-7. **Naive Bayes**: Fast probabilistic model, works with limited data
-8. **R² Score**: Measures how much price variation your model explains (aim for > 0.7)
-9. **K-Fold Cross-Validation**: Robust evaluation using multiple train-test splits
-10. **GridSearchCV**: Automated hyperparameter tuning with cross-validation
-11. **Model Persistence**: Save trained models using pickle for reuse
-
-**Most Important Lessons**:
-- 🎯 **No single "best" model** - it depends on your specific problem and constraints
-- ⚖️ **Trade-offs matter**: Accuracy vs. Speed vs. Interpretability vs. Memory
-- 🔬 **Always experiment**: Try multiple models, use cross-validation for fair comparison
-- 📊 **Context is key**: Choose based on data size, feature count, and business requirements
-- 🚀 **Start simple**: Begin with Linear Regression, then try more complex models if needed
+- 📊 Download Preprocessed Dataset for Classification Problem(CSV):  
+  [preprocessed_dataset.csv](../files/day2/drugclassification_preprocessed_data.csv)
+Run each cell step by step to see data cleaning and feature engineering in action!
 
 ---
 
-## What's Next?
+**Remember**: 
+The best model isn't always the most complex one.   
+Choose based on:
+- Performance on test data
+- Interpretability needs
+- Computational resources
+- Business requirements
 
-You now have a complete end-to-end machine learning pipeline:
-1. ✅ Data Cleaning
-2. ✅ Feature Engineering
-3. ✅ Model Training
-4. ✅ Model Evaluation
-5. ✅ Making Predictions
+---
 
-**Next Steps**:
-- Deploy this model as a web application
-- Try more advanced models (Random Forests, Gradient Boosting)
-- Collect more features (proximity to schools, crime rates, etc.)
-- Apply these techniques to different problems
-
-Congratulations on completing this comprehensive machine learning project! 🎉
+*Created for ML Workshop Day 2 | Happy Learning! 🎓*

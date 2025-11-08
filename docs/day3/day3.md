@@ -1,3 +1,5 @@
+# DAY 3-DEEP LEARNING & NLP WORKSHOP
+
 ## 🧠 Introduction to Deep Learning
 
 **Deep Learning (DL)** is a subset of Machine Learning that uses **neural networks** with many layers to automatically learn complex patterns from data.
@@ -12,12 +14,10 @@
 
 ### 🔍 Example
 
--   Traditional rule: “If price < 10, buy.”
-    
--   Deep Learning: _Learns_ to buy/sell automatically from thousands of examples.
-    
+- Traditional rule: “If price < 10, buy.”
+- Deep Learning: *Learns* to buy/sell automatically from thousands of examples.
 
-* * *
+---
 
 ## ⚖️ Why Deep Learning over Traditional ML
 
@@ -31,12 +31,10 @@
 
 ### 💡 Example
 
--   ML: You manually count words and predict sentiment.
-    
--   DL: The model _understands meaning_ (e.g., “not bad” = positive) automatically.
-    
+- ML: You manually count words and predict sentiment.
+- DL: The model *understands meaning* (e.g., “not bad” = positive) automatically.
 
-* * *
+---
 
 ## 💬 What is NLP (Natural Language Processing)?
 
@@ -44,16 +42,12 @@
 
 ### 💡 Real-Life Examples
 
--   ChatGPT (conversation)
-    
--   Google Translate (language conversion)
-    
--   Spam filters (email classification)
-    
--   Siri/Alexa (speech recognition)
-    
+- ChatGPT (conversation)
+- Google Translate (language conversion)
+- Spam filters (email classification)
+- Siri/Alexa (speech recognition)
 
-* * *
+---
 
 ## 🧹 Text Preprocessing Steps
 
@@ -62,12 +56,12 @@ Before giving text to a deep learning model, we clean and convert it into number
 | Step | What It Does | Example |
 | --- | --- | --- |
 | **Lowercasing** | Standardize text | “Harry” → “harry” |
-| **Tokenization** | Split into words | “harry potter went” → \[“harry”, “potter”, “went”\] |
+| **Tokenization** | Split into words | “harry potter went” → [“harry”, “potter”, “went”] |
 | **Stopword Removal** | Remove unimportant words | Remove “a”, “the”, “to”, etc. |
 | **Stemming/Lemmatization** | Reduce to root form | “running” → “run” |
 | **Vectorization** | Convert to numbers | “harry” → `[0.23, 0.89, -0.12, …]` |
 
-* * *
+---
 
 ## 🧩 Understanding Word Embeddings
 
@@ -75,31 +69,36 @@ Before giving text to a deep learning model, we clean and convert it into number
 
 ### ✨ Example:
 
--   “king” – “man” + “woman” ≈ “queen”
-    
--   “cat” and “dog” will be close in embedding space.
-    
+- “king” – “man” + “woman” ≈ “queen”
+- “cat” and “dog” will be close in embedding space.
 
 ### 📊 Visualization
 
-          `king             \              \    queen               \  /           man   woman      cat -------- dog`
+```markdown
+          king
+            \
+             \    queen
+              \  /
+          man   woman
 
-> Embeddings capture **semantic meaning**, not just spelling.
+     cat -------- dog
+
+```
+
+> Embeddings capture semantic meaning, not just spelling.
+> 
 
 Popular embeddings:
 
--   **Word2Vec**
-    
--   **GloVe**
-    
--   **FastText**
-    
+- **Word2Vec**
+- **GloVe**
+- **FastText**
 
-* * *
+---
 
 ## ⚙️ Deep Learning Architectures for NLP
 
-* * *
+---
 
 ### 🌀 (A) LSTMs — Long Short-Term Memory Networks
 
@@ -107,28 +106,30 @@ LSTMs are good at learning **sequences** (like sentences or time series).
 
 They solve a key problem — remembering **long-term context**.
 
-#### 🧩 Example
+### 🧩 Example
 
 Sentence:
 
-> “Harry looked at Ron and said he was \_\_.”
+> “Harry looked at Ron and said he was __.”
+> 
 
 To predict the blank word (“angry”), the model must **remember earlier words** — that’s what LSTMs do.
 
-#### 🧠 Concept Diagram
+### 🧠 Concept Diagram
 
-`Input → [LSTM cell → LSTM cell → LSTM cell] → Output             ↑ remembers previous words ↑`
+```markdown
+Input → [LSTM cell → LSTM cell → LSTM cell] → Output
+            ↑ remembers previous words ↑
 
-#### 🧮 Applications
+```
 
--   Next word prediction
-    
--   Sentiment analysis
-    
--   Chatbots
-    
+### 🧮 Applications
 
-* * *
+- Next word prediction
+- Sentiment analysis
+- Chatbots
+
+---
 
 ### ⚡ (B) Transformers
 
@@ -136,15 +137,16 @@ Transformers are the **modern standard** for NLP.
 
 Instead of reading one word at a time, they read the **whole sentence at once** and use **attention** to find relationships between words.
 
-#### 🧩 Example
+### 🧩 Example
 
 Sentence:
 
 > “The ball hit the boy because he was careless.”
+> 
 
 The model learns that **“he”** refers to **“boy”**, not “ball”.
 
-#### 🔍 Attention Mechanism
+### 🔍 Attention Mechanism
 
 The model gives “attention scores” — how much each word relates to another.
 
@@ -154,7 +156,7 @@ The model gives “attention scores” — how much each word relates to another
 | ball | hit | ⭐⭐ |
 | because | careless | ⭐⭐⭐ |
 
-* * *
+---
 
 ## 🤖 Modern Models: BERT & GPT
 
@@ -163,35 +165,57 @@ The model gives “attention scores” — how much each word relates to another
 | **BERT** | Bidirectional (reads both directions) | Understand text | Sentiment, Q&A |
 | **GPT** | Unidirectional (left→right) | Generate text | Chatbots, writing |
 
-* * *
+---
 
 ## 🧪 Hands-On Project: Predicting Next Word (Harry Potter Corpus)
 
 ### 🧰 Setup
 
-`pip install transformers torch`
+```bash
+pip install transformers torch
+
+```
 
 ### 🧩 Python Code
 
-`from transformers import pipeline  generator = pipeline("text-generation", model="gpt2")  prompt = "Harry looked at Ron and said" result = generator(prompt, max_length=25, num_return_sequences=1, temperature=0.9)  print(result[0]['generated_text'])`
+```python
+from transformers import pipeline
+
+generator = pipeline("text-generation", model="gpt2")
+
+prompt = "Harry looked at Ron and said"
+result = generator(prompt, max_length=25, num_return_sequences=1, temperature=0.9)
+
+print(result[0]['generated_text'])
+
+```
 
 ### 🧙‍♂️ Example Output
 
 > Harry looked at Ron and said quietly, “We can’t let anyone know about this.” The wind howled through the castle halls...
+> 
 
 ### 🔍 Try Custom Prompts
 
-`prompts = [     "Voldemort raised his wand and",     "Hermione opened the book of spells and",     "Hogwarts castle was silent until" ]  for p in prompts:     print(generator(p, max_length=30, num_return_sequences=1)[0]['generated_text'])`
+```python
+prompts = [
+    "Voldemort raised his wand and",
+    "Hermione opened the book of spells and",
+    "Hogwarts castle was silent until"
+]
+
+for p in prompts:
+    print(generator(p, max_length=30, num_return_sequences=1)[0]['generated_text'])
+
+```
 
 ### ⚙️ How It Works
 
-1.  Text → tokens → embeddings
-    
-2.  Model predicts the **next likely word**
-    
-3.  Adds it to text and repeats
-    
-4.  Generates creative continuations
-    
+1. Text → tokens → embeddings
+2. Model predicts the **next likely word**
+3. Adds it to text and repeats
+4. Generates creative continuations
 
-* * *
+---
+
+##

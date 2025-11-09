@@ -278,11 +278,11 @@ print(sentiment("I love Hogwarts but hate exams!"))
 
 - 📓 Download Notebook:
     
-    [BERT_(Harry_Potter).ipynb](/Users/baijupnairnair/Desktop/acm-ml-workshop/docs/files/day3/BERT_(Harry_Potter).ipynb)
+    [BERT_(Harry_Potter).ipynb](/acm-ml-workshop/docs/files/day3/BERT_(Harry_Potter).ipynb)
     
 - 📊 Download Dataset:
     
-    [harry_potter_corpus.txt](/Users/baijupnairnair/Desktop/acm-ml-workshop/docs/files/day3/harry_potter_corpus.txt)
+    [harry_potter_corpus.txt](/acm-ml-workshop/docs/files/day3/harry_potter_corpus.txt)
     
 
 Run each cell step by step to see model in action!

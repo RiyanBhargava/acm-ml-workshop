@@ -254,12 +254,8 @@ Tomorrow, we'll take this cleaned dataset and build machine learning models to p
 
 ### 📥 Download Material
 
-- 📓 Download Notebook:  
-  [banglore_home_prices_final.ipynb](../files/day1/banglore_home_prices_final.ipynb)
-
-- 📊 Download Dataset (CSV):  
-  [bengaluru_house_prices.csv](../files/day1/bengaluru_house_prices.csv)
-
+� **Download All Day 1 Materials (ZIP):**  
+[day1_materials.zip](../files/day1.zip) - Contains the Jupyter notebook and dataset
 
 Run each cell step by step to see data cleaning and feature engineering in action!
 

@@ -883,17 +883,10 @@ Decision Tree & Random Forest win because:
 
 ### 📥 Download Material
 
-- 📓 Download Notebook for Regression Problem:  
-  [ML_Worshop_Day2](../files/day2/ML_Workshop_Day_2.ipynb)
+- 📓 Download Notebook and Dataset for Regression and Classification Problem:  
+  [day2.zip](../files/day2.zip)
 
-- 📊 Download Preprocessed Dataset for Regression Problem(CSV):  
-  [preprocessed_dataset.csv](../files/day2/houseprice_preprocessed_data.csv)
 
-- 📓 Download Notebook for Regression Problem:  
-  [ML_Worshop_Day2](../files/day2/ML_Workshop_Day2_Classification.ipynb)
-
-- 📊 Download Preprocessed Dataset for Classification Problem(CSV):  
-  [preprocessed_dataset.csv](../files/day2/drugclassification_preprocessed_data.csv)
 Run each cell step by step to see data cleaning and feature engineering in action!
 
 ---

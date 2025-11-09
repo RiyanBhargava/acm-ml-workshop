@@ -272,7 +272,22 @@ print(sentiment("I love Hogwarts but hate exams!"))
 
 ---
 
-## 🔹 9. Key Learnings
+## 🔹 9. Fine-Tuning BERT on Harry Potter Corpus
+
+**📥 Download Material**
+
+- 📓 Download Notebook:
+    
+    [BERT_(Harry_Potter).ipynb](docs/files/day3/BERT_(Harry_Potter).ipynb)
+    
+- 📊 Download Dataset:
+    
+    [harry_potter_corpus.txt](docs/files/day3/harry_potter_corpus.txt)
+    
+
+Run each cell step by step to see model in action!
+
+## 🔹 10. Key Learnings
 
 | Concept | Summary |
 | --- | --- |

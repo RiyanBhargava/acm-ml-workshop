@@ -1,0 +1,2587 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A template site, replace this with the actual description">
+      
+      
+        <meta name="author" content="ACM BPDC">
+      
+      
+        <link rel="canonical" href="https://template_site.acmbpdc.org/day2/day2/">
+      
+      
+        <link rel="prev" href="../../day1/day1/">
+      
+      
+        <link rel="next" href="../../day3/day3/">
+      
+      
+      <link rel="icon" href="../../assets/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>DAY 2 - ML Workshop</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ml-workshop-day-2-model-training-and-analysis" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="ML Workshop" class="md-header__button md-logo" aria-label="ML Workshop" data-md-component="logo">
+      
+  <img src="../../assets/ACM_Logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ML Workshop
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              DAY 2
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/acmbpdc/mkdocs-template" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    acmbpdc/mkdocs-template
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../day1/day1/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  DAY 1
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  DAY 2
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../day3/day3/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  DAY 3
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../day4/day4/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  DAY 4
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="ML Workshop" class="md-nav__button md-logo" aria-label="ML Workshop" data-md-component="logo">
+      
+  <img src="../../assets/ACM_Logo.png" alt="logo">
+
+    </a>
+    ML Workshop
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/acmbpdc/mkdocs-template" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    acmbpdc/mkdocs-template
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day1/day1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DAY 1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    DAY 2
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    DAY 2
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#complete-documentation-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      Complete Documentation Guide
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      📋 Table of Contents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dataset-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 Dataset Information
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Dataset Information">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#original-dataset" class="md-nav__link">
+    <span class="md-ellipsis">
+      Original Dataset
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#feature-preparation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Feature Preparation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#overfitting-and-underfitting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overfitting and Underfitting
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Overfitting and Underfitting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overfitting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overfitting
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#underfitting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Underfitting
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#train-test-split" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔀 Train-Test Split
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔀 Train-Test Split">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-train-test-split" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is Train-Test Split?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-split-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why Split Data?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#types-of-machine-learning-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      Types of Machine Learning Problems
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Types of Machine Learning Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#regression-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      Regression Problem
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#classification-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      Classification Problem
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#regression-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      📈 Regression Models
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📈 Regression Models">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-linear-regression" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Linear Regression
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-decision-tree-regressor" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Decision Tree Regressor
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-random-forest-regressor" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Random Forest Regressor
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-support-vector-regressor-svr" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Support Vector Regressor (SVR)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-k-nearest-neighbors-knn-regressor" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. K-Nearest Neighbors (KNN) Regressor
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classification-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Classification Models
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Classification Models">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-logistic-regression" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Logistic Regression
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-decision-tree-classifier" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Decision Tree Classifier
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-random-forest-classifier" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Random Forest Classifier
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-support-vector-machine-svm-classifier" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Support Vector Machine (SVM) Classifier
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-k-nearest-neighbors-knn-classifier" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. K-Nearest Neighbors (KNN) Classifier
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-naive-bayes-classifier" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Naive Bayes Classifier
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#evaluation-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 Evaluation Metrics
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Evaluation Metrics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#regression-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Regression Metrics
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Regression Metrics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-mean-squared-error-mse" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Mean Squared Error (MSE)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-root-mean-squared-error-rmse" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Root Mean Squared Error (RMSE)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-mean-absolute-error-mae" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Mean Absolute Error (MAE)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-r2-score-r-squared" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. R² Score (R-Squared)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#classification-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Classification Metrics
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classification Metrics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-accuracy" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Accuracy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-confusion-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Confusion Matrix
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-precision" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Precision
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-recall-sensitivity" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Recall (Sensitivity)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-f1-score" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. F1-Score
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#model-comparison-regression-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      🏆 Model Comparison (Regression Results)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🏆 Model Comparison (Regression Results)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#regression-performance-ranking" class="md-nav__link">
+    <span class="md-ellipsis">
+      Regression Performance Ranking
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-observations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Observations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#model-comparison-classification-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      🏆 Model Comparison (Classification Results)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🏆 Model Comparison (Classification Results)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#classification-performance-ranking" class="md-nav__link">
+    <span class="md-ellipsis">
+      Classification Performance Ranking
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#confusion-matrix-for-all-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      Confusion Matrix for all models
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-observations_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Observations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#general-ml-best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      General ML Best Practices
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      📚 Summary
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📚 Summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#download-material" class="md-nav__link">
+    <span class="md-ellipsis">
+      📥 Download Material
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day3/day3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DAY 3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day4/day4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DAY 4
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#complete-documentation-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      Complete Documentation Guide
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      📋 Table of Contents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dataset-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 Dataset Information
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Dataset Information">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#original-dataset" class="md-nav__link">
+    <span class="md-ellipsis">
+      Original Dataset
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#feature-preparation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Feature Preparation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#overfitting-and-underfitting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overfitting and Underfitting
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Overfitting and Underfitting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overfitting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overfitting
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#underfitting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Underfitting
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#train-test-split" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔀 Train-Test Split
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔀 Train-Test Split">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-train-test-split" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is Train-Test Split?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-split-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why Split Data?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#types-of-machine-learning-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      Types of Machine Learning Problems
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Types of Machine Learning Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#regression-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      Regression Problem
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#classification-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      Classification Problem
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#regression-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      📈 Regression Models
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📈 Regression Models">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-linear-regression" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Linear Regression
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-decision-tree-regressor" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Decision Tree Regressor
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-random-forest-regressor" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Random Forest Regressor
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-support-vector-regressor-svr" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Support Vector Regressor (SVR)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-k-nearest-neighbors-knn-regressor" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. K-Nearest Neighbors (KNN) Regressor
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classification-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Classification Models
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Classification Models">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-logistic-regression" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Logistic Regression
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-decision-tree-classifier" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Decision Tree Classifier
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-random-forest-classifier" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Random Forest Classifier
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-support-vector-machine-svm-classifier" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Support Vector Machine (SVM) Classifier
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-k-nearest-neighbors-knn-classifier" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. K-Nearest Neighbors (KNN) Classifier
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-naive-bayes-classifier" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Naive Bayes Classifier
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#evaluation-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 Evaluation Metrics
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Evaluation Metrics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#regression-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Regression Metrics
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Regression Metrics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-mean-squared-error-mse" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Mean Squared Error (MSE)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-root-mean-squared-error-rmse" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Root Mean Squared Error (RMSE)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-mean-absolute-error-mae" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Mean Absolute Error (MAE)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-r2-score-r-squared" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. R² Score (R-Squared)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#classification-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Classification Metrics
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classification Metrics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-accuracy" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Accuracy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-confusion-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Confusion Matrix
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-precision" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Precision
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-recall-sensitivity" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Recall (Sensitivity)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-f1-score" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. F1-Score
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#model-comparison-regression-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      🏆 Model Comparison (Regression Results)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🏆 Model Comparison (Regression Results)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#regression-performance-ranking" class="md-nav__link">
+    <span class="md-ellipsis">
+      Regression Performance Ranking
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-observations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Observations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#model-comparison-classification-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      🏆 Model Comparison (Classification Results)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🏆 Model Comparison (Classification Results)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#classification-performance-ranking" class="md-nav__link">
+    <span class="md-ellipsis">
+      Classification Performance Ranking
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#confusion-matrix-for-all-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      Confusion Matrix for all models
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-observations_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Observations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#general-ml-best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      General ML Best Practices
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      📚 Summary
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📚 Summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#download-material" class="md-nav__link">
+    <span class="md-ellipsis">
+      📥 Download Material
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="ml-workshop-day-2-model-training-and-analysis">ML Workshop Day 2: Model Training and Analysis<a class="headerlink" href="#ml-workshop-day-2-model-training-and-analysis" title="Permanent link">&para;</a></h1>
+<h2 id="complete-documentation-guide">Complete Documentation Guide<a class="headerlink" href="#complete-documentation-guide" title="Permanent link">&para;</a></h2>
+<hr />
+<h2 id="table-of-contents">📋 Table of Contents<a class="headerlink" href="#table-of-contents" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Overview</li>
+<li>Dataset Information</li>
+<li>Overfitting and Underfitting</li>
+<li>Train-Test Split</li>
+<li>Types of ML Problems</li>
+<li>Regression Models</li>
+<li>Classification Models</li>
+<li>Evaluation Metrics</li>
+<li>Model Comparison</li>
+<li>Key Insights</li>
+</ol>
+<hr />
+<h2 id="overview">🎯 Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>This workshop introduces fundamental machine learning concepts with practical implementation. You'll learn how to:
+- Split data for training and testing
+- Implement multiple regression and classification models
+- Evaluate model performance
+- Compare and select the best model</p>
+<p><strong>Dataset</strong>: Real estate pricing data </p>
+<hr />
+<h2 id="dataset-information">📊 Dataset Information<a class="headerlink" href="#dataset-information" title="Permanent link">&para;</a></h2>
+<h3 id="original-dataset">Original Dataset<a class="headerlink" href="#original-dataset" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Total Records</strong>: 10,835 properties</li>
+<li><strong>Features</strong>: 246 (after preprocessing)</li>
+<li><strong>Target Variable</strong>: <code>price</code> (continuous numerical value) - that we want to predict</li>
+</ul>
+<h3 id="feature-preparation">Feature Preparation<a class="headerlink" href="#feature-preparation" title="Permanent link">&para;</a></h3>
+<pre><code class="language-python"># Separating features and target
+X = df[feature_cols]  # All columns except 'price'
+y = df['price']       # Target variable
+
+# Dataset shape
+Features: (10835, 244)
+Target: (10835,)
+</code></pre>
+<hr />
+<h2 id="overfitting-and-underfitting">Overfitting and Underfitting<a class="headerlink" href="#overfitting-and-underfitting" title="Permanent link">&para;</a></h2>
+<p>When building machine learning models, the goal is to <strong>capture the true underlying patterns in data</strong> so the model can <strong>generalize</strong> to new, unseen examples.  </p>
+<p>However, models can sometimes go wrong in two common ways:</p>
+<ol>
+<li><strong>Underfitting</strong></li>
+<li><strong>Overfitting</strong> </li>
+</ol>
+<p><img alt="Underfit,Goodfit and Overfit curves" src="../../assets/image13.png" /></p>
+<p>Striking the <strong>right balance</strong> between underfitting and overfitting is key to building robust machine learning models.</p>
+<h3 id="overfitting">Overfitting<a class="headerlink" href="#overfitting" title="Permanent link">&para;</a></h3>
+<p>Overfitting happens when a model learns too much from the training data, including details that don’t matter (like noise or outliers).</p>
+<p><strong>Example :</strong>
+- Imagine fitting a very complicated curve to a set of points. The curve will go through every point, but it won’t represent the actual pattern.
+- As a result, the model works great on training data but fails when tested on new data.</p>
+<p><img alt="An example of overfit curve" src="../../assets/image14.png" /></p>
+<p><strong>Reasons for Overfitting:</strong></p>
+<ol>
+<li>High variance and low bias.</li>
+<li>The model is too complex.</li>
+<li>The size of the training data.</li>
+</ol>
+<h3 id="underfitting">Underfitting<a class="headerlink" href="#underfitting" title="Permanent link">&para;</a></h3>
+<p>Underfitting is the opposite of overfitting. It happens when a model is too simple to capture what’s going on in the data.</p>
+<p><strong>Example:</strong>
+- Imagine drawing a straight line to fit points that actually follow a curve. The line misses most of the pattern.
+- In this case, the model doesn’t work well on either the training or testing data.</p>
+<p><img alt="An example of underfit curve" src="../../assets/image15.png" /></p>
+<p><strong>Reasons for Underfitting:</strong></p>
+<ol>
+<li>The model is too simple, So it may be not capable to represent the complexities in the data.</li>
+<li>The input features which is used to train the model is not the adequate representations of underlying factors influencing the target variable.</li>
+<li>The size of the training dataset used is not enough.</li>
+<li>Features are not scaled.</li>
+</ol>
+<h2 id="train-test-split">🔀 Train-Test Split<a class="headerlink" href="#train-test-split" title="Permanent link">&para;</a></h2>
+<h3 id="what-is-train-test-split">What is Train-Test Split?<a class="headerlink" href="#what-is-train-test-split" title="Permanent link">&para;</a></h3>
+<p>Train-test split divides your dataset into two parts:</p>
+<p><img alt="Visual Representation of Train-Test Split" src="../../assets/image1.png" /></p>
+<p><strong>Training Set (80%)</strong>: Used to teach the model
+- Model learns patterns from this data
+- Used for fitting/training algorithms</p>
+<p><strong>Testing Set (20%)</strong>: Used to evaluate the model
+- Model has never seen this data
+- Tests how well model generalizes to new data</p>
+<h3 id="implementation">Implementation<a class="headerlink" href="#implementation" title="Permanent link">&para;</a></h3>
+<pre><code class="language-python">X_train, X_test, y_train, y_test = train_test_split(
+    X, y, 
+    test_size=0.2,      # 20% for testing
+    random_state=42     # For reproducibility
+)
+</code></pre>
+<h3 id="why-split-data">Why Split Data?<a class="headerlink" href="#why-split-data" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Prevents Overfitting</strong>: Model doesn't memorize training data</li>
+<li><strong>Tests Generalization</strong>: Evaluates performance on unseen data</li>
+<li><strong>Realistic Performance</strong>: Simulates real-world predictions</li>
+</ul>
+<hr />
+<h2 id="types-of-machine-learning-problems">Types of Machine Learning Problems<a class="headerlink" href="#types-of-machine-learning-problems" title="Permanent link">&para;</a></h2>
+<p>In supervised learning, problems are usually divided into two types : 
+- Regression Problem
+- Classification Problem</p>
+<h3 id="regression-problem">Regression Problem<a class="headerlink" href="#regression-problem" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal :</strong> To predict a continuous numeric value.</li>
+<li>
+<p>Regression models try to find relationships between input variables (features) and a continuous output.</p>
+</li>
+<li>
+<p>Examples:</p>
+<ul>
+<li>Predicting house prices 🏠</li>
+<li>Estimating temperature 🌡️</li>
+<li>Forecasting stock prices 📈  </li>
+</ul>
+</li>
+<li>
+<p>Common Algorithms:</p>
+<ol>
+<li>Linear Regression    </li>
+<li>Decision Tree Regressor</li>
+<li>Random Forest Regressor</li>
+<li>Support Vector Regressor (SVR)</li>
+</ol>
+</li>
+<li>
+<p>Evaluation Metrics:</p>
+<ol>
+<li>Mean Squared Error (MSE)</li>
+<li>Root Mean Squared Error (RMSE)</li>
+<li>Mean Absolute Error (MAE)</li>
+<li>R² Score</li>
+</ol>
+</li>
+</ul>
+<h3 id="classification-problem">Classification Problem<a class="headerlink" href="#classification-problem" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal :</strong> To predict a discrete label or category.</li>
+<li>
+<p>Classification models learn to separate data into different classes.</p>
+</li>
+<li>
+<p>Examples:</p>
+<ul>
+<li>Email spam detection ✉️</li>
+<li>Disease diagnosis (positive/negative) 🧬</li>
+<li>Image recognition (cat vs. dog) 🐱🐶 </li>
+</ul>
+</li>
+<li>
+<p>Common Algorithms:</p>
+<ol>
+<li>Logistic Regression</li>
+<li>Decision Tree Classifier</li>
+<li>Random Forest Classifier</li>
+<li>Support Vector Machine (SVM)</li>
+<li>k-Nearest Neighbors (KNN)</li>
+</ol>
+</li>
+<li>
+<p>Evaluation Metrics:</p>
+<ol>
+<li>Accuracy</li>
+<li>Precision &amp; Recall</li>
+<li>F1 Score</li>
+<li>Confusion Matrix</li>
+</ol>
+</li>
+</ul>
+<hr />
+<h2 id="regression-models">📈 Regression Models<a class="headerlink" href="#regression-models" title="Permanent link">&para;</a></h2>
+<p>Regression predicts <strong>continuous numerical values</strong> (e.g., house prices, temperature, sales).</p>
+<hr />
+<h3 id="1-linear-regression">1. Linear Regression<a class="headerlink" href="#1-linear-regression" title="Permanent link">&para;</a></h3>
+<p><strong>How it works</strong>: Finds the best straight line through your data points.</p>
+<p><strong>Mathematical Formula</strong>: </p>
+<pre><code>ŷ = β₀ + β₁x₁ + β₂x₂ + ... + βₙxₙ
+
+Where:
+ŷ = predicted value
+β₀ = intercept (bias)
+β₁, β₂, ..., βₙ = coefficients (weights)
+x₁, x₂, ..., xₙ = feature values
+</code></pre>
+<p>Simple form: <code>y = mx + b</code>
+- Simple and interpretable
+- Assumes linear relationship between features and target</p>
+<p><img alt="Linear Regression Diagram" src="../../assets/image2.png" /></p>
+<p><strong>Strengths</strong>:
+- Fast to train
+- Easy to interpret
+- Works well with linear relationships</p>
+<p><strong>Weaknesses</strong>:
+- Cannot capture complex non-linear patterns
+- Sensitive to outliers - basically those values that are much out of range when compared to normal values</p>
+<p><strong>Use cases :</strong>
+- Predicting house prices based on area, location, etc.<br />
+- Estimating sales revenue from advertising spend.<br />
+- Forecasting demand or performance metrics. </p>
+<hr />
+<h3 id="2-decision-tree-regressor">2. Decision Tree Regressor<a class="headerlink" href="#2-decision-tree-regressor" title="Permanent link">&para;</a></h3>
+<p><strong>How it works</strong>: Creates a tree of yes/no questions to make predictions.</p>
+<p><strong>Example</strong>:</p>
+<pre><code>Is size &gt; 2000 sq ft?
+  ├─ Yes → Is location = downtown?
+  │         ├─ Yes → Predict $500k
+  │         └─ No → Predict $350k
+  └─ No → Predict $250k
+</code></pre>
+<p><img alt="Decision Tree Diagram" src="../../assets/image3.png" /></p>
+<p><strong>Mathematical Formula :</strong></p>
+<pre><code>Prediction at leaf node = (1/n) Σᵢ₌₁ⁿ yᵢ
+
+Where:
+n = number of samples in the leaf
+yᵢ = actual values in the leaf
+(Takes the mean of training samples that reach that leaf)
+
+Split criterion (MSE):
+MSE = (1/n) Σᵢ₌₁ⁿ (yᵢ - ŷ)²
+</code></pre>
+<p><strong>Strengths</strong>:
+- Handles non-linear relationships
+- Easy to visualize and understand
+- No feature scaling needed</p>
+<p><strong>Weaknesses</strong>:
+- Can overfit easily
+- Sensitive to small data changes
+- May create overly complex trees</p>
+<p><strong>Use cases :</strong>
+- Predicting sales based on season, location, and marketing.<br />
+- Modeling complex, non-linear data patterns.  </p>
+<hr />
+<h3 id="3-random-forest-regressor">3. Random Forest Regressor<a class="headerlink" href="#3-random-forest-regressor" title="Permanent link">&para;</a></h3>
+<p><strong>How it works</strong>: Creates many decision trees and averages their predictions.</p>
+<p><strong>Think of it as</strong>: A committee of experts voting on the answer
+- Each tree sees slightly different data
+- Final prediction = average of all trees
+- Reduces overfitting compared to single tree</p>
+<p><img alt="Random Forest Regressor Diagram" src="../../assets/image4.png" /></p>
+<p><strong>Mathematical Formula :</strong></p>
+<pre><code>ŷ = (1/T) Σₜ₌₁ᵀ hₜ(x)
+
+Where:
+T = number of trees in the forest
+hₜ(x) = prediction from tree t
+ŷ = final prediction (average of all trees)
+</code></pre>
+<p><strong>Strengths</strong>:
+- More accurate than single decision tree
+- Handles complex relationships
+- Reduces overfitting
+- Shows feature importance</p>
+<p><strong>Weaknesses</strong>:
+- Slower to train
+- Less interpretable
+- Requires more memory</p>
+<p><strong>Use Cases :</strong>
+- Predicting house prices, insurance claim amounts.<br />
+- Forecasting demand or energy consumption. </p>
+<hr />
+<h3 id="4-support-vector-regressor-svr">4. Support Vector Regressor (SVR)<a class="headerlink" href="#4-support-vector-regressor-svr" title="Permanent link">&para;</a></h3>
+<p><strong>How it works</strong>: 
+- Fits a line or curve that predicts most of the data within a “tube” of tolerance (𝜖).
+- Focuses only on points that lie on or outside the tube (support vectors).
+- Can handle nonlinear patterns using kernel functions (like RBF).</p>
+<p><strong>Key Concept</strong>: 
+- Uses kernel tricks for non-linear patterns
+- Focuses on data points that define boundaries
+- RBF kernel used in your implementation</p>
+<p><strong>Mathematical Formula :</strong></p>
+<pre><code>Minimize: (1/2)||w||² + C Σᵢ₌₁ⁿ (ξᵢ + ξᵢ*)
+
+Subject to:
+|yᵢ - (w·xᵢ + b)| ≤ ε + ξᵢ
+
+Where:
+w = weight vector
+ε = epsilon (tube width)
+C = penalty parameter
+ξᵢ = slack variables
+</code></pre>
+<p><img alt="Support Vector Regressor Diagram" src="../../assets/image5.png" /></p>
+<p><strong>Strengths</strong>:
+- Effective in high-dimensional spaces
+- Memory efficient
+- Robust to outliers</p>
+<p><strong>Weaknesses</strong>:
+- Slower on large datasets
+- Needs feature scaling
+- Difficult to interpret</p>
+<p><strong>Use Cases :</strong>
+- Predicting stock prices or exchange rates.<br />
+- Estimating real estate prices where outliers exist. </p>
+<hr />
+<h3 id="5-k-nearest-neighbors-knn-regressor">5. K-Nearest Neighbors (KNN) Regressor<a class="headerlink" href="#5-k-nearest-neighbors-knn-regressor" title="Permanent link">&para;</a></h3>
+<p><strong>How it works</strong>: Predicts based on the K closest training examples.</p>
+<p><strong>Example</strong> (K=5):
+- Find 5 nearest houses to your property
+- Average their prices
+- That's your prediction</p>
+<p><strong>Mathematical Formula :</strong></p>
+<pre><code>ŷ = (1/K) Σᵢ₌₁ᴷ yᵢ
+
+Where:
+K = number of nearest neighbors
+yᵢ = value of i-th nearest neighbor
+
+Distance (Euclidean):
+d(x, xᵢ) = √(Σⱼ₌₁ⁿ (xⱼ - xᵢⱼ)²)
+</code></pre>
+<p><img alt="KNN Regressor Diagram" src="../../assets/image6.png" /></p>
+<p><strong>Strengths</strong>:
+- Simple to understand
+- No training phase (lazy learning)
+- Naturally handles non-linear patterns</p>
+<p><strong>Weaknesses</strong>:
+- Slow predictions on large datasets
+- Needs feature scaling
+- Sensitive to irrelevant features</p>
+<p><strong>Use Cases :</strong>
+- Estimating house rent based on nearby similar properties.<br />
+- Predicting temperature using data from nearby weather stations.</p>
+<hr />
+<h2 id="classification-models">🎯 Classification Models<a class="headerlink" href="#classification-models" title="Permanent link">&para;</a></h2>
+<p>Classification predicts <strong>categories/classes</strong> (e.g., spam/not spam, disease/healthy, high/medium/low price).</p>
+<h3 id="1-logistic-regression">1. Logistic Regression<a class="headerlink" href="#1-logistic-regression" title="Permanent link">&para;</a></h3>
+<p><strong>How it works</strong>: Despite the name, it's for classification! Predicts probability of belonging to a class.</p>
+<p><strong>Example</strong>: Predicting if house is "expensive" or "affordable"</p>
+<pre><code>Probability = 1 / (1 + e^(-score))
+If probability &gt; 0.5 → Expensive
+If probability ≤ 0.5 → Affordable
+</code></pre>
+<p><strong>Mathematical Formula :</strong></p>
+<pre><code>P(y=1|x) = 1 / (1 + e^(-z))
+
+Where:
+z = β₀ + β₁x₁ + β₂x₂ + ... + βₙxₙ
+P(y=1|x) = probability of class 1
+e = Euler's number (≈2.718)
+
+Decision: If P(y=1|x) &gt; 0.5 → Class 1
+          If P(y=1|x) ≤ 0.5 → Class 0
+</code></pre>
+<p><img alt="Logistic Regression Diagram" src="../../assets/image7.png" /></p>
+<p><strong>Strengths</strong>:
+- Fast and efficient
+- Provides probability scores
+- Easy to interpret</p>
+<p><strong>Weaknesses</strong>:
+- Assumes linear decision boundary
+- Not effective for complex relationships</p>
+<p><strong>When to use</strong>: Binary classification with linearly separable data</p>
+<hr />
+<h3 id="2-decision-tree-classifier">2. Decision Tree Classifier<a class="headerlink" href="#2-decision-tree-classifier" title="Permanent link">&para;</a></h3>
+<p><strong>How it works</strong>: Same tree structure as regression, but predicts categories.</p>
+<p><strong>Example</strong>:
+Is size &gt; 2000 sq ft?
+  ├─ Yes → Is location = downtown?
+  │         ├─ Yes → Class: Luxury
+  │         └─ No → Class: Standard
+  └─ No → Class: Budget</p>
+<p><strong>Mathematical Formula :</strong></p>
+<pre><code>Gini Impurity = 1 - Σᵢ₌₁ᶜ pᵢ²
+
+Where:
+c = number of classes
+pᵢ = proportion of class i in node
+
+Entropy (alternative):
+H = -Σᵢ₌₁ᶜ pᵢ log₂(pᵢ)
+
+(Tree splits to minimize impurity)
+</code></pre>
+<p><img alt="Decision Tree Classifier" src="../../assets/image8.png" /></p>
+<p><strong>Strengths</strong>:
+- Handles non-linear boundaries
+- Interpretable
+- Works with categorical data</p>
+<p><strong>Weaknesses</strong>:
+- Overfits easily
+- Unstable with small data changes</p>
+<p><strong>When to use</strong>: When you need interpretability and have categorical data</p>
+<hr />
+<h3 id="3-random-forest-classifier">3. Random Forest Classifier<a class="headerlink" href="#3-random-forest-classifier" title="Permanent link">&para;</a></h3>
+<p><strong>How it works</strong>: Ensemble of decision trees voting on the class.</p>
+<p><strong>Voting Example</strong> (5 trees):
+- Tree 1: Luxury
+- Tree 2: Standard
+- Tree 3: Luxury
+- Tree 4: Luxury
+- Tree 5: Standard
+- <strong>Final Prediction</strong>: Luxury (majority vote: 3/5)</p>
+<p><strong>Mathematical Formula :</strong></p>
+<pre><code>ŷ = mode{h₁(x), h₂(x), ..., hₜ(x)}
+
+Where:
+T = number of trees
+hₜ(x) = prediction from tree t
+mode = most frequent class (majority vote)
+
+For probabilities:
+P(class=c|x) = (1/T) Σₜ₌₁ᵀ I(hₜ(x) = c)
+</code></pre>
+<p><img alt="Random Forest Classifier" src="../../assets/image9.png" /></p>
+<p><strong>Strengths</strong>:
+- High accuracy
+- Reduces overfitting
+- Shows feature importance
+- Handles imbalanced data well</p>
+<p><strong>Weaknesses</strong>:
+- Slower than single tree
+- Less interpretable
+- More memory intensive</p>
+<p><strong>When to use</strong>: When accuracy is priority and you have sufficient data</p>
+<hr />
+<h3 id="4-support-vector-machine-svm-classifier">4. Support Vector Machine (SVM) Classifier<a class="headerlink" href="#4-support-vector-machine-svm-classifier" title="Permanent link">&para;</a></h3>
+<p><strong>How it works</strong>: Finds the best boundary (hyperplane) that separates classes with maximum margin.</p>
+<p><strong>Mathematical Formula :</strong></p>
+<pre><code>Minimize: (1/2)||w||² + C Σᵢ₌₁ⁿ ξᵢ
+
+Subject to:
+yᵢ(w·xᵢ + b) ≥ 1 - ξᵢ
+
+Where:
+w = weight vector (perpendicular to hyperplane)
+b = bias
+C = penalty parameter
+ξᵢ = slack variables
+yᵢ ∈ {-1, +1} = class labels
+</code></pre>
+<p><img alt="SVM Classifier" src="../../assets/image10.png" /></p>
+<p><strong>Strengths</strong>:
+- Effective in high dimensions
+- Works well with clear margins
+- Memory efficient</p>
+<p><strong>Weaknesses</strong>:
+- Slow on large datasets
+- Needs parameter tuning
+- Requires feature scaling</p>
+<p><strong>When to use</strong>: High-dimensional data with clear separation</p>
+<hr />
+<h3 id="5-k-nearest-neighbors-knn-classifier">5. K-Nearest Neighbors (KNN) Classifier<a class="headerlink" href="#5-k-nearest-neighbors-knn-classifier" title="Permanent link">&para;</a></h3>
+<p><strong>How it works</strong>: Assigns class based on K nearest neighbors' majority vote.</p>
+<p><strong>Example</strong> (K=5):
+- Find 5 nearest houses
+- 3 are "Luxury", 2 are "Standard"
+- Predict: "Luxury" (majority)</p>
+<p><strong>Mathematical Formula :</strong></p>
+<pre><code>ŷ = mode{y₁, y₂, ..., yₖ}
+
+Where:
+K = number of nearest neighbors
+yᵢ = class of i-th nearest neighbor
+mode = most frequent class
+
+Distance (Euclidean):
+d(x, xᵢ) = √(Σⱼ₌₁ⁿ (xⱼ - xᵢⱼ)²)
+</code></pre>
+<p><img alt="KNN Classifier" src="../../assets/image11.png" /></p>
+<p><strong>Strengths</strong>:
+- Simple and intuitive
+- No training needed
+- Naturally handles multi-class</p>
+<p><strong>Weaknesses</strong>:
+- Slow for large datasets
+- Sensitive to feature scaling
+- Curse of dimensionality</p>
+<p><strong>When to use</strong>: Small to medium datasets with good feature engineering</p>
+<hr />
+<h3 id="6-naive-bayes-classifier">6. Naive Bayes Classifier<a class="headerlink" href="#6-naive-bayes-classifier" title="Permanent link">&para;</a></h3>
+<p><strong>How it works</strong>: Uses Bayes' Theorem assuming features are independent.</p>
+<p><strong>Mathematical Formula</strong>: </p>
+<p><strong>Bayes' Theorem:</strong>
+<code>P(A | B) = [ P(B | A) * P(A) ] / P(B)</code></p>
+<p><strong>For Naïve Bayes Classification:</strong></p>
+<pre><code>P(C | X) = [ P(X | C) * P(C) ] / P(X)
+
+Where:
+- P(C | X) → Posterior probability of class C given predictor X  
+- P(X | C) → Likelihood of predictor given class  
+- P(C) → Prior probability of class  
+- P(X) → Probability of predictor (same for all classes)
+</code></pre>
+<p><strong>Naïve (Independence) Assumption:</strong>
+<code>P(X | C) = P(x₁, x₂, ..., xₙ | C) = Π P(xᵢ | C)</code></p>
+<p><strong>Final Formula:</strong>
+<code>P(C | X) ∝ P(C) * Π P(xᵢ | C)</code></p>
+<p><img alt="Naive Bayes Classifier" src="../../assets/image12.png" /></p>
+<p><strong>Example</strong>: Weather Prediction (Naïve Bayes)</p>
+<ul>
+<li>
+<p>We want to predict whether someone will <strong>play tennis (Yes/No)</strong> based on the <strong>weather conditions</strong>.</p>
+</li>
+<li>
+<p>Suppose we have features:</p>
+</li>
+<li>Outlook = Sunny, Overcast, or Rain  </li>
+<li>Temperature = Hot, Mild, or Cool  </li>
+<li>
+<p>Humidity = High or Normal  </p>
+</li>
+<li>
+<p>We want to find:<br />
+<code>P(Play = Yes | Outlook = Sunny, Humidity = High)</code></p>
+</li>
+<li>
+<p>Using Naïve Bayes:</p>
+</li>
+</ul>
+<pre><code>P(Play = Yes | Outlook = Sunny, Humidity = High) ∝ 
+P(Play = Yes) * P(Outlook = Sunny | Play = Yes) * P(Humidity = High | Play = Yes)
+</code></pre>
+<ul>
+<li>Each probability is estimated from training data (frequency counts).  </li>
+<li>The class (Yes or No) with the higher probability becomes the prediction.</li>
+</ul>
+<p><strong>Strengths</strong>:
+- Very fast
+- Works well with text data
+- Needs little training data
+- Handles multi-class naturally</p>
+<p><strong>Weaknesses</strong>:
+- Assumes feature independence (often unrealistic)
+- Cannot learn feature interactions</p>
+<p><strong>When to use</strong>: Text classification, spam detection, sentiment analysis</p>
+<hr />
+<h2 id="evaluation-metrics">📊 Evaluation Metrics<a class="headerlink" href="#evaluation-metrics" title="Permanent link">&para;</a></h2>
+<h3 id="regression-metrics">Regression Metrics<a class="headerlink" href="#regression-metrics" title="Permanent link">&para;</a></h3>
+<h4 id="1-mean-squared-error-mse">1. Mean Squared Error (MSE)<a class="headerlink" href="#1-mean-squared-error-mse" title="Permanent link">&para;</a></h4>
+<p><strong>Formula</strong>: Average of squared differences between predictions and actual values<br />
+<code>MSE = (1/n) * Σ (yᵢ - ŷᵢ)²</code></p>
+<p><strong>Interpretation</strong>:
+- Lower is better
+- Heavily penalizes large errors
+- Units are squared (e.g., dollars²)</p>
+<p><strong>Example</strong>: 
+- Actual: $300k, Predicted: $310k → Error²: (10k)² = 100M
+- Actual: $300k, Predicted: $320k → Error²: (20k)² = 400M
+- MSE = (100M + 400M) / 2 = 250M</p>
+<hr />
+<h4 id="2-root-mean-squared-error-rmse">2. Root Mean Squared Error (RMSE)<a class="headerlink" href="#2-root-mean-squared-error-rmse" title="Permanent link">&para;</a></h4>
+<p><strong>Formula</strong>: Square root of MSE<br />
+<code>RMSE = √[ (1/n) * Σ (yᵢ - ŷᵢ)² ]</code></p>
+<p><strong>Interpretation</strong>:
+- Lower is better
+- Same units as target (dollars, not dollars²)
+- More interpretable than MSE</p>
+<p><strong>Example</strong>:
+- From above, MSE = 250M<br />
+- RMSE = √250M ≈ 15.8k</p>
+<hr />
+<h4 id="3-mean-absolute-error-mae">3. Mean Absolute Error (MAE)<a class="headerlink" href="#3-mean-absolute-error-mae" title="Permanent link">&para;</a></h4>
+<p><strong>Formula</strong>: Average of absolute differences<br />
+<code>MAE = (1/n) * Σ |yᵢ - ŷᵢ|</code></p>
+<p><strong>Interpretation</strong>:
+- Lower is better
+- Less sensitive to outliers than RMSE
+- Direct average error</p>
+<p><strong>Example:</strong><br />
+- Actual: $300k, Predicted: $310k → |Error| = 10k<br />
+- Actual: $300k, Predicted: $320k → |Error| = 20k<br />
+- MAE = (10k + 20k) / 2 = 15k</p>
+<hr />
+<h4 id="4-r2-score-r-squared">4. R² Score (R-Squared)<a class="headerlink" href="#4-r2-score-r-squared" title="Permanent link">&para;</a></h4>
+<p><strong>Formula</strong>: 1 - (Sum of Squared Residuals / Total Sum of Squares)<br />
+<code>R² = 1 - [ Σ (yᵢ - ŷᵢ)² / Σ (yᵢ - ȳ)² ]</code></p>
+<p><strong>Interpretation</strong>:
+- Range: -∞ to 1.0
+- 1.0 = Perfect predictions
+- 0.0 = Model no better than predicting mean
+- &lt; 0 = Model worse than predicting mean</p>
+<p><strong>Example:</strong><br />
+- Total variance (Σ(yᵢ - ȳ)²) = 1000M<br />
+- Residual variance (Σ(yᵢ - ŷᵢ)²) = 250M<br />
+- R² = 1 - (250 / 1000) = 0.75 → Model explains 75% of variance</p>
+<hr />
+<h3 id="classification-metrics">Classification Metrics<a class="headerlink" href="#classification-metrics" title="Permanent link">&para;</a></h3>
+<p>Let us assume we have:</p>
+<table>
+<thead>
+<tr>
+<th>Actual</th>
+<th>Predicted</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Positive (1)</td>
+<td>Positive (1)</td>
+</tr>
+<tr>
+<td>Negative (0)</td>
+<td>Positive (1)</td>
+</tr>
+<tr>
+<td>Positive (1)</td>
+<td>Negative (0)</td>
+</tr>
+<tr>
+<td>Negative (0)</td>
+<td>Negative (0)</td>
+</tr>
+</tbody>
+</table>
+<p>So:<br />
+TP = 1, TN = 1, FP = 1, FN = 1</p>
+<hr />
+<h4 id="1-accuracy">1. Accuracy<a class="headerlink" href="#1-accuracy" title="Permanent link">&para;</a></h4>
+<p><strong>Formula</strong>: (Correct Predictions) / (Total Predictions)<br />
+<code>Accuracy = (TP + TN) / (TP + TN + FP + FN)</code></p>
+<p><strong>Example</strong>:
+Accuracy = (1 + 1) / (1 + 1 + 1 + 1) = 0.5 → <strong>50% accuracy</strong></p>
+<p><strong>Limitation</strong>: Misleading with imbalanced classes</p>
+<hr />
+<h4 id="2-confusion-matrix">2. Confusion Matrix<a class="headerlink" href="#2-confusion-matrix" title="Permanent link">&para;</a></h4>
+<p>Compares predictions vs actual:</p>
+<pre><code>                Predicted
+              No    Yes
+Actual  No   [TN]  [FP]
+        Yes  [FN]  [TP]
+</code></pre>
+<ul>
+<li><strong>TP</strong>: True Positives (correctly predicted Yes)</li>
+<li><strong>TN</strong>: True Negatives (correctly predicted No)</li>
+<li><strong>FP</strong>: False Positives (predicted Yes, actually No)</li>
+<li><strong>FN</strong>: False Negatives (predicted No, actually Yes)</li>
+</ul>
+<hr />
+<h4 id="3-precision">3. Precision<a class="headerlink" href="#3-precision" title="Permanent link">&para;</a></h4>
+<p><strong>Formula</strong>: <br />
+<code>TP / (TP + FP)</code></p>
+<p><strong>Meaning</strong>: "Of all positive predictions, how many were correct?"</p>
+<p><strong>Example</strong>:
+ = 1 / (1 + 1) = 0.5 → <strong>50% of predicted positives are correct</strong></p>
+<hr />
+<h4 id="4-recall-sensitivity">4. Recall (Sensitivity)<a class="headerlink" href="#4-recall-sensitivity" title="Permanent link">&para;</a></h4>
+<p><strong>Formula</strong>: <br />
+<code>TP / (TP + FN)</code></p>
+<p><strong>Meaning</strong>: "Of all actual positives, how many did we catch?"</p>
+<p><strong>Example :</strong>
+= 1 / (1 + 1) = 0.5 → <strong>50% of actual positives identified</strong></p>
+<hr />
+<h4 id="5-f1-score">5. F1-Score<a class="headerlink" href="#5-f1-score" title="Permanent link">&para;</a></h4>
+<p><strong>Formula</strong>: <br />
+<code>F1 = 2 * (Precision * Recall) / (Precision + Recall)</code></p>
+<p><strong>Meaning</strong>: Harmonic mean of precision and recall</p>
+<p><strong>Example :</strong>
+F1 = 2 * (0.5 * 0.5) / (0.5 + 0.5) = 0.5</p>
+<p><strong>When to use</strong>: Balances precision and recall, especially with imbalanced data</p>
+<hr />
+<h2 id="model-comparison-regression-results">🏆 Model Comparison (Regression Results)<a class="headerlink" href="#model-comparison-regression-results" title="Permanent link">&para;</a></h2>
+<h3 id="regression-performance-ranking">Regression Performance Ranking<a class="headerlink" href="#regression-performance-ranking" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Rank</th>
+<th>Model</th>
+<th>R² Score</th>
+<th>RMSE</th>
+<th>MAE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🥇 1</td>
+<td>Linear Regression</td>
+<td>0.7904</td>
+<td>30.79</td>
+<td>9.95</td>
+</tr>
+<tr>
+<td>🥈 2</td>
+<td>Random Forest</td>
+<td>0.7375</td>
+<td>34.45</td>
+<td>1.77</td>
+</tr>
+<tr>
+<td>🥉 3</td>
+<td>KNN</td>
+<td>0.6585</td>
+<td>39.29</td>
+<td>1.91</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Decision Tree</td>
+<td>0.6268</td>
+<td>41.08</td>
+<td>3.14</td>
+</tr>
+<tr>
+<td>5</td>
+<td>SVR</td>
+<td>0.5188</td>
+<td>46.64</td>
+<td>3.88</td>
+</tr>
+</tbody>
+</table>
+<h3 id="key-observations">Key Observations<a class="headerlink" href="#key-observations" title="Permanent link">&para;</a></h3>
+<p><strong>Linear Regression wins because</strong>:  </p>
+<ul>
+<li>✅ Highest R² score (79.04%)  </li>
+<li>✅ Lowest RMSE (best average error)  </li>
+<li>✅ Fast training and prediction  </li>
+<li>✅ Easy to interpret  </li>
+</ul>
+<p><strong>Interesting finding</strong>: Despite lower MAE, Random Forest has better overall performance metrics than simpler models.</p>
+<hr />
+<h2 id="model-comparison-classification-results">🏆 Model Comparison (Classification Results)<a class="headerlink" href="#model-comparison-classification-results" title="Permanent link">&para;</a></h2>
+<h3 id="classification-performance-ranking">Classification Performance Ranking<a class="headerlink" href="#classification-performance-ranking" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Accuracy</th>
+<th>Precision</th>
+<th>Recall</th>
+<th>F1 Score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Logistic Regression</td>
+<td>0.9231</td>
+<td>0.9479</td>
+<td>0.9231</td>
+<td>0.9271</td>
+</tr>
+<tr>
+<td>Decision Tree</td>
+<td>1.0000</td>
+<td>1.0000</td>
+<td>1.0000</td>
+<td>1.0000</td>
+</tr>
+<tr>
+<td>Random Forest</td>
+<td>1.0000</td>
+<td>1.0000</td>
+<td>1.0000</td>
+<td>1.0000</td>
+</tr>
+<tr>
+<td>SVM</td>
+<td>0.6667</td>
+<td>0.5041</td>
+<td>0.6667</td>
+<td>0.5698</td>
+</tr>
+<tr>
+<td>KNN</td>
+<td>0.6410</td>
+<td>0.6282</td>
+<td>0.6410</td>
+<td>0.6197</td>
+</tr>
+<tr>
+<td>Naive Bayes</td>
+<td>0.9487</td>
+<td>0.9615</td>
+<td>0.9487</td>
+<td>0.9508</td>
+</tr>
+</tbody>
+</table>
+<h3 id="confusion-matrix-for-all-models">Confusion Matrix for all models<a class="headerlink" href="#confusion-matrix-for-all-models" title="Permanent link">&para;</a></h3>
+<p><img alt="Confusion Matrix for all Models" src="../../assets/image16.png" /></p>
+<h3 id="key-observations_1">Key Observations<a class="headerlink" href="#key-observations_1" title="Permanent link">&para;</a></h3>
+<p>🏆 <strong>BEST CLASSIFICATION MODELS</strong></p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Accuracy</th>
+<th>Precision</th>
+<th>Recall</th>
+<th>F1 Score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Decision Tree</td>
+<td>1.0</td>
+<td>1.0</td>
+<td>1.0</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Random Forest</td>
+<td>1.0</td>
+<td>1.0</td>
+<td>1.0</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>Decision Tree &amp; Random Forest win because:</p>
+<p>✅ Perfect test accuracy on this dataset
+✅ Can capture complex, non-linear relationships
+✅ Handle both categorical and numerical features naturally
+✅ Robust and flexible for small datasets</p>
+<hr />
+<h3 id="general-ml-best-practices">General ML Best Practices<a class="headerlink" href="#general-ml-best-practices" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Always split your data</strong></li>
+<li>Train-test split prevents overfitting</li>
+<li>
+<p>Use cross-validation for robust evaluation</p>
+</li>
+<li>
+<p><strong>Try multiple models</strong></p>
+</li>
+<li>Different models work better for different data</li>
+<li>
+<p>No "one size fits all" solution</p>
+</li>
+<li>
+<p><strong>Understand your metrics</strong></p>
+</li>
+<li>R² for overall model fit</li>
+<li>RMSE for average prediction error</li>
+<li>
+<p>MAE for median error magnitude</p>
+</li>
+<li>
+<p><strong>Consider the business context</strong></p>
+</li>
+<li>Is $31k error acceptable for your use case?</li>
+<li>Sometimes a simple, interpretable model is better than a complex one</li>
+</ol>
+<hr />
+<h2 id="summary">📚 Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<p><strong>You've learned</strong>:</p>
+<ul>
+<li>✅ Train-test split methodology</li>
+<li>✅ 5 regression algorithms</li>
+<li>✅ 6 classification algorithms </li>
+<li>✅ Multiple evaluation metrics</li>
+<li>✅ Model comparison techniques</li>
+</ul>
+<h3 id="download-material">📥 Download Material<a class="headerlink" href="#download-material" title="Permanent link">&para;</a></h3>
+<ul>
+<li>📓 Download Notebook and Dataset for Regression and Classification Problem:<br />
+<a href="../../files/day2.zip">day2.zip</a></li>
+</ul>
+<p>Run each cell step by step to see data cleaning and feature engineering in action!</p>
+<hr />
+<p><strong>Remember</strong>: 
+The best model isn't always the most complex one. <br />
+Choose based on:
+- Performance on test data
+- Interpretability needs
+- Computational resources
+- Business requirements</p>
+<hr />
+<p><em>Created for ML Workshop Day 2 | Happy Learning! 🎓</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024 - ACM BITS Pilani Dubai Campus
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://instagram.com/acmbpdc" target="_blank" rel="noopener" title="instagram.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M224.3 141a115 115 0 1 0-.6 230 115 115 0 1 0 .6-230m-.6 40.4a74.6 74.6 0 1 1 .6 149.2 74.6 74.6 0 1 1-.6-149.2m93.4-45.1a26.8 26.8 0 1 1 53.6 0 26.8 26.8 0 1 1-53.6 0m129.7 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8M399 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/acmbpdc" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://discord.gg/DYQdxquYwP" target="_blank" rel="noopener" title="discord.gg" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M492.5 69.8c-.2-.3-.4-.6-.8-.7-38.1-17.5-78.4-30-119.7-37.1-.4-.1-.8 0-1.1.1s-.6.4-.8.8c-5.5 9.9-10.5 20.2-14.9 30.6-44.6-6.8-89.9-6.8-134.4 0-4.5-10.5-9.5-20.7-15.1-30.6-.2-.3-.5-.6-.8-.8s-.7-.2-1.1-.2C162.5 39 122.2 51.5 84.1 69c-.3.1-.6.4-.8.7C7.1 183.5-13.8 294.6-3.6 404.2c0 .3.1.5.2.8s.3.4.5.6c44.4 32.9 94 58 146.8 74.2.4.1.8.1 1.1 0s.7-.4.9-.7c11.3-15.4 21.4-31.8 30-48.8.1-.2.2-.5.2-.8s0-.5-.1-.8-.2-.5-.4-.6-.4-.3-.7-.4c-15.8-6.1-31.2-13.4-45.9-21.9-.3-.2-.5-.4-.7-.6s-.3-.6-.3-.9 0-.6.2-.9.3-.5.6-.7c3.1-2.3 6.2-4.7 9.1-7.1.3-.2.6-.4.9-.4s.7 0 1 .1c96.2 43.9 200.4 43.9 295.5 0 .3-.1.7-.2 1-.2s.7.2.9.4c2.9 2.4 6 4.9 9.1 7.2.2.2.4.4.6.7s.2.6.2.9-.1.6-.3.9-.4.5-.6.6c-14.7 8.6-30 15.9-45.9 21.8-.2.1-.5.2-.7.4s-.3.4-.4.7-.1.5-.1.8.1.5.2.8c8.8 17 18.8 33.3 30 48.8.2.3.6.6.9.7s.8.1 1.1 0c52.9-16.2 102.6-41.3 147.1-74.2.2-.2.4-.4.5-.6s.2-.5.2-.8c12.3-126.8-20.5-236.9-86.9-334.5zm-302 267.7c-29 0-52.8-26.6-52.8-59.2s23.4-59.2 52.8-59.2c29.7 0 53.3 26.8 52.8 59.2 0 32.7-23.4 59.2-52.8 59.2m195.4 0c-29 0-52.8-26.6-52.8-59.2s23.4-59.2 52.8-59.2c29.7 0 53.3 26.8 52.8 59.2 0 32.7-23.2 59.2-52.8 59.2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "header.autohide"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

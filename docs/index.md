@@ -8,7 +8,7 @@ Welcome to the **ACM Machine Learning Workshop**, where curiosity meets computat
 
 ## 1. What is Machine Learning?
 
-![MachineLearning](../assets/MachineLearning.png)
+![MachineLearning](assets/MachineLearning.png)
 
 Machine Learning is a branch of Artificial Intelligence (AI) that enables systems to **identify patterns**, **make predictions**, and **improve automatically** through experience. Unlike traditional programming where we explicitly code rules, ML allows computers to discover rules and patterns from data.
 
@@ -40,7 +40,7 @@ Machine Learning is transforming industries and solving complex problems across 
 * **Patient Monitoring:** Predicting patient deterioration in ICUs
 * **Personalized Treatment:** Recommending treatments based on genetic profiles
 
-![MachineLearningHealthSector](../assets/ml_health_sector.jpg)
+![MachineLearningHealthSector](assets/ml_health_sector.jpg)
 
 #### 1.2.3 Finance & Banking
 * **Fraud Detection:** Identifying suspicious transactions in real-time
@@ -48,14 +48,14 @@ Machine Learning is transforming industries and solving complex problems across 
 * **Algorithmic Trading:** Predicting stock market trends
 * **Customer Segmentation:** Personalizing banking services
 
-![MachineLearningInFinance](../assets/MachineLearningInFinance.jpg)
+![MachineLearningInFinance](assets/MachineLearningInFinance.jpg)
 
 #### 1.2.4 Transportation & Autonomous Vehicles
 * **Self-Driving Cars:** Tesla, Waymo using computer vision and sensor fusion
 * **Route Optimization:** Uber, Google Maps predicting traffic and suggesting routes
 * **Predictive Maintenance:** Anticipating vehicle component failures
 
-![MachineLearningSelfDrivingCars](../assets/MachineLearningSelfDrivingCars.jpg)
+![MachineLearningSelfDrivingCars](assets/MachineLearningSelfDrivingCars.jpg)
 
 #### 1.2.5 Manufacturing & Industry
 * **Quality Control:** Detecting defects in production lines
@@ -63,7 +63,7 @@ Machine Learning is transforming industries and solving complex problems across 
 * **Supply Chain Optimization:** Forecasting demand and managing inventory
 * **Energy Optimization:** Reducing power consumption
 
-![MachineLearningInspection](../assets/MachineLearningInspection.png)
+![MachineLearningInspection](assets/MachineLearningInspection.png)
 
 ### 1.3 What Kind of Problems Can ML Solve?
 

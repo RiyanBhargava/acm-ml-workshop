@@ -8,7 +8,7 @@ For today's hands-on session, you'll need the following materials:
 [Open in Google Colab](https://colab.research.google.com/drive/1lIjRkgCzgM_pKqE77_8lVWM34vYb-6oj#scrollTo=85lg7vd7VqaM)
 
 **📊 Dataset:**  
-[Download day1_materials.zip](../files/day1.zip) - Contains the Bangalore house prices dataset
+[Download day1_materials.zip](../files/day1/day1.zip) - Contains the Bangalore house prices dataset
 
 > **Important:** Make a copy of the Colab notebook (File → Save a copy in Drive) before running it. We'll be using these resources throughout today's session.
 
@@ -678,7 +678,7 @@ Open the Colab Link, Make a Copy and Upload the dataset on Colab
 [Open in Google Colab](https://colab.research.google.com/drive/1lIjRkgCzgM_pKqE77_8lVWM34vYb-6oj#scrollTo=85lg7vd7VqaM)
 
 **📊 Dataset:**  
-[Download day1_materials.zip](../files/day1.zip) - Contains the Bangalore house prices dataset
+[Download day1_materials.zip](../files/day1/day1.zip) - Contains the Bangalore house prices dataset
 
 ---
 

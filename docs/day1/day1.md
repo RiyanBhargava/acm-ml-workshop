@@ -678,8 +678,8 @@ Open the Colab Link, Make a Copy and Upload the dataset on Colab
 [Open in Google Colab](https://colab.research.google.com/drive/1lIjRkgCzgM_pKqE77_8lVWM34vYb-6oj#scrollTo=85lg7vd7VqaM)
 
 **📊 Dataset:**  
-[Download day1_materials.zip](../files/day1/day1.zip) - Contains the Bangalore house prices dataset
-
+[day1.zip](../files/day1/day1.zip) - Contains the Bangalore house prices dataset
+[Datasets](../files/day2/Datasets.zip)
 ---
 
 See you next week! 🚀

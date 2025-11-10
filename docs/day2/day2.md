@@ -3,21 +3,7 @@
 
 ---
 
-## 📋 Table of Contents
-1. Overview
-2. Dataset Information
-3. Overfitting and Underfitting
-4. Train-Test Split
-5. Types of ML Problems
-6. Regression Models
-7. Classification Models
-8. Evaluation Metrics
-9. Model Comparison
-10. Key Insights
-
----
-
-## 🎯 Overview
+## 1. Overview
 
 This workshop introduces fundamental machine learning concepts with practical implementation. You'll learn how to:
 - Split data for training and testing
@@ -27,11 +13,23 @@ This workshop introduces fundamental machine learning concepts with practical im
 
 **Dataset**: Real estate pricing data 
 
+### Colab Files (Make a copy and run the cells) :
+1. Model Training(Regression) :  
+   [ML_Workshop_Day2_Regression](https://colab.research.google.com/drive/1OJKjqnp6zMdjilnRdZkCm-De1M91Ax8v?usp=sharing)
+
+2. Preprocessing of Classification dataset :
+[Drugclassification_Preprocessing](https://colab.research.google.com/drive/1DvOHTXz8iPYrH-0NSuyq19W1_E-TBpey?usp=sharing)
+
+3. Model Training(Classification) :
+[ML_Worshop_Day2_Classification](https://colab.research.google.com/drive/1eVj2YmoO9bbze7IZnl1IsBGroT4skyxm?usp=sharing)
+
+4. Dataset Files :
+[Datasets](../files/day2/Datasets.zip)
 ---
 
-## 📊 Dataset Information
+## 2. Dataset Information
 
-### Original Dataset
+### Preprocessed Dataset
 - **Total Records**: 10,835 properties
 - **Features**: 246 (after preprocessing)
 - **Target Variable**: `price` (continuous numerical value) - that we want to predict
@@ -39,8 +37,11 @@ This workshop introduces fundamental machine learning concepts with practical im
 ### Feature Preparation
 ```python
 # Separating features and target
-X = df[feature_cols]  # All columns except 'price'
-y = df['price']       # Target variable
+# Features: drop 'price' (target), keep all others
+feature_cols = [col for col in df1.columns if col != 'price']
+X = df1[feature_cols]
+y = df1['price']
+
 
 # Dataset shape
 Features: (10835, 244)
@@ -49,19 +50,19 @@ Target: (10835,)
 
 ---
 
-## Overfitting and Underfitting
+## 3. Overfitting and Underfitting
 When building machine learning models, the goal is to **capture the true underlying patterns in data** so the model can **generalize** to new, unseen examples.  
 
 However, models can sometimes go wrong in two common ways:
 
-1. **Underfitting**
-2. **Overfitting** 
+1. **Overfitting**
+2. **Underfitting** 
 
 ![Underfit,Goodfit and Overfit curves](../assets/image13.png)
 
 Striking the **right balance** between underfitting and overfitting is key to building robust machine learning models.
 
-### Overfitting
+### 3.1. Overfitting
 Overfitting happens when a model learns too much from the training data, including details that don’t matter (like noise or outliers).
 
 **Example :**
@@ -76,7 +77,7 @@ Overfitting happens when a model learns too much from the training data, includi
 2. The model is too complex.
 3. The size of the training data.
 
-### Underfitting
+### 3.2. Underfitting
 
 Underfitting is the opposite of overfitting. It happens when a model is too simple to capture what’s going on in the data.
 
@@ -93,7 +94,7 @@ Underfitting is the opposite of overfitting. It happens when a model is too simp
 3. The size of the training dataset used is not enough.
 4. Features are not scaled.
 
-## 🔀 Train-Test Split
+## 4. Train-Test Split
 
 ### What is Train-Test Split?
 
@@ -112,25 +113,26 @@ Train-test split divides your dataset into two parts:
 
 ### Implementation
 ```python
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, 
-    test_size=0.2,      # 20% for testing
-    random_state=42     # For reproducibility
-)
+X_train, X_test, y_train, y_test = train_test_split(X, y,test_size=0.2,random_state=42)
+
+#test_size -> indicates that 20% is for testing and 80% is for training
+
+#random_state -> reproducibility - ensures same kind of split occurs everytime
 ```
 
-### Why Split Data?
+### 4.1. Why Split Data?
 - **Prevents Overfitting**: Model doesn't memorize training data
 - **Tests Generalization**: Evaluates performance on unseen data
 - **Realistic Performance**: Simulates real-world predictions
 
 ---
-## Types of Machine Learning Problems
-In supervised learning, problems are usually divided into two types : 
-- Regression Problem
-- Classification Problem
+## 5. Types of Machine Learning Problems
+In supervised learning, problems are usually divided into two types :   
 
-### Regression Problem
+- **Regression Problem**
+- **Classification Problem**
+
+### 5.1. Regression Problem
 - **Goal :** To predict a continuous numeric value.
 - Regression models try to find relationships between input variables (features) and a continuous output.
 
@@ -147,6 +149,7 @@ In supervised learning, problems are usually divided into two types :
     2. Decision Tree Regressor
     3. Random Forest Regressor
     4. Support Vector Regressor (SVR)
+    5. K - Nearest Neighbors Regressor
 
 - Evaluation Metrics:
 
@@ -155,7 +158,7 @@ In supervised learning, problems are usually divided into two types :
     3. Mean Absolute Error (MAE)
     4. R² Score
 
-### Classification Problem
+### 5.2. Classification Problem
 - **Goal :** To predict a discrete label or category.
 - Classification models learn to separate data into different classes.
 
@@ -173,6 +176,7 @@ In supervised learning, problems are usually divided into two types :
     3. Random Forest Classifier
     4. Support Vector Machine (SVM)
     5. k-Nearest Neighbors (KNN)
+    6. Naive Bayes Classifier
 
 - Evaluation Metrics:
 
@@ -183,13 +187,13 @@ In supervised learning, problems are usually divided into two types :
 
 ---
 
-## 📈 Regression Models
+## 6. Regression Models
 
 Regression predicts **continuous numerical values** (e.g., house prices, temperature, sales).
 
 --- 
 
-### 1. Linear Regression
+### 6.1. Linear Regression
 
 **How it works**: Finds the best straight line through your data points.
 
@@ -204,28 +208,32 @@ Where:
 x₁, x₂, ..., xₙ = feature values
 ```
 
-Simple form: ```y = mx + b```
+Simple form: ```y = mx + b```    
+
 - Simple and interpretable
 - Assumes linear relationship between features and target
 
 ![Linear Regression Diagram](../assets/image2.png)
 
-**Strengths**:
+**Strengths**:  
+
 - Fast to train
 - Easy to interpret
 - Works well with linear relationships
 
-**Weaknesses**:
+**Weaknesses**:  
+
 - Cannot capture complex non-linear patterns
 - Sensitive to outliers - basically those values that are much out of range when compared to normal values
 
-**Use cases :**
+**Use cases :**  
+
 - Predicting house prices based on area, location, etc.  
 - Estimating sales revenue from advertising spend.  
 - Forecasting demand or performance metrics. 
 ---
 
-### 2. Decision Tree Regressor
+### 6.2. Decision Tree Regressor
 
 **How it works**: Creates a tree of yes/no questions to make predictions.
 
@@ -253,22 +261,25 @@ yᵢ = actual values in the leaf
 Split criterion (MSE):
 MSE = (1/n) Σᵢ₌₁ⁿ (yᵢ - ŷ)²
 ```
-**Strengths**:
+**Strengths**:  
+
 - Handles non-linear relationships
 - Easy to visualize and understand
 - No feature scaling needed
 
-**Weaknesses**:
+**Weaknesses**:  
+
 - Can overfit easily
 - Sensitive to small data changes
 - May create overly complex trees
 
-**Use cases :**
+**Use cases :**  
+
 - Predicting sales based on season, location, and marketing.  
 - Modeling complex, non-linear data patterns.  
 ---
 
-### 3. Random Forest Regressor
+### 6.3. Random Forest Regressor
 
 **How it works**: Creates many decision trees and averages their predictions.
 
@@ -288,23 +299,27 @@ T = number of trees in the forest
 hₜ(x) = prediction from tree t
 ŷ = final prediction (average of all trees)
 ```
-**Strengths**:
+
+**Strengths**:  
+
 - More accurate than single decision tree
 - Handles complex relationships
 - Reduces overfitting
 - Shows feature importance
 
-**Weaknesses**:
+**Weaknesses**:  
+
 - Slower to train
 - Less interpretable
 - Requires more memory
 
-**Use Cases :**
+**Use Cases :**  
+
 - Predicting house prices, insurance claim amounts.  
 - Forecasting demand or energy consumption. 
 ---
 
-### 4. Support Vector Regressor (SVR)
+### 6.4. Support Vector Regressor (SVR)
 
 **How it works**: 
 - Fits a line or curve that predicts most of the data within a “tube” of tolerance (𝜖).
@@ -332,22 +347,25 @@ C = penalty parameter
 
 ![Support Vector Regressor Diagram](../assets/image5.png)
 
-**Strengths**:
+**Strengths**:  
+
 - Effective in high-dimensional spaces
 - Memory efficient
 - Robust to outliers
 
-**Weaknesses**:
+**Weaknesses**:  
+
 - Slower on large datasets
 - Needs feature scaling
 - Difficult to interpret
 
-**Use Cases :**
+**Use Cases :**  
+
 - Predicting stock prices or exchange rates.  
 - Estimating real estate prices where outliers exist. 
 ---
 
-### 5. K-Nearest Neighbors (KNN) Regressor
+### 6.5. K-Nearest Neighbors (KNN) Regressor
 
 **How it works**: Predicts based on the K closest training examples.
 
@@ -370,27 +388,30 @@ d(x, xᵢ) = √(Σⱼ₌₁ⁿ (xⱼ - xᵢⱼ)²)
 
 ![KNN Regressor Diagram](../assets/image6.png)
 
-**Strengths**:
+**Strengths**:  
+
 - Simple to understand
 - No training phase (lazy learning)
 - Naturally handles non-linear patterns
 
-**Weaknesses**:
+**Weaknesses**:  
+
 - Slow predictions on large datasets
 - Needs feature scaling
 - Sensitive to irrelevant features
 
-**Use Cases :**
+**Use Cases :**  
+
 - Estimating house rent based on nearby similar properties.  
 - Predicting temperature using data from nearby weather stations.
 
 ---
 
-## 🎯 Classification Models
+## 7. Classification Models
 
 Classification predicts **categories/classes** (e.g., spam/not spam, disease/healthy, high/medium/low price).
 
-### 1. Logistic Regression
+### 7.1. Logistic Regression
 
 **How it works**: Despite the name, it's for classification! Predicts probability of belonging to a class.
 
@@ -416,12 +437,14 @@ Decision: If P(y=1|x) > 0.5 → Class 1
 
 ![Logistic Regression Diagram](../assets/image7.png)
 
-**Strengths**:
+**Strengths**:  
+
 - Fast and efficient
 - Provides probability scores
 - Easy to interpret
 
-**Weaknesses**:
+**Weaknesses**:  
+
 - Assumes linear decision boundary
 - Not effective for complex relationships
 
@@ -429,16 +452,18 @@ Decision: If P(y=1|x) > 0.5 → Class 1
 
 ---
 
-### 2. Decision Tree Classifier
+### 7.2. Decision Tree Classifier
 
 **How it works**: Same tree structure as regression, but predicts categories.
 
 **Example**:
+```
 Is size > 2000 sq ft?
   ├─ Yes → Is location = downtown?
   │         ├─ Yes → Class: Luxury
   │         └─ No → Class: Standard
   └─ No → Class: Budget
+```
 
 **Mathematical Formula :**
 ```
@@ -456,12 +481,14 @@ H = -Σᵢ₌₁ᶜ pᵢ log₂(pᵢ)
 
 ![Decision Tree Classifier](../assets/image8.png)
 
-**Strengths**:
+**Strengths**:  
+
 - Handles non-linear boundaries
 - Interpretable
 - Works with categorical data
 
-**Weaknesses**:
+**Weaknesses**:  
+
 - Overfits easily
 - Unstable with small data changes
 
@@ -469,11 +496,12 @@ H = -Σᵢ₌₁ᶜ pᵢ log₂(pᵢ)
 
 ---
 
-### 3. Random Forest Classifier
+### 7.3. Random Forest Classifier
 
 **How it works**: Ensemble of decision trees voting on the class.
 
-**Voting Example** (5 trees):
+**Voting Example** (5 trees):  
+
 - Tree 1: Luxury
 - Tree 2: Standard
 - Tree 3: Luxury
@@ -496,13 +524,15 @@ P(class=c|x) = (1/T) Σₜ₌₁ᵀ I(hₜ(x) = c)
 
 ![Random Forest Classifier](../assets/image9.png)
 
-**Strengths**:
+**Strengths**:  
+
 - High accuracy
 - Reduces overfitting
 - Shows feature importance
 - Handles imbalanced data well
 
-**Weaknesses**:
+**Weaknesses**:  
+
 - Slower than single tree
 - Less interpretable
 - More memory intensive
@@ -511,7 +541,7 @@ P(class=c|x) = (1/T) Σₜ₌₁ᵀ I(hₜ(x) = c)
 
 ---
 
-### 4. Support Vector Machine (SVM) Classifier
+### 7.4. Support Vector Machine (SVM) Classifier
 
 **How it works**: Finds the best boundary (hyperplane) that separates classes with maximum margin.
 
@@ -530,14 +560,16 @@ C = penalty parameter
 yᵢ ∈ {-1, +1} = class labels
 ```
 
-![SVM Classifier](../assets/image10.png)
+![SVM Classifier Diagram](../assets/image10.png)
 
-**Strengths**:
+**Strengths**:  
+
 - Effective in high dimensions
 - Works well with clear margins
 - Memory efficient
 
-**Weaknesses**:
+**Weaknesses**:  
+
 - Slow on large datasets
 - Needs parameter tuning
 - Requires feature scaling
@@ -546,11 +578,12 @@ yᵢ ∈ {-1, +1} = class labels
 
 ---
 
-### 5. K-Nearest Neighbors (KNN) Classifier
+### 7.5. K-Nearest Neighbors (KNN) Classifier
 
 **How it works**: Assigns class based on K nearest neighbors' majority vote.
 
-**Example** (K=5):
+**Example** (K=5):  
+
 - Find 5 nearest houses
 - 3 are "Luxury", 2 are "Standard"
 - Predict: "Luxury" (majority)
@@ -570,12 +603,14 @@ d(x, xᵢ) = √(Σⱼ₌₁ⁿ (xⱼ - xᵢⱼ)²)
 
 ![KNN Classifier](../assets/image11.png)
 
-**Strengths**:
+**Strengths**:  
+
 - Simple and intuitive
 - No training needed
 - Naturally handles multi-class
 
-**Weaknesses**:
+**Weaknesses**:  
+
 - Slow for large datasets
 - Sensitive to feature scaling
 - Curse of dimensionality
@@ -584,7 +619,7 @@ d(x, xᵢ) = √(Σⱼ₌₁ⁿ (xⱼ - xᵢⱼ)²)
 
 ---
 
-### 6. Naive Bayes Classifier
+### 7.6. Naive Bayes Classifier
 
 **How it works**: Uses Bayes' Theorem assuming features are independent.
 
@@ -603,10 +638,10 @@ Where:
 - P(C) → Prior probability of class  
 - P(X) → Probability of predictor (same for all classes)
 ```
-**Naïve (Independence) Assumption:**
+**Naïve (Independence) Assumption:**  
 ```P(X | C) = P(x₁, x₂, ..., xₙ | C) = Π P(xᵢ | C)```
 
-**Final Formula:**
+**Final Formula:**  
 ```P(C | X) ∝ P(C) * Π P(xᵢ | C)```
 
 ![Naive Bayes Classifier](../assets/image12.png)
@@ -633,13 +668,15 @@ P(Play = Yes) * P(Outlook = Sunny | Play = Yes) * P(Humidity = High | Play = Yes
 - The class (Yes or No) with the higher probability becomes the prediction.
 
 
-**Strengths**:
+**Strengths**:  
+
 - Very fast
 - Works well with text data
 - Needs little training data
 - Handles multi-class naturally
 
-**Weaknesses**:
+**Weaknesses**:  
+
 - Assumes feature independence (often unrealistic)
 - Cannot learn feature interactions
 
@@ -647,72 +684,80 @@ P(Play = Yes) * P(Outlook = Sunny | Play = Yes) * P(Humidity = High | Play = Yes
 
 ---
 
-## 📊 Evaluation Metrics
+## 8. Evaluation Metrics
 
-### Regression Metrics
+### Section 8.1 : Regression Metrics
 
-#### 1. Mean Squared Error (MSE)
+#### 8.1.1. Mean Squared Error (MSE)
 **Formula**: Average of squared differences between predictions and actual values  
 ```MSE = (1/n) * Σ (yᵢ - ŷᵢ)²```
 
-**Interpretation**:
+**Interpretation**:  
+
 - Lower is better
 - Heavily penalizes large errors
 - Units are squared (e.g., dollars²)
 
-**Example**: 
+**Example**:   
+
 - Actual: $300k, Predicted: $310k → Error²: (10k)² = 100M
 - Actual: $300k, Predicted: $320k → Error²: (20k)² = 400M
 - MSE = (100M + 400M) / 2 = 250M
 ---
 
-#### 2. Root Mean Squared Error (RMSE)
+#### 8.1.2. Root Mean Squared Error (RMSE)
 **Formula**: Square root of MSE  
 ```RMSE = √[ (1/n) * Σ (yᵢ - ŷᵢ)² ]```
 
-**Interpretation**:
+**Interpretation**:  
+
 - Lower is better
 - Same units as target (dollars, not dollars²)
 - More interpretable than MSE
 
-**Example**:
+**Example**:  
+
 - From above, MSE = 250M  
 - RMSE = √250M ≈ 15.8k
 ---
 
-#### 3. Mean Absolute Error (MAE)
+#### 8.1.3. Mean Absolute Error (MAE)
 **Formula**: Average of absolute differences  
 ```MAE = (1/n) * Σ |yᵢ - ŷᵢ|```
 
-**Interpretation**:
+**Interpretation**:  
+
 - Lower is better
 - Less sensitive to outliers than RMSE
 - Direct average error
 
-**Example:**  
+**Example:**    
+
 - Actual: $300k, Predicted: $310k → |Error| = 10k  
 - Actual: $300k, Predicted: $320k → |Error| = 20k  
 - MAE = (10k + 20k) / 2 = 15k
 ---
 
-#### 4. R² Score (R-Squared)
+#### 8.1.4. R² Score (R-Squared)
 **Formula**: 1 - (Sum of Squared Residuals / Total Sum of Squares)  
 ```R² = 1 - [ Σ (yᵢ - ŷᵢ)² / Σ (yᵢ - ȳ)² ]```
 
-**Interpretation**:
+**Interpretation**:  
+
 - Range: -∞ to 1.0
 - 1.0 = Perfect predictions
 - 0.0 = Model no better than predicting mean
 - < 0 = Model worse than predicting mean
 
 **Example:**  
+
 - Total variance (Σ(yᵢ - ȳ)²) = 1000M  
 - Residual variance (Σ(yᵢ - ŷᵢ)²) = 250M  
 - R² = 1 - (250 / 1000) = 0.75 → Model explains 75% of variance
 
 ---
 
-### Classification Metrics
+### 8.2. Classification Metrics
 
 Let us assume we have:
 
@@ -728,7 +773,7 @@ So:
 TP = 1, TN = 1, FP = 1, FN = 1
 
 ---
-#### 1. Accuracy
+#### 8.2.1. Accuracy
 **Formula**: (Correct Predictions) / (Total Predictions)  
 ```Accuracy = (TP + TN) / (TP + TN + FP + FN)```
 
@@ -739,7 +784,7 @@ Accuracy = (1 + 1) / (1 + 1 + 1 + 1) = 0.5 → **50% accuracy**
 
 ---
 
-#### 2. Confusion Matrix
+#### 8.2.2. Confusion Matrix
 Compares predictions vs actual:
 
 ```
@@ -756,7 +801,7 @@ Actual  No   [TN]  [FP]
 
 ---
 
-#### 3. Precision
+#### 8.2.3. Precision
 **Formula**:   
 ```TP / (TP + FP)```
 
@@ -767,7 +812,7 @@ Actual  No   [TN]  [FP]
 
 ---
 
-#### 4. Recall (Sensitivity)
+#### 8.2.4. Recall (Sensitivity)
 **Formula**:   
 ```TP / (TP + FN)```
 
@@ -778,7 +823,7 @@ Actual  No   [TN]  [FP]
 
 ---
 
-#### 5. F1-Score
+#### 8.2.5. F1-Score
 **Formula**:   
 ```F1 = 2 * (Precision * Recall) / (Precision + Recall)```
 
@@ -791,9 +836,9 @@ F1 = 2 * (0.5 * 0.5) / (0.5 + 0.5) = 0.5
 
 ---
 
-## 🏆 Model Comparison (Regression Results)
+## 9. Model Comparison (Regression Results)
 
-### Regression Performance Ranking
+### 9.1. Regression Performance Ranking
 
 | Rank | Model | R² Score | RMSE | MAE |
 |------|-------|----------|------|-----|
@@ -803,7 +848,7 @@ F1 = 2 * (0.5 * 0.5) / (0.5 + 0.5) = 0.5
 | 4 | Decision Tree | 0.6268 | 41.08 | 3.14 |
 | 5 | SVR | 0.5188 | 46.64 | 3.88 |
 
-### Key Observations
+### 9.2. Key Observations
 
 **Linear Regression wins because**:  
 
@@ -816,9 +861,9 @@ F1 = 2 * (0.5 * 0.5) / (0.5 + 0.5) = 0.5
 
 ---
 
-## 🏆 Model Comparison (Classification Results)
+## 10. Model Comparison (Classification Results)
 
-### Classification Performance Ranking
+### 10.1. Classification Performance Ranking
 
 | Model                | Accuracy | Precision | Recall | F1 Score |
 |-----------------------|-----------|------------|---------|-----------|
@@ -829,11 +874,11 @@ F1 = 2 * (0.5 * 0.5) / (0.5 + 0.5) = 0.5
 | KNN                   | 0.6410    | 0.6282     | 0.6410  | 0.6197    |
 | Naive Bayes           | 0.9487    | 0.9615     | 0.9487  | 0.9508    |
 
-### Confusion Matrix for all models 
+### 10.2. Confusion Matrix for all models 
 
 ![Confusion Matrix for all Models](../assets/image16.png)
 
-### Key Observations
+### 10.3. Key Observations
 
 🏆 **BEST CLASSIFICATION MODELS**
 
@@ -842,16 +887,16 @@ F1 = 2 * (0.5 * 0.5) / (0.5 + 0.5) = 0.5
 | Decision Tree  | 1.0       | 1.0        | 1.0     | 1.0       |
 | Random Forest  | 1.0       | 1.0        | 1.0     | 1.0       |
 
-Decision Tree & Random Forest win because:
+**Decision Tree & Random Forest win because:**  
 
-✅ Perfect test accuracy on this dataset
-✅ Can capture complex, non-linear relationships
-✅ Handle both categorical and numerical features naturally
-✅ Robust and flexible for small datasets
+- ✅ Perfect test accuracy on this dataset
+- ✅ Can capture complex, non-linear relationships
+- ✅ Handle both categorical and numerical features naturally
+- ✅ Robust and flexible for small datasets
 
 ---
 
-### General ML Best Practices
+### 11. General ML Best Practices
 
 1. **Always split your data**
    - Train-test split prevents overfitting
@@ -871,7 +916,7 @@ Decision Tree & Random Forest win because:
    - Sometimes a simple, interpretable model is better than a complex one
 ---
 
-## 📚 Summary
+## 12. Summary
 
 **You've learned**:
 
@@ -881,19 +926,12 @@ Decision Tree & Random Forest win because:
 - ✅ Multiple evaluation metrics
 - ✅ Model comparison techniques
 
-### 📥 Download Material
-
-- 📓 Download Notebook and Dataset for Regression and Classification Problem:  
-  [day2.zip](../files/day2.zip)
-
-
-Run each cell step by step to see data cleaning and feature engineering in action!
-
 ---
 
 **Remember**: 
-The best model isn't always the most complex one.   
-Choose based on:
+The best model isn't always the most complex one.     
+Choose based on:  
+
 - Performance on test data
 - Interpretability needs
 - Computational resources

@@ -57,6 +57,10 @@ nav:
 markdown_extensions:
   - toc:
       permalink: True
+  - tables
+  - admonition
+  - attr_list
+  - md_in_html
 
 plugins:
   - search

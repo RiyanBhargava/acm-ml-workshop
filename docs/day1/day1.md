@@ -92,10 +92,8 @@ Think of data cleaning like preparing ingredients before cooking. You wouldn't u
 
 Not every piece of information is useful. Consider these columns in a house price dataset:
 
-- **Area Type**: The type of area measurement (built-up, plot area, etc.)
 - **Society Name**: The specific housing society
-- **Balcony Count**: Number of balconies
-- **Availability**: When the house is available
+
 
 **Question**: Do these strongly influence price predictions? Often, the answer is no. Removing irrelevant features:
 
@@ -355,6 +353,22 @@ A box plot makes it easy to spot outliers visually, as they appear as isolated p
 **Steps:**
 
 1. Compute Q1 and Q3 — Find the 25th and 75th percentiles of the data.
+
+Suppose you have house prices (in lakhs):
+
+[10, 48, 55, 120, 125, 185, 600]
+
+Q1 (First Quartile / 25th Percentile)
+
+The value below which 25% of the data falls.
+
+Here, Q1 ≈ 48 → one-fourth of the data is below ₹48 L.
+
+Q3 (Third Quartile / 75th Percentile)
+
+The value below which 75% of the data falls.
+
+Here, Q3 ≈ 185 → most data (three-fourths) is below ₹185 L.
 
 2. Calculate IQR
 

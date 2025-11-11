@@ -354,21 +354,21 @@ A box plot makes it easy to spot outliers visually, as they appear as isolated p
 
 1. Compute Q1 and Q3 — Find the 25th and 75th percentiles of the data.
 
-Suppose you have house prices (in lakhs):
+    Suppose you have house prices (in lakhs):
 
-[10, 48, 55, 120, 125, 185, 600]
+    [10, 48, 55, 120, 125, 185, 600]
 
-Q1 (First Quartile / 25th Percentile)
+    Q1 (First Quartile / 25th Percentile)
 
-The value below which 25% of the data falls.
+    The value below which 25% of the data falls.
 
-Here, Q1 ≈ 48 → one-fourth of the data is below ₹48 L.
+    Here, Q1 ≈ 48 → one-fourth of the data is below ₹48 L.
 
-Q3 (Third Quartile / 75th Percentile)
+    Q3 (Third Quartile / 75th Percentile)
 
-The value below which 75% of the data falls.
+    The value below which 75% of the data falls.
 
-Here, Q3 ≈ 185 → most data (three-fourths) is below ₹185 L.
+    Here, Q3 ≈ 185 → most data (three-fourths) is below ₹185 L.
 
 2. Calculate IQR
 

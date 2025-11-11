@@ -1492,10 +1492,7 @@
 <h3 id="43-dealing-with-irrelevant-features">4.3 Dealing with Irrelevant Features<a class="headerlink" href="#43-dealing-with-irrelevant-features" title="Permanent link">&para;</a></h3>
 <p>Not every piece of information is useful. Consider these columns in a house price dataset:</p>
 <ul>
-<li><strong>Area Type</strong>: The type of area measurement (built-up, plot area, etc.)</li>
 <li><strong>Society Name</strong>: The specific housing society</li>
-<li><strong>Balcony Count</strong>: Number of balconies</li>
-<li><strong>Availability</strong>: When the house is available</li>
 </ul>
 <p><strong>Question</strong>: Do these strongly influence price predictions? Often, the answer is no. Removing irrelevant features:</p>
 <ul>
@@ -2223,9 +2220,17 @@ It displays:</p>
 <p>A box plot makes it easy to spot outliers visually, as they appear as isolated points away from the main data cluster.</p>
 <p><strong>Steps:</strong></p>
 <ol>
-<li>
-<p>Compute Q1 and Q3 — Find the 25th and 75th percentiles of the data.</p>
-</li>
+<li>Compute Q1 and Q3 — Find the 25th and 75th percentiles of the data.</li>
+</ol>
+<p>Suppose you have house prices (in lakhs):</p>
+<p>[10, 48, 55, 120, 125, 185, 600]</p>
+<p>Q1 (First Quartile / 25th Percentile)</p>
+<p>The value below which 25% of the data falls.</p>
+<p>Here, Q1 ≈ 48 → one-fourth of the data is below ₹48 L.</p>
+<p>Q3 (Third Quartile / 75th Percentile)</p>
+<p>The value below which 75% of the data falls.</p>
+<p>Here, Q3 ≈ 185 → most data (three-fourths) is below ₹185 L.</p>
+<ol>
 <li>
 <p>Calculate IQR</p>
 <p><code>𝐼𝑄𝑅=𝑄3−𝑄1</code></p>

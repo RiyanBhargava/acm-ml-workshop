@@ -1,4 +1,4 @@
-# ML Workshop Day 2: Model Training and Analysis
+# Day 2: Model Training and Analysis
 ## Complete Documentation Guide
 
 ---
@@ -14,16 +14,16 @@ This workshop introduces fundamental machine learning concepts with practical im
 **Dataset**: Real estate pricing data 
 
 ### Workshop Resources (Make a copy and run the cells) :
-1. Model Training(Regression) :    
+1. **Model Training(Regression) :**    
 [ML_Workshop_Day2_Regression](https://colab.research.google.com/drive/1OJKjqnp6zMdjilnRdZkCm-De1M91Ax8v?usp=sharing)
 
-2. Preprocessing of Classification dataset :  
+2. **Preprocessing of Classification dataset :**  
 [Drugclassification_Preprocessing](https://colab.research.google.com/drive/1DvOHTXz8iPYrH-0NSuyq19W1_E-TBpey?usp=sharing)
 
-3. Model Training(Classification) :  
+3. **Model Training(Classification) :**  
 [ML_Worshop_Day2_Classification](https://colab.research.google.com/drive/1eVj2YmoO9bbze7IZnl1IsBGroT4skyxm?usp=sharing)
 
-4. Dataset Files :  
+4. **Dataset Files :**  
 [Datasets](../files/day2/Datasets.zip)
 
 ---
@@ -545,6 +545,8 @@ d(x, xᵢ) = √(Σⱼ₌₁ⁿ (xⱼ - xᵢⱼ)²)
 
 ![Regression Metrics](../assets/image17.png)  
 
+---
+
 #### 8.1.1. Mean Squared Error (MSE)
 **Formula**: Average of squared differences between predictions and actual values  
 ```MSE = (1/n) * Σ (yᵢ - ŷᵢ)²```
@@ -563,9 +565,12 @@ d(x, xᵢ) = √(Σⱼ₌₁ⁿ (xⱼ - xᵢⱼ)²)
 
 **Common Use Cases :**
 
-- **Training neural networks:** Used as a loss function because it's differentiable and penalizes large errors
-- **Quality control:** When large deviations are particularly costly or dangerous
-- **Financial forecasting:** Where overestimating or underestimating by large amounts has severe consequences
+- **Training neural networks:** Used as a loss function because it's differentiable and penalizes large errors  
+
+- **Quality control:** When large deviations are particularly costly or dangerous  
+
+- **Financial forecasting:** Where overestimating or underestimating by large amounts has severe consequences  
+
 ---
 
 #### 8.1.2. Root Mean Squared Error (RMSE)
@@ -582,7 +587,6 @@ d(x, xᵢ) = √(Σⱼ₌₁ⁿ (xⱼ - xᵢⱼ)²)
 
 - From above, MSE = 250M  
 - RMSE = √250M ≈ 15.8k
----
 
 **Common Use Cases :**
 
@@ -591,6 +595,8 @@ d(x, xᵢ) = √(Σⱼ₌₁ⁿ (xⱼ - xᵢⱼ)²)
 - **Weather forecasting:** Temperature predictions where errors need to be in degrees, not degrees²  
 
 - **Sales forecasting:** When stakeholders need to understand prediction error in actual sales units
+
+---
 
 #### 8.1.3. Mean Absolute Error (MAE)
 **Formula**: Average of absolute differences  
@@ -615,6 +621,7 @@ d(x, xᵢ) = √(Σⱼ₌₁ⁿ (xⱼ - xᵢⱼ)²)
 - **Customer lifetime value prediction:** When a few high-value customers shouldn't distort performance  
 
 - **Budget planning:** Where you need realistic average deviations for resource allocation
+
 ---
 
 #### 8.1.4. R² Score (R-Squared)
@@ -641,6 +648,7 @@ d(x, xᵢ) = √(Σⱼ₌₁ⁿ (xⱼ - xᵢⱼ)²)
 - **Marketing analytics:** Understanding how much of sales variance is explained by campaigns vs. other factors  
 
 - **Academic/reporting contexts:** When stakeholders need a single, intuitive performance metric
+
 ---
 
 ### 8.2. Classification Metrics
@@ -677,6 +685,7 @@ Accuracy = (1 + 1) / (1 + 1 + 1 + 1) = 0.5 → **50% accuracy**
 - **Initial model evaluation:** Quick baseline metric before diving into detailed analysis  
 
 - **Avoid for:** Fraud detection, disease diagnosis, or any imbalanced dataset (accuracy paradox)
+
 ---
 
 #### 8.2.2. Confusion Matrix
@@ -695,6 +704,7 @@ Actual  No   [TN]  [FP]
 - **FN**: False Negatives (predicted No, actually Yes)
 
 **Common Use Cases :**  
+
 - **Medical diagnosis:** Understanding both false alarms (FP) and missed cases (FN)  
 
 - **Spam filtering:** Seeing how many legitimate emails are caught (FP) vs. spam that gets through (FN)
@@ -711,11 +721,13 @@ Actual  No   [TN]  [FP]
  = 1 / (1 + 1) = 0.5 → **50% of predicted positives are correct**
 
 **Common Use Cases :**  
+
 - **Product recommendations:** Only recommend products you're confident users will like  
 
 - **Marketing campaign targeting:** When contacting customers has a cost, ensure targets are relevant 
 
 - **Legal document review:** When reviewing flagged documents is expensive, minimize false flags
+
 ---
 
 #### 8.2.4. Recall (Sensitivity)

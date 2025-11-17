@@ -139,11 +139,11 @@ Prominent applications include:
 
 While that framework is very powerful and versatile, it’s comes at the expense of *interpretability.* There’s often little, if any, intuitive explanation—beyond a raw mathematical one—for how the values of individual model parameters learned by a neural network reflect real-world characteristics of data. For that reason, deep learning models are often referred to as “black boxes,” especially when compared to traditional types of machine learning models.
 
-## **3.7. Applying the Machine to Language**
+## **3.7. Applying the Machine to Language- NLP**
 
 Now we apply our "learning machine" to the messy, complex problem of human language.
 
-Understanding Natural Language Processing(NLP)At its core, all modern NLP follows a three-step process:
+At its core, all modern NLP follows a three-step process:
 
 1. **Step 1: Text to Numbers (Embedding):** We must convert raw text ("The quick brown fox...") into a numerical format (vectors) that a machine can understand. This is the most critical step.
 2. **Step 2: Process the Numbers (The Model):** The numerical vectors are fed into a deep learning model (like an RNN or a Transformer). This "brain" processes the numbers to "understand" the patterns, context, and relationships.

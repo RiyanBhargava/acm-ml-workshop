@@ -25,7 +25,7 @@ In this workshop you'll learn:
 
 ### **📊 Dataset:**
 
-[harry_potter_corpus.txt](DAY%203%20DEEP%20LEARNING%20&%20NLP/harry_potter_corpus.txt)
+[harry_potter_corpus.txt](../files/day3/harry_potter_corpus.txt)
 
 ---
 
@@ -48,13 +48,13 @@ Here's its job, step-by-step:
 3. **It Has a Bias (b):** A **bias** is an extra "nudge." It's a number that helps the neuron decide how easy or hard it is to fire. (e.g., "Don't fire unless you are *really* sure").
 4. **It Calculates an Output (Y):** The neuron multiplies each input by its weight, adds them all up, adds the bias, and then passes this total through an **Activation Function**. This function just squashes the number (e.g., to be between 0 and 1) to make it a clean, final output signal.
 
-![image.png](DAY%203%20DEEP%20LEARNING%20&%20NLP/image.png)
+![image.png](../assets/DAY%203%20DEEP%20LEARNING%20&%20NLP/image.png)
 
 ## 3.2. Building a "Deep" Brain: The Neural Network
 
 A "deep" network is just many layers of these neurons stacked together. This is where the magic happens!
 
-![image.png](DAY%203%20DEEP%20LEARNING%20&%20NLP/image%201.png)
+![image.png](../assets/DAY%203%20DEEP%20LEARNING%20&%20NLP/image%201.png)
 
 For example: Recognising a handwritten digit
 
@@ -65,13 +65,13 @@ For example: Recognising a handwritten digit
     - **Layer 3** might combine those loops to recognize a full "8" or "9".
 3. **Output Layer:** This layer gives the final answer (e.g., 10 neurons, one for each digit 0-9, where the "9" neuron fires the strongest).
 
-![Screenshot 2025-11-15 at 9.16.03 PM.png](DAY%203%20DEEP%20LEARNING%20&%20NLP/Screenshot_2025-11-15_at_9.16.03_PM.png)
+![Screenshot 2025-11-15 at 9.16.03 PM.png](../assets/DAY%203%20DEEP%20LEARNING%20&%20NLP/Screenshot_2025-11-15_at_9.16.03_PM.png)
 
 ## 3.3. How Does it Learn? (The Training Process)
 
 The power of a neural network is its ability to find the optimal **weights** and **biases** that map inputs to correct outputs. It achieves this by iteratively "learning from its mistakes" through a process driven by **Backpropagation** and **Gradient Descent**.
 
-![image.png](DAY%203%20DEEP%20LEARNING%20&%20NLP/image%202.png)
+![image.png](../assets/DAY%203%20DEEP%20LEARNING%20&%20NLP/image%202.png)
 
 This learning process is a four-step cycle:
 
@@ -97,7 +97,7 @@ Finally, the network applies the correction using an optimization algorithm like
 • **The Nudge:** Gradient Descent uses the "blame" information (the gradients) calculated by backpropagation to "feel" which way is downhill. It then "nudges" all weights and biases by taking a small step in that precise direction—the direction that most effectively reduces the error.
 ****
 
-![image.png](DAY%203%20DEEP%20LEARNING%20&%20NLP/image%203.png)
+![image.png](../assets/DAY%203%20DEEP%20LEARNING%20&%20NLP/image%203.png)
 
 ---
 
@@ -244,7 +244,7 @@ This is a critical step. **Computers do not understand words; they only understa
 
 Before we had powerful neural networks, we relied on **statistics and word counts**. These models were clever but lacked any *real* understanding.
 
-![image.png](DAY%203%20DEEP%20LEARNING%20&%20NLP/image%204.png)
+![image.png](../assets/DAY%203%20DEEP%20LEARNING%20&%20NLP/image%204.png)
 
 - **Bag-of-Words (BoW):**
     - **How it Works:** The simplest method. It treats a sentence as a "bag" (a jumbled set) of words, ignoring order. It just *counts* how many times each word appears.
@@ -257,7 +257,7 @@ Before we had powerful neural networks, we relied on **statistics and word count
 - **One-Hot Encoding**
     - **Idea:** Create a giant list (a vector) for your entire vocabulary (e.g., 50,000 words). Each word gets a vector of all zeros, except for a single "1" at its own position.
 
-![image.png](DAY%203%20DEEP%20LEARNING%20&%20NLP/image%205.png)
+![image.png](../assets/DAY%203%20DEEP%20LEARNING%20&%20NLP/image%205.png)
 
 **Problem with this solution:**
 
@@ -274,13 +274,13 @@ Instead of *counting*, we *learn* the meaning of words.
     - **How it Works:** We train a simple neural network on a "fake" task: "Given a word (like *fox*), predict the words around it (*quick, brown, jumps, over*)." We train this on billions of sentences.
     - **The "Aha!" Moment:** We don't care about the network's predictions. We *steal its weights*. This learned weight matrix becomes a lookup table where each word has its own 300-dimension vector (its "embedding").
     
-    ![image.png](DAY%203%20DEEP%20LEARNING%20&%20NLP/image%206.png)
+    ![image.png](../assets/DAY%203%20DEEP%20LEARNING%20&%20NLP/image%206.png)
     
     - **Advantages:**
         - This was the first method to capture **semantic meaning**.
         - It created the famous analogy: `Vector("King") - Vector("Man") + Vector("Woman") ≈ Vector("Queen")`.
         
-        ![image.png](DAY%203%20DEEP%20LEARNING%20&%20NLP/image%207.png)
+        ![image.png](../assets/DAY%203%20DEEP%20LEARNING%20&%20NLP/image%207.png)
         
     - **Limitations:**
         - **Out-of-Vocabulary (OOV):** If a word like "brunchfast" wasn't in its training data, Word2Vec has no vector for it.
@@ -293,13 +293,13 @@ Word2Vec was just the start. Other models iterated on this idea.
     - **Advantages:** Often performs better at capturing global relationships and analogies than Word2Vec.
     - **Limitations:** Same as Word2Vec. It still has the **OOV problem** and the **polysemy ("bank") problem**.
 
-![image.png](DAY%203%20DEEP%20LEARNING%20&%20NLP/image%208.png)
+![image.png](../assets/DAY%203%20DEEP%20LEARNING%20&%20NLP/image%208.png)
 
 - **fastText (from Facebook):**
     - **How it Works:** This model's insight was brilliant. It *doesn't* learn vectors for words. It learns vectors for **character n-grams** (sub-word pieces).
     - **Example:** The vector for "brunch" is the *sum* of the vectors for its parts (e.g., `<br`, `bru`, `run`, `unc`, `nch`, `ch>`).
     
-    ![image.png](DAY%203%20DEEP%20LEARNING%20&%20NLP/image%209.png)
+    ![image.png](../assets/DAY%203%20DEEP%20LEARNING%20&%20NLP/image%209.png)
     
     - **Advantages:**
         1. **Solves the OOV problem:** It can create a vector for *any* word, even misspelled ones ("brunchfastly"), by summing its sub-word parts.
@@ -329,7 +329,7 @@ A standard ANN has no "memory." If you input "how" and then "are," it forgets "h
 
 ### **i. Recurrent Neural Networks (RNNs)**
 
-![image.png](DAY%203%20DEEP%20LEARNING%20&%20NLP/image%2010.png)
+![image.png](../assets/DAY%203%20DEEP%20LEARNING%20&%20NLP/image%2010.png)
 
 An RNN solves this with a **"loop"**. When an RNN processes an input, its output is not only used for the prediction but is also **fed back into itself** as part of the input for the *next* step.
 
@@ -341,7 +341,7 @@ This loop acts as a "memory," allowing the network to retain information from pr
 
 **LSTMs** are a specialized, more advanced type of RNN, designed specifically to solve the long-term memory problem.
 
-![image.png](DAY%203%20DEEP%20LEARNING%20&%20NLP/image%2011.png)
+![image.png](../assets/DAY%203%20DEEP%20LEARNING%20&%20NLP/image%2011.png)
 
 An LSTM doesn't just have a simple loop; it has a complex internal structure based on a "cell state" and three "gates":
 
@@ -366,7 +366,7 @@ This architecture is key to tasks like machine translation.
 2. **Decoder:** A "decoder" (another RNN) takes that *one* vector and "decodes" it into the output sentence (e.g., "¿Cómo estás?").
 - **The Problem:** This single context vector is a **bottleneck**. It's hard to cram the entire meaning of a 50-word sentence into one vector.
 
-![image.png](DAY%203%20DEEP%20LEARNING%20&%20NLP/image%2012.png)
+![image.png](../assets/DAY%203%20DEEP%20LEARNING%20&%20NLP/image%2012.png)
 
 ### **b) The Breakthrough: The Attention Mechanism**
 
@@ -376,7 +376,7 @@ It learns to "pay attention" to the specific input words that are most relevant 
 
 - **Advantage:** It's **highly parallelizable** (much faster to train) and can capture *extremely* long-range dependencies, making it the new state-of-the-art.
 
-![image.png](DAY%203%20DEEP%20LEARNING%20&%20NLP/image%2013.png)
+![image.png](../assets/DAY%203%20DEEP%20LEARNING%20&%20NLP/image%2013.png)
 
 ### **iv. Modern Models: BERT & GPT**
 
@@ -396,7 +396,7 @@ These are the two most famous models built on the Transformer architecture.
 - **Key Feature:** It's **auto-regressive** (one-way). It only looks *backward* (at the words that came before).
 - **Best For:** **Generation** tasks. Because it's trained to "predict the next word," it is exceptional at writing essays, holding conversations, summarizing text, and generating creative content.
 
-![image.png](DAY%203%20DEEP%20LEARNING%20&%20NLP/image%2014.png)
+![image.png](../assets/DAY%203%20DEEP%20LEARNING%20&%20NLP/image%2014.png)
 
 ---
 
@@ -456,7 +456,7 @@ A computer can't just "read" a sentence. To get from raw human language to a use
 
 **📊 Dataset:**  
 
-[harry_potter_corpus.txt](DAY%203%20DEEP%20LEARNING%20&%20NLP/harry_potter_corpus%201.txt)
+[harry_potter_corpus.txt](../files/day3/harry_potter_corpus.txt)
 
 ---
 

@@ -825,7 +825,7 @@ F1 = 2 * (0.5 * 0.5) / (0.5 + 0.5) = 0.5
 
 ---
 
-### 11. General ML Best Practices
+## 11. General ML Best Practices
 
 - **Always split your data**
     - Train-test split prevents overfitting

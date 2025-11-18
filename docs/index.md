@@ -6,6 +6,18 @@ Welcome to the **ACM Machine Learning Workshop**, where curiosity meets computat
 
 ---
 
+## About This Workshop
+
+This 4-day workshop is designed to **blend theory with hands-on practice**.
+You'll explore essential ML concepts, clean and prepare real datasets, build models, and even experiment with **deep learning** and **natural language processing**.
+
+### Workshop Outline
+
+| Day       | Topic                               | Highlights                                             |
+| --------- | ----------------------------------- | ------------------------------------------------------ |
+| **[Day 1](day1/day1.md)** | Data Cleaning & Feature Engineering | Handle missing data, create features, prepare datasets |
+| **[Day 2](day2/day2.md)** | Model Training & Analysis           | Train, test, and evaluate key ML models                |
+
 ## 1. What is Machine Learning?
 
 ![MachineLearning](assets/MachineLearning.png)
@@ -168,21 +180,7 @@ By understanding ML, you can:
 
 ---
 
-## 3. About This Workshop
-
-This 4-day workshop is designed to **blend theory with hands-on practice**.
-You'll explore essential ML concepts, clean and prepare real datasets, build models, and even experiment with **deep learning** and **natural language processing**.
-
-### 3.1 Workshop Outline
-
-| Day       | Topic                               | Highlights                                             |
-| --------- | ----------------------------------- | ------------------------------------------------------ |
-| **Day 1** | Data Cleaning & Feature Engineering | Handle missing data, create features, prepare datasets |
-| **Day 2** | Model Training & Analysis           | Train, test, and evaluate key ML models                |
-| **Day 3** | Natural Language Processing         | Explore text data, embeddings, and GPT models          |
-| **Day 4** | Deep Learning & Deployment          | Build neural networks and learn model hosting basics   |
-
-## 4. Resources & Next Steps
+## 3. Resources & Next Steps
 - Recommended reading and tutorials will be shared during the sessions.
 - After the workshop, try applying what you've learned to a small end-to-end project.
 - Questions? Feel free to ask during the sessions or reach out via the repository.

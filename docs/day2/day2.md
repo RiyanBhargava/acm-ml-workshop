@@ -827,22 +827,23 @@ F1 = 2 * (0.5 * 0.5) / (0.5 + 0.5) = 0.5
 
 ### 11. General ML Best Practices
 
-1. **Always split your data**
-   - Train-test split prevents overfitting
-   - Use cross-validation for robust evaluation
+- **Always split your data**
+    - Train-test split prevents overfitting
+    - Use cross-validation for robust evaluation
 
-2. **Try multiple models**
-   - Different models work better for different data
-   - No "one size fits all" solution
+- **Try multiple models**
+    - Different models work better for different data
+    - No "one size fits all" solution
 
-3. **Understand your metrics**
-   - R² for overall model fit
-   - RMSE for average prediction error
-   - MAE for median error magnitude
+- **Understand your metrics**
+    - R² for overall model fit
+    - RMSE for average prediction error
+    - MAE for median error magnitude
 
-4. **Consider the business context**
-   - Is $31k error acceptable for your use case?
-   - Sometimes a simple, interpretable model is better than a complex one
+- **Consider the business context**
+    - Is $31k error acceptable for your use case?
+    - Sometimes a simple, interpretable model is better than a complex one
+
 ---
 
 ## 12. Summary

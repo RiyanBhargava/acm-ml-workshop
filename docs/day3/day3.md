@@ -25,7 +25,7 @@ In this workshop you'll learn:
 
 ### **📊 Dataset:**
 
-[harry_potter_corpus.txt](..\files\day3\harry_potter_corpus.txt)
+[harry_potter_corpus.txt](../files/day3/harry_potter_corpus.txt)
 
 ---
 
@@ -456,7 +456,7 @@ A computer can't just "read" a sentence. To get from raw human language to a use
 
 **📊 Dataset:**  
 
-[harry_potter_corpus.txt](DAY%203%20DEEP%20LEARNING%20&%20NLP/harry_potter_corpus%201.txt)
+[harry_potter_corpus.txt](../files/day3/harry_potter_corpus.txt)
 
 ---
 

@@ -1,10 +1,10 @@
 site_name: ML Workshop
 remote_branch: gh-pages
-site_url: https://template_site.acmbpdc.org
+site_url: https://riyanbhargava.github.io/acm-ml-workshop
 site_author: ACM BPDC
 site_description: A template site, replace this with the actual description
-repo_url: https://github.com/acmbpdc/mkdocs-template
-repo_name: acmbpdc/mkdocs-template
+repo_url: https://github.com/RiyanBhargava/acm-ml-workshop
+repo_name: RiyanBhargava/acm-ml-workshop
 
 copyright: Copyright &copy; 2024 - ACM BITS Pilani Dubai Campus
 
@@ -51,7 +51,7 @@ nav:
   - Home: index.md
   - Data Cleaning and Feature Engineering: day1/day1.md
   - Model Training and Analysis: day2/day2.md
-  - DAY 3: day3/day3.md
+  - Deep Learning & NLP: day3/day3.md
   #- DAY 4: day4/day4.md
 
 markdown_extensions:

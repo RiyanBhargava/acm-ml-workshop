@@ -4,7 +4,7 @@
 
 # **1. Overview**
 
-****In this workshop you'll learn:
+In this workshop you'll learn:
 
 - **Deep Learning Basics:** Covers the fundamentals, starting from a single **neuron**, building up to **neural networks**, and explaining the "learning" process of **gradient descent** and **backpropagation**.
 - **What is NLP? :** Introduces Natural Language Processing and its evolution from old **rules-based** systems to modern **Deep Learning** models.

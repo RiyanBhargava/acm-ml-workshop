@@ -269,19 +269,6 @@ This is a critical step. **Computers do not understand words; they only understa
 
 Before we had powerful neural networks, we relied on **statistics and word counts**. These models were clever but lacked any *real* understanding.
 
-![image.png](../assets/DAY%203%20DEEP%20LEARNING%20&%20NLP/image%204.png)
-
-- **Bag-of-Words (BoW):**
-    - **How it Works:** The simplest method. It treats a sentence as a "bag" (a jumbled set) of words, ignoring order. It just *counts* how many times each word appears.
-    - **Example:** To a BoW model, "The man bit the dog" and "The dog bit the man" are *exactly the same*. They both contain `{"the": 2, "man": 1, "bit": 1, "dog": 1}`.
-    - **Limitation:** It has zero understanding of context or grammar.
-- **TF-IDF (Term Frequency-Inverse Document Frequency):**
-    - **How it Works:** A "smarter" version of BoW. It scores words not just on *frequency*, but on *importance*. A word gets a high score if it's frequent in *this* document but *rare* in all other documents.
-    - **Example:** In a set of news articles, the word "the" is common everywhere (low score). The word "astrophysics" is rare, so in an article about space, it gets a *very high* score.
-    - **Limitation:** It's great for search engines, but it still has no *semantic meaning*. It doesn't know that "cat" and "kitten" are related. To TF-IDF, they are just two different, meaningless tokens.
-- **One-Hot Encoding**
-    - **Idea:** Create a giant list (a vector) for your entire vocabulary (e.g., 50,000 words). Each word gets a vector of all zeros, except for a single "1" at its own position.
-
 ![image.png](../assets/DAY%203%20DEEP%20LEARNING%20&%20NLP/image%205.png)
 
 ### **i. Bag-of-Words (BoW):**
@@ -382,45 +369,234 @@ Before we had powerful neural networks, we relied on **statistics and word count
 
 Instead of *counting*, modern NLP systems *learn* the **meaning** of words by training neural networks on billions of sentences.
 
-- **Word2Vec (Word to Vector):**
-    - **How it Works:** We train a simple neural network on a "fake" task: "Given a word (like *fox*), predict the words around it (*quick, brown, jumps, over*)." We train this on billions of sentences.
-    - **The "Aha!" Moment:** We don't care about the network's predictions. We *steal its weights*. This learned weight matrix becomes a lookup table where each word has its own 300-dimension vector (its "embedding").
-    
-    ![image.png](../assets/DAY%203%20DEEP%20LEARNING%20&%20NLP/image%206.png)
-    
-    - **Advantages:**
-        - This was the first method to capture **semantic meaning**.
-        - It created the famous analogy: `Vector("King") - Vector("Man") + Vector("Woman") ≈ Vector("Queen")`.
-        
-        ![image.png](../assets/DAY%203%20DEEP%20LEARNING%20&%20NLP/image%207.png)
-        
-    - **Limitations:**
-        - **Out-of-Vocabulary (OOV):** If a word like "brunchfast" wasn't in its training data, Word2Vec has no vector for it.
-        - **Polysemy (Many Meanings):** The word "bank" (river bank vs. money bank) has *only one vector*. That vector is a blurry, "average" of all its meanings.
+---
 
-Word2Vec was just the start. Other models iterated on this idea.
+### **i. Word2Vec (Word → Vector)**
 
-- **GloVe (Global Vectors):**
-    - **How it Works:** Word2Vec learns from "local" windows (a few words at a time). GloVe learns from "global" statistics. It first builds a giant co-occurrence matrix of *how often every word appears near every other word* in the entire corpus. It then uses a technique (matrix factorization) to "compress" this giant matrix down into the same kind of word vectors.
-    - **Advantages:** Often performs better at capturing global relationships and analogies than Word2Vec.
-    - **Limitations:** Same as Word2Vec. It still has the **OOV problem** and the **polysemy ("bank") problem**.
+**How it works :**
 
-![image.png](../assets/DAY%203%20DEEP%20LEARNING%20&%20NLP/image%208.png)
+We train a tiny neural network.
 
-- **fastText (from Facebook):**
-    - **How it Works:** This model's insight was brilliant. It *doesn't* learn vectors for words. It learns vectors for **character n-grams** (sub-word pieces).
-    - **Example:** The vector for "brunch" is the *sum* of the vectors for its parts (e.g., `<br`, `bru`, `run`, `unc`, `nch`, `ch>`).
-    
-    ![image.png](../assets/DAY%203%20DEEP%20LEARNING%20&%20NLP/image%209.png)
-    
-    - **Advantages:**
-        1. **Solves the OOV problem:** It can create a vector for *any* word, even misspelled ones ("brunchfastly"), by summing its sub-word parts.
-        2. **Understands Morphology:** It knows "run" and "running" are related because they share many character n-grams.
-    - **Limitations:**
-        1. **Still has the polysemy ("bank") problem.** (This isn't solved until Transformers).
-        2. **Storage:** The dictionary of all n-grams is *massive*, making the model files very large.
+Its task is **fake**:
 
-## **6.3. Step 3: Text Analysis (The "Understanding" Step)**
+> “Given a word, predict the words around it.”
+> 
+
+Example window size = **2**
+
+Sentence: **“the cat sat on the mat”**
+
+For each center word, the model tries to predict nearby words:
+
+| Center | Words predicted (window = 2) |
+| --- | --- |
+| cat | the, sat |
+| sat | cat, on |
+| on | sat, the |
+| mat | the |
+
+Each training step:
+
+**Input = one word → Output = probabilities of surrounding words**
+
+---
+
+**The Weight Matrix (What We Steal) :**
+
+Inside Word2Vec is a **big matrix of weights.**
+
+Suppose vocabulary size = 10,000
+
+Embedding dimension = 300
+
+Matrix shape: **10,000 × 300**
+
+```
+        dim1 dim2 dim3 ... dim300
+word1   0.12 0.88 0.01     0.33
+word2   0.55 0.02 0.19     0.44
+word3   0.90 0.10 0.77     0.12
+ ...
+```
+
+Each **row** is a word’s embedding — a 300-dimensional vector.
+
+---
+
+### **What is a 300-dimensional vector?**
+
+Think of it like a **profile** of a word, described by 300 “features” the model learns by itself.
+
+Example (tiny version using only 4 dims):
+
+Vector(“cat”) =
+
+```
+[0.8,  0.1,  0.3,  0.9]
+```
+
+Vector(“dog”) =
+
+```
+[0.79, 0.12, 0.31, 0.91]
+```
+
+The numbers are **not human-interpretable**.
+
+But the **patterns** let the model recognize similarity (cat ≈ dog).
+
+A 300-dimensional vector is just a longer version:
+
+```
+[0.23, -0.18, 0.04, 1.22, ..., 0.09]  ← 300 numbers
+```
+
+Higher dimension → more information about meaning.
+
+---
+
+### **Detailed Example:**
+
+**Sentence: the cat sat on the mat**
+
+**Window size = 2 (predict 2 words left & right)**
+
+Below is every training pair Word2Vec creates:
+
+**1. Center word: “the”**
+
+Neighbors: *cat*
+
+Training: the → cat
+
+**2. Center word: “cat”**
+
+Neighbors: the, sat
+
+Training: cat → (the, sat)
+
+**3. Center word: “sat”**
+
+Neighbors: cat, on
+
+Training: sat → (cat, on)
+
+**4. Center word: “on”**
+
+Neighbors: sat, the
+
+Training: on → (sat, the)
+
+**5. Center word: “the”**
+
+Neighbors: on, mat
+
+Training: the → (on, mat)
+
+**6. Center word: “mat”**
+
+Neighbors: the
+
+Training: mat → the
+
+This is done across **millions** of sentences.
+
+The neural network slowly learns which words occur in similar contexts.
+
+After training, we **throw away the network** and **keep the weight matrix**.
+
+That matrix becomes:
+
+- a dictionary
+- where every word = a learned vector
+- that captures meaning
+
+This is the famous Word2Vec trick.
+
+### **ii. GloVe (Global Co-occurrence Matrix)**
+
+GloVe does **NOT** predict windows.
+
+It builds one giant table counting **how often words appear near each other**.
+
+Using the SAME sentence:
+
+We count how many times each pair appears within a window of 2:
+
+| Word | the | cat | sat | on | mat |
+| --- | --- | --- | --- | --- | --- |
+| the | — | 1 | 0 | 1 | 1 |
+| cat | 1 | — | 1 | 0 | 0 |
+| sat | 0 | 1 | — | 1 | 0 |
+| on | 1 | 0 | 1 | — | 1 |
+| mat | 1 | 0 | 0 | 1 | — |
+
+Some examples from above:
+
+- “cat” and “the” appear together once
+- “cat” and “sat” appear together once
+- “on” and “mat” appear together once
+- “sat” and “mat” never appear together
+
+GloVe then **factorizes** this co-occurrence matrix into two smaller matrices (like compressing it).
+
+The result of the factorization is:
+
+```
+the → 300D vector
+cat → 300D vector
+sat → 300D vector
+on  → 300D vector
+mat → 300D vector
+```
+
+Same output format as Word2Vec — but learned differently.
+
+---
+
+### **iii. fastText (Breaks words into character pieces)**
+
+fastText uses the SAME sentence, but it **doesn’t learn vectors for whole words directly**.
+
+Using:
+
+**“the cat sat on the mat”**
+
+Instead of learning a vector for “cat”, fastText breaks it into character n-grams:
+
+For n=3 (trigrams):
+
+```
+<ca, cat, at>   → for "cat"
+<sa, sat, at>   → for "sat"
+<ma, mat, at>   → for "mat"
+<th, the, he>   → for "the"
+<on>            → for "on"
+```
+
+Then fastText learns vectors for all these pieces.
+
+Example (simplified):
+
+```
+Vector("cat") = Vector("<ca") + Vector("cat") + Vector("at")
+Vector("mat") = Vector("<ma") + Vector("mat") + Vector("at")
+```
+
+Since “cat” and “mat” share the subword “at”, their vectors become similar.
+
+That’s why fastText can handle:
+
+- misspellings
+- new words
+- rare words
+- morphological changes (“sitting”, “sits”, “sat”)
+
+Even if the full word wasn't seen during training.
+
+---
+
+## **5.3. Step 3: Text Analysis (The "Understanding" Step)**
 
 Now that our text is in a clean, numerical format, the real work can begin. This step involves feeding the numerical data into a **model architecture** (the "brain") to interpret and extract meaningful information.
 
@@ -452,7 +628,7 @@ So we need models that can “remember” previous inputs.
 
 ### **i. Recurrent Neural Networks (RNNs)**
 
-![image.png](../assets/DAY%203%20DEEP%20LEARNING%20&%20NLP/image%2010.png)
+![image.png](../assets/DAY%203%20DEEP%20LEARNING%20&%20NLP/image%206.png)
 
 An RNN adds a **loop** so that information can be passed from one step to the next.
 
@@ -560,18 +736,100 @@ This is how RNNs represent sequences.
 
 ### **ii. Long Short-Term Memory (LSTMs)**
 
-**LSTMs** are a specialized, more advanced type of RNN, designed specifically to solve the long-term memory problem.
+![image.png](../assets/DAY%203%20DEEP%20LEARNING%20&%20NLP/image%207.png)
 
-![image.png](../assets/DAY%203%20DEEP%20LEARNING%20&%20NLP/image%2011.png)
+LSTMs fix this by adding **two memory paths**:
 
-An LSTM doesn't just have a simple loop; it has a complex internal structure based on a "cell state" and three "gates":
+1. **Hidden state (hₜ)** → short-term memory
+2. **Cell state (cₜ)** → long-term memory (highway through time)
 
-- **Cell State:** A "conveyor belt" that carries relevant information through the entire sequence.
-- **Forget Gate:** A "doorman" that looks at the new input and decides what old information (if any) to *remove* from the cell state.
-- **Input Gate:** Decides what *new* information from the current input is important enough to *add* to the cell state.
-- **Output Gate:** Decides what part of the cell state to *use* to make the final prediction for the current step.
+Each step uses **three gates**:
 
-By using these gates, an LSTM can learn to "remember" important information from long ago (e.g., the subject of a sentence) and "forget" irrelevant details.
+- **Forget gate** → remove useless old info
+- **Input gate** → add important new info
+- **Output gate** → decide what to reveal as the hidden state
+
+---
+
+### **Example: Same sentence encoded with LSTM**
+
+Sentence: **“I love deep learning”**
+
+Each step outputs **two vectors**:
+
+- hidden state **hₜ**
+- cell state **cₜ**
+
+Start with:
+
+```
+h₀ = [0,0,0,0]
+c₀ = [0,0,0,0]
+```
+
+---
+
+**Step 1: “I”**
+
+The gates decide what to store.
+
+Example (illustration):
+
+```
+c₁ = [0.9, -0.1, 0.1, 0.0]
+h₁ = [0.7, -0.05, 0.15, 0.0]
+```
+
+---
+
+**Step 2: “love”**
+
+Forget gate removes irrelevant parts of `c₁`.
+
+Input gate adds new info.
+
+```
+c₂ = [0.85, 0.40, 0.25, 0.10]
+h₂ = [0.62, 0.55, 0.20, 0.15]
+```
+
+---
+
+**Step 3: “deep”**
+
+```
+c₃ = [0.80, 0.57, 0.60, 0.33]
+h₃ = [0.55, 0.60, 0.45, 0.40]
+```
+
+---
+
+**Step 4: “learning”**
+
+Final states:
+
+```
+c₄ = [0.90, 0.70, 0.85, 0.75]
+h₄ = [0.60, 0.75, 0.65, 0.58]
+```
+
+---
+
+RNN: Only **h₄** contains the meaning of the whole sentence.
+
+LSTM: Both **h₄** and **c₄** represent the final sentence meaning.
+
+- `h₄`: what the model is “focusing on” at the last word
+- `c₄`: deep long-term memory preserved across the sentence
+
+You can think of LSTM like:
+
+```
+hₜ = short-term note
+cₜ = long-term diary
+```
+
+This is why LSTMs understand **long sentences** much better than basic RNNs.
 
 ---
 
@@ -587,7 +845,7 @@ This architecture is key to tasks like machine translation.
 2. **Decoder:** A "decoder" (another RNN) takes that *one* vector and "decodes" it into the output sentence (e.g., "¿Cómo estás?").
 - **The Problem:** This single context vector is a **bottleneck**. It's hard to cram the entire meaning of a 50-word sentence into one vector.
 
-![image.png](../assets/DAY%203%20DEEP%20LEARNING%20&%20NLP/image%2012.png)
+![image.png](../assets/DAY%203%20DEEP%20LEARNING%20&%20NLP/image%208.png)
 
 ### **b) The Breakthrough: The Attention Mechanism**
 
@@ -597,7 +855,7 @@ It learns to "pay attention" to the specific input words that are most relevant 
 
 - **Advantage:** It's **highly parallelizable** (much faster to train) and can capture *extremely* long-range dependencies, making it the new state-of-the-art.
 
-![image.png](../assets/DAY%203%20DEEP%20LEARNING%20&%20NLP/image%2013.png)
+![image.png](../assets/DAY%203%20DEEP%20LEARNING%20&%20NLP/image%209.png)
 
 ### **iv. Modern Models: BERT & GPT**
 
@@ -617,7 +875,7 @@ These are the two most famous models built on the Transformer architecture.
 - **Key Feature:** It's **auto-regressive** (one-way). It only looks *backward* (at the words that came before).
 - **Best For:** **Generation** tasks. Because it's trained to "predict the next word," it is exceptional at writing essays, holding conversations, summarizing text, and generating creative content.
 
-![image.png](../assets/DAY%203%20DEEP%20LEARNING%20&%20NLP/image%2014.png)
+![image.png](../assets/DAY%203%20DEEP%20LEARNING%20&%20NLP/image%2010.png)
 
 ---
 

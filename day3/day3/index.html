@@ -496,10 +496,28 @@
 <p><a href="../../files/day3/harry_potter_corpus.txt">harry_potter_corpus.txt</a></p>
 <hr />
 <h1 id="3-introduction-to-deep-learning-how-computers-learn">3. Introduction to Deep Learning (How Computers "Learn")<a class="headerlink" href="#3-introduction-to-deep-learning-how-computers-learn" title="Permanent link">&para;</a></h1>
-<p>Welcome! Before we teach a computer to <em>read</em>, we must first understand how a computer "learns" at all. The main idea is <strong>Deep Learning (DL)</strong>.</p>
+<p>Welcome! Before we teach a computer to read, we must first understand how a computer "learns" at all. The main idea is <strong>Deep Learning (DL)</strong>.</p>
 <p>Imagine you want to teach a computer to recognize your handwriting. How would it do that? This is the core problem Deep Learning solves.</p>
-<p>DL is a method inspired by the human brain. It's not that we're building a <em>real</em> brain, but we're borrowing the key idea: <strong>a network of simple, interconnected units called neurons.</strong></p>
-<h2 id="31-the-building-block-the-artificial-neuron">3.1. The Building Block: The Artificial Neuron<a class="headerlink" href="#31-the-building-block-the-artificial-neuron" title="Permanent link">&para;</a></h2>
+<p>DL is a method inspired by the human brain. It's not that we're building a real brain, but we're borrowing the key idea: <strong>a network of simple, interconnected units called neurons.</strong></p>
+<h2 id="31-why-neural-networks-matter-and-their-applications">3.1. Why Neural Networks Matter and Their Applications<a class="headerlink" href="#31-why-neural-networks-matter-and-their-applications" title="Permanent link">&para;</a></h2>
+<p>Neural networks are central to modern AI because they <strong>learn useful internal representations directly from data</strong>, allowing them to capture complex, nonlinear structures that classical models miss. This core capability allows them to power a vast array of real-world AI systems across numerous domains.</p>
+<p>Prominent applications include:</p>
+<ul>
+<li><strong>Computer Vision:</strong> Convolutional Neural Networks (CNNs) are used for image recognition, medical imaging analysis, and powering autonomous vehicles.</li>
+<li><strong>Natural Language Processing:</strong> Transformers are the basis for machine translation, advanced chatbots, and text summarization.</li>
+<li><strong>Speech Recognition:</strong> Recurrent Neural Networks (RNNs) and other deep nets are used for transcription services and voice assistants.</li>
+<li><strong>Forecasting and Time Series:</strong> They are applied to demand prediction, financial modeling, and weather forecasting.</li>
+<li><strong>Reinforcement Learning:</strong> Neural networks act as function approximators in game-playing agents, such as DeepMind's AlphaGo.</li>
+<li><strong>Pattern Recognition:</strong> They are highly effective at identifying fraud, detecting anomalies, and classifying documents.</li>
+</ul>
+<h2 id="32-why-deep-learning-over-traditional-machine-learning"><strong>3.2. Why Deep Learning over Traditional Machine Learning?</strong><a class="headerlink" href="#32-why-deep-learning-over-traditional-machine-learning" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Automatic Feature Engineering:</strong> This is the biggest advantage. Traditional ML (like Support Vector Machines or Random Forests) relies on <em>manual feature engineering</em>. A data scientist must spend significant time selecting and creating features (e.g., "word count" or "average pixel brightness"). Deep Learning models learn the best features <em>automatically</em> from the raw data.</li>
+<li><strong>Performance with Scale:</strong> Traditional ML models plateau in performance as you give them more data. Deep Learning models <em>continue to improve</em> as the volume of data increases.</li>
+<li><strong>Handling Unstructured Data:</strong> DL excels at complex, unstructured data like text, images, and audio, where traditional ML struggles.</li>
+</ol>
+<p>While that framework is very powerful and versatile, it’s comes at the expense of <em>interpretability.</em> There’s often little, if any, intuitive explanation—beyond a raw mathematical one—for how the values of individual model parameters learned by a neural network reflect real-world characteristics of data. For that reason, deep learning models are often referred to as “black boxes,” especially when compared to traditional types of machine learning models.</p>
+<h2 id="33-the-building-block-the-artificial-neuron">3.3. The Building Block: The Artificial Neuron<a class="headerlink" href="#33-the-building-block-the-artificial-neuron" title="Permanent link">&para;</a></h2>
 <p>Think of a single <strong>neuron</strong> as a tiny, simple decision-maker. It gets some inputs and decides how strongly to "fire" an output.</p>
 <p>Here's its job, step-by-step:</p>
 <ol>
@@ -509,10 +527,10 @@
 <li><strong>It Calculates an Output (Y):</strong> The neuron multiplies each input by its weight, adds them all up, adds the bias, and then passes this total through an <strong>Activation Function</strong>. This function just squashes the number (e.g., to be between 0 and 1) to make it a clean, final output signal.</li>
 </ol>
 <p><img alt="image.png" src="../../assets/DAY%203%20DEEP%20LEARNING%20%26%20NLP/image.png" /></p>
-<h2 id="32-building-a-deep-brain-the-neural-network">3.2. Building a "Deep" Brain: The Neural Network<a class="headerlink" href="#32-building-a-deep-brain-the-neural-network" title="Permanent link">&para;</a></h2>
+<h2 id="34-building-a-deep-brain-the-neural-network">3.4. Building a "Deep" Brain: The Neural Network<a class="headerlink" href="#34-building-a-deep-brain-the-neural-network" title="Permanent link">&para;</a></h2>
 <p>A "deep" network is just many layers of these neurons stacked together. This is where the magic happens!</p>
 <p><img alt="image.png" src="../../assets/DAY%203%20DEEP%20LEARNING%20%26%20NLP/image%201.png" /></p>
-<p>For example: Recognising a handwritten digit</p>
+<p>For example: Recognizing a handwritten digit</p>
 <ol>
 <li><strong>Input Layer:</strong> This layer just "receives" the raw data (e.g., all 784 pixels of a handwritten digit). It doesn't make any decisions.</li>
 <li><strong>Hidden Layers:</strong> This is the <em>real</em> "brain" of the network. The term "deep" comes from having <em>multiple</em> hidden layers. They perform <strong>automatic feature learning</strong>:<ul>
@@ -524,58 +542,92 @@
 <li><strong>Output Layer:</strong> This layer gives the final answer (e.g., 10 neurons, one for each digit 0-9, where the "9" neuron fires the strongest).</li>
 </ol>
 <p><img alt="Screenshot 2025-11-15 at 9.16.03 PM.png" src="../../assets/DAY%203%20DEEP%20LEARNING%20%26%20NLP/Screenshot_2025-11-15_at_9.16.03_PM.png" /></p>
-<h2 id="33-how-does-it-learn-the-training-process">3.3. How Does it Learn? (The Training Process)<a class="headerlink" href="#33-how-does-it-learn-the-training-process" title="Permanent link">&para;</a></h2>
+<h2 id="35-how-does-it-learn-the-training-process">3.5. How Does it Learn? (The Training Process)<a class="headerlink" href="#35-how-does-it-learn-the-training-process" title="Permanent link">&para;</a></h2>
 <p>The power of a neural network is its ability to find the optimal <strong>weights</strong> and <strong>biases</strong> that map inputs to correct outputs. It achieves this by iteratively "learning from its mistakes" through a process driven by <strong>Backpropagation</strong> and <strong>Gradient Descent</strong>.</p>
 <p><img alt="image.png" src="../../assets/DAY%203%20DEEP%20LEARNING%20%26%20NLP/image%202.png" /></p>
 <p>This learning process is a four-step cycle:</p>
-<p><strong>i. The Forward Pass (The Guess)</strong></p>
-<p>First, the network makes a guess. Inputs (like an image of a "7") are fed <em>forward</em> through the network's layers. At each layer, the data is multiplied by the current weights, a bias is added, and it passes through a nonlinear activation function. This produces the network's initial, likely random, prediction (e.g., it guesses "3").</p>
-<p><strong>ii. The Loss Calculation (The Mistake)</strong></p>
-<p>Next, the network measures <em>how wrong</em> its guess was. A <strong>Loss Function</strong> (or Cost Function) compares the network's prediction $(\hat{Y})$ to the true label ($Y$). This calculation results in a single number, the "loss" or "mistake score," which quantifies the error. A high score means a bad guess; the goal is to get this score as low as possible.</p>
-<p><strong>iii. The Backward Pass (Assigning Blame)</strong></p>
-<p>This is the core of the learning mechanism, enabled by <strong>Backpropagation</strong> (short for "backward propagation of error").
-• <strong>Calculates Contribution:</strong> Starting from the final loss score, the algorithm works <em>backward</em> through the network, layer by layer.
-• <strong>Uses Calculus:</strong> Using the chain rule of calculus, it calculates the "gradient"—a derivative that precisely measures <em>how much each individual weight and bias</em> in the entire network contributed to the final error.
-• <strong>Finds Direction:</strong> This gradient "blames" the parameters. It tells the network not only <em>who</em> was responsible for the mistake but also <em>which direction</em> to nudge each parameter to fix it.</p>
+<p><strong>i. The Forward Pass (The Guess)</strong>
+First, the network makes a guess. Inputs (like an image of a "7") are fed <em>forward</em> through the network's layers. At each layer, the data is multiplied by the current weights, a bias is added, and it passes through a nonlinear activation function. This produces the network's initial, likely random, prediction (e.g., it guesses "3").</p>
+<p><strong>ii. The Loss Calculation (The Mistake)</strong>
+Next, the network measures <em>how wrong</em> its guess was. A <strong>Loss Function</strong> (or Cost Function) compares the network's prediction to the true label. This calculation results in a single number, the "loss" or "mistake score," which quantifies the error. A high score means a bad guess; the goal is to get this score as low as possible.</p>
+<p><strong>iii. The Backward Pass (Assigning Blame)</strong>
+This is the core of the learning mechanism, enabled by <strong>Backpropagation</strong> (short for "backward propagation of error").</p>
+<ul>
+<li><strong>Calculates Contribution:</strong> Starting from the final loss score, the algorithm works <em>backward</em> through the network, layer by layer.</li>
+<li><strong>Uses Calculus:</strong> Using the chain rule of calculus, it calculates the "gradient"—a derivative that precisely measures how much each individual weight and bias in the entire network contributed to the final error.</li>
+<li><strong>Finds Direction:</strong> This gradient "blames" the parameters. It tells the network not only <em>who</em> was responsible for the mistake but also <em>which direction</em> to nudge each parameter to fix it.</li>
+</ul>
 <p><strong>iv. The Weight Update (The Correction)</strong></p>
-<p>Finally, the network applies the correction using an optimization algorithm like <strong>Gradient Descent</strong>.
-• <strong>"Downhill" Analogy:</strong> Imagine all possible weight combinations as a giant, hilly landscape, where the "altitude" is the loss score. The network is at a high point and wants to find the lowest valley.
-• <strong>The Nudge:</strong> Gradient Descent uses the "blame" information (the gradients) calculated by backpropagation to "feel" which way is downhill. It then "nudges" all weights and biases by taking a small step in that precise direction—the direction that most effectively reduces the error.</p>
-<hr />
+<p>Finally, the network applies the correction using <strong>Gradient Descent</strong>.</p>
 <p><img alt="image.png" src="../../assets/DAY%203%20DEEP%20LEARNING%20%26%20NLP/image%203.png" /></p>
+<p><strong>A. Gradient Descent — What It Actually Does:</strong></p>
+<ul>
+<li>Think of all possible weight combinations as a giant, hilly landscape.</li>
+<li>The <strong>height</strong> of the landscape at any point is the <strong>loss</strong>.</li>
+<li>The goal: <strong>reach the lowest valley</strong> — the point where loss is minimum.</li>
+</ul>
+<p><strong>B. Local Minima vs. Global Minimum:</strong></p>
+<ul>
+<li>A <strong>global minimum</strong> is the <em>absolute lowest</em> point in the entire landscape.</li>
+<li>A <strong>local minimum</strong> is a <em>small valley</em> that is lower than its surroundings but not the lowest overall.</li>
+<li>Gradient Descent follows the slope downward, so if the landscape is complex, it may get stuck in a <strong>local minimum</strong> instead of reaching the <strong>global minimum</strong>.</li>
+</ul>
+<p><img alt="image.png" src="../../assets/DAY%203%20DEEP%20LEARNING%20%26%20NLP/image%204.png" /></p>
+<p><strong>C. Normal GD vs. Stochastic GD:</strong></p>
+<p><strong>Stochastic Gradient Descent (SGD)</strong> is a fast and noisy version of <strong>Gradient Descent</strong> used to train machine learning models—especially neural networks, using <strong>ONE</strong> <strong>training example</strong> at a time, instead of the entire dataset.</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th><strong>Normal / Batch Gradient Descent</strong></th>
+<th><strong>Stochastic Gradient Descent (SGD)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Data Used per Update</strong></td>
+<td>Entire dataset</td>
+<td>One data point (or small batch)</td>
+</tr>
+<tr>
+<td><strong>Speed</strong></td>
+<td>Very slow</td>
+<td>Much faster</td>
+</tr>
+<tr>
+<td><strong>Computational Cost</strong></td>
+<td>Very high</td>
+<td>Much cheaper</td>
+</tr>
+<tr>
+<td><strong>Accuracy of Gradient</strong></td>
+<td>Very accurate</td>
+<td>Noisy updates</td>
+</tr>
+<tr>
+<td><strong>Effect on Optimization</strong></td>
+<td>Can get stuck in local minima</td>
+<td>Noise helps escape local minima and find better solutions</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Why SGD is used primarily?</strong></p>
+<p>Because computing gradients for millions of samples every step is too expensive. SGD drastically reduces the number of computations and speeds up learning, making training modern neural networks feasible.</p>
 <hr />
-<p><strong>v. The Training Loop</strong></p>
+<p><strong>v. The Training Loop:</strong></p>
 <ul>
 <li>This entire four-step cycle is repeated many times, showing the network thousands of data examples. Each full pass through the training dataset is called an <strong>epoch</strong>.
 With each epoch, the weights and biases are nudged closer to their optimal values, the "mistake score" descends into the "valley," and the network's predictions become incrementally more accurate.</li>
 </ul>
-<p>However, despite practitioners' effort to train high performing models, neural networks still face challenges similar to other machine learning models—most significantly, overfitting. When a neural network becomes overly complex with too many parameters, the model will overfit to the training data and predict poorly. Overfitting is a common problem in all kinds of neural networks, and paying close attention to bias-variance tradeoff is paramount to creating high-performing neural network models.  </p>
-<h2 id="34-types-of-neural-networks"><strong>3.4. Types of neural networks</strong><a class="headerlink" href="#34-types-of-neural-networks" title="Permanent link">&para;</a></h2>
+<p>However, despite practitioners' effort to train high performing models, neural networks still face challenges similar to other machine learning models—most significantly, overfitting. When a neural network becomes overly complex with too many parameters, the model will overfit to the training data and predict poorly. Overfitting is a common problem in all kinds of neural networks, and paying close attention to bias-variance tradeoff is paramount to creating high-performing neural network models.  </p>
+<h2 id="36-types-of-neural-networks"><strong>3.6. Types of neural networks</strong><a class="headerlink" href="#36-types-of-neural-networks" title="Permanent link">&para;</a></h2>
 <p>While multilayer perceptrons are the foundation, neural networks have evolved into specialized architectures suited for different domains:</p>
 <ul>
 <li><strong>Convolutional neural networks (CNNs or convnets)</strong>: Designed for grid-like data such as images. CNNs excel at image recognition, computer vision and facial recognition thanks to convolutional filters that detect spatial hierarchies of features.</li>
-<li><strong>Recurrent neural networks (RNNs)</strong>: Incorporate feedback loops that allow information to persist across time steps. RNNs are well-suited for speech recognition, time series forecasting and sequential data.</li>
+<li><strong>Recurrent neural networks (RNNs)</strong>: Incorporate feedback loops that allow information to persist across time steps. RNNs are well-suited for speech recognition, time series forecasting and sequential data.</li>
 <li><strong>Transformers</strong>: A modern architecture that replaced RNNs for many sequence tasks. Transformers leverage attention mechanisms to capture dependencies in natural language processing (NLP) and power state-of-the-art models like GPT.</li>
 </ul>
 <p>These variations highlight the versatility of neural networks. Regardless of architecture, all rely on the same principles: artificial neurons, nonlinear activations and optimization algorithms.</p>
-<h2 id="35-why-neural-networks-matter-and-their-applications">3.5. Why Neural Networks Matter and Their Applications<a class="headerlink" href="#35-why-neural-networks-matter-and-their-applications" title="Permanent link">&para;</a></h2>
-<p>Neural networks are central to modern AI because they <strong>learn useful internal representations directly from data</strong>, allowing them to capture complex, nonlinear structures that classical models miss. This core capability allows them to power a vast array of real-world AI systems across numerous domains.</p>
-<p>Prominent applications include:</p>
-<ul>
-<li><strong>Computer Vision:</strong> Convolutional Neural Networks (CNNs) are used for image recognition, medical imaging analysis, and powering autonomous vehicles.</li>
-<li><strong>Natural Language Processing:</strong> Transformers are the basis for machine translation, advanced chatbots, and text summarization.</li>
-<li><strong>Speech Recognition:</strong> Recurrent Neural Networks (RNNs) and other deep nets are used for transcription services and voice assistants.</li>
-<li><strong>Forecasting and Time Series:</strong> They are applied to demand prediction, financial modeling, and weather forecasting.</li>
-<li><strong>Reinforcement Learning:</strong> Neural networks act as function approximators in game-playing agents, such as DeepMind's AlphaGo.</li>
-<li><strong>Pattern Recognition:</strong> They are highly effective at identifying fraud, detecting anomalies, and classifying documents.</li>
-</ul>
-<h2 id="36-why-deep-learning-over-traditional-machine-learning"><strong>3.6. Why Deep Learning over Traditional Machine Learning?</strong><a class="headerlink" href="#36-why-deep-learning-over-traditional-machine-learning" title="Permanent link">&para;</a></h2>
-<ol>
-<li><strong>Automatic Feature Engineering:</strong> This is the biggest advantage. Traditional ML (like Support Vector Machines or Random Forests) relies on <em>manual feature engineering</em>. A data scientist must spend significant time selecting and creating features (e.g., "word count" or "average pixel brightness"). Deep Learning models learn the best features <em>automatically</em> from the raw data.</li>
-<li><strong>Performance with Scale:</strong> Traditional ML models plateau in performance as you give them more data. Deep Learning models <em>continue to improve</em> as the volume of data increases.</li>
-<li><strong>Handling Unstructured Data:</strong> DL excels at complex, unstructured data like text, images, and audio, where traditional ML struggles.</li>
-</ol>
-<p>While that framework is very powerful and versatile, it’s comes at the expense of <em>interpretability.</em> There’s often little, if any, intuitive explanation—beyond a raw mathematical one—for how the values of individual model parameters learned by a neural network reflect real-world characteristics of data. For that reason, deep learning models are often referred to as “black boxes,” especially when compared to traditional types of machine learning models.</p>
 <h2 id="37-applying-the-machine-to-language"><strong>3.7. Applying the Machine to Language</strong><a class="headerlink" href="#37-applying-the-machine-to-language" title="Permanent link">&para;</a></h2>
 <p>Now we apply our "learning machine" to the messy, complex problem of human language.</p>
 <p>Understanding Natural Language Processing(NLP)At its core, all modern NLP follows a three-step process:</p>
@@ -591,10 +643,10 @@ With each epoch, the weights and biases are nudged closer to their optimal value
 </ol>
 <p>Before deep learning, this process was much more manual.</p>
 <hr />
-<h1 id="5-the-evolution-of-nlp-three-main-approaches">5. The Evolution of NLP: Three Main Approaches<a class="headerlink" href="#5-the-evolution-of-nlp-three-main-approaches" title="Permanent link">&para;</a></h1>
+<h1 id="4-the-evolution-of-nlp-three-main-approaches">4. The Evolution of NLP: Three Main Approaches<a class="headerlink" href="#4-the-evolution-of-nlp-three-main-approaches" title="Permanent link">&para;</a></h1>
 <p>To understand language, NLP models have evolved over time. They started with strict, simple rules and grew into the powerful, flexible "learning" systems we have today.</p>
 <p>You can think of this evolution in three main stages.</p>
-<h2 id="51-before-we-begin-two-core-ideas">5.1. Before We Begin: Two Core Ideas<a class="headerlink" href="#51-before-we-begin-two-core-ideas" title="Permanent link">&para;</a></h2>
+<h2 id="41-before-we-begin-two-core-ideas">4.1. Before We Begin: Two Core Ideas<a class="headerlink" href="#41-before-we-begin-two-core-ideas" title="Permanent link">&para;</a></h2>
 <p>All NLP, from the simplest to the most complex, relies on two basic ways of analyzing language:</p>
 <ol>
 <li><strong>Syntactical Analysis (Grammar):</strong> This is the "rules" part. It focuses on the <strong>structure and grammar</strong> of a sentence. It checks if the word order is correct according to the rules of the language.<ul>
@@ -608,7 +660,7 @@ With each epoch, the weights and biases are nudged closer to their optimal value
 </li>
 </ol>
 <p>Now, let's look at how the models evolved.</p>
-<h2 id="52-approach-a-rules-based-nlp-the-if-then-approach">5.2. Approach A: Rules-Based NLP (The "If-Then" Approach)<a class="headerlink" href="#52-approach-a-rules-based-nlp-the-if-then-approach" title="Permanent link">&para;</a></h2>
+<h2 id="42-approach-a-rules-based-nlp-the-if-then-approach">4.2. Approach A: Rules-Based NLP (The "If-Then" Approach)<a class="headerlink" href="#42-approach-a-rules-based-nlp-the-if-then-approach" title="Permanent link">&para;</a></h2>
 <p>This was the earliest approach to NLP. It's based on <strong>manually programmed, "if-then" rules</strong>.</p>
 <ul>
 <li><strong>How it Worked:</strong> A programmer had to sit down and write explicit rules for the computer to follow.<ul>
@@ -623,7 +675,7 @@ With each epoch, the weights and biases are nudged closer to their optimal value
 </li>
 <li><strong>Example:</strong> Early automated phone menus (like Moviefone) that only understood specific commands.</li>
 </ul>
-<h2 id="53-approach-b-statistical-nlp-the-probability-approach">5.3. Approach B: Statistical NLP (The "Probability" Approach)<a class="headerlink" href="#53-approach-b-statistical-nlp-the-probability-approach" title="Permanent link">&para;</a></h2>
+<h2 id="43-approach-b-statistical-nlp-the-probability-approach">4.3. Approach B: Statistical NLP (The "Probability" Approach)<a class="headerlink" href="#43-approach-b-statistical-nlp-the-probability-approach" title="Permanent link">&para;</a></h2>
 <p>This was the next big step, which introduced <strong>machine learning</strong>. Instead of relying on hard-coded rules, this approach "learns" from a large amount of text.</p>
 <ul>
 <li><strong>How it Worked:</strong> The model analyzes data and assigns a <strong>statistical likelihood (a probability)</strong> to different word combinations.<ul>
@@ -639,7 +691,7 @@ These models needed "labeled data"—data that a human had already manually anno
 A key breakthrough called Self-Supervised Learning (SSL) allowed models to learn from unlabeled raw text, which is much faster and cheaper and a key reason why modern Deep Learning is so powerful.
 </p>
 </blockquote>
-<h2 id="54-approach-c-deep-learning-nlp-the-modern-approach">5.4. Approach C: Deep Learning NLP (The "Modern" Approach)<a class="headerlink" href="#54-approach-c-deep-learning-nlp-the-modern-approach" title="Permanent link">&para;</a></h2>
+<h2 id="44-approach-c-deep-learning-nlp-the-modern-approach">4.4. Approach C: Deep Learning NLP (The "Modern" Approach)<a class="headerlink" href="#44-approach-c-deep-learning-nlp-the-modern-approach" title="Permanent link">&para;</a></h2>
 <p>This is the dominant, state-of-the-art approach used today. It's an evolution of the statistical method but uses powerful, multi-layered <strong>neural networks</strong> to learn from <em>massive</em> volumes of unstructured, raw data.</p>
 <p>These models are incredibly accurate because they can understand complex context and nuance. Several types of deep learning models are important:</p>
 <ul>
@@ -664,9 +716,9 @@ A key breakthrough called Self-Supervised Learning (SSL) allowed models to learn
 </li>
 </ul>
 <hr />
-<h1 id="6-how-nlp-works-the-4-step-pipeline"><strong>6. How NLP Works: The 4-Step Pipeline</strong><a class="headerlink" href="#6-how-nlp-works-the-4-step-pipeline" title="Permanent link">&para;</a></h1>
+<h1 id="5-how-nlp-works-the-4-step-pipeline"><strong>5. How NLP Works: The 4-Step Pipeline</strong><a class="headerlink" href="#5-how-nlp-works-the-4-step-pipeline" title="Permanent link">&para;</a></h1>
 <p>A computer can't just "read" a sentence. To get from raw human language to a useful insight, it follows a strict, step-by-step "assembly line."</p>
-<h2 id="61-step-1-text-preprocessing-the-cleaning-step"><strong>6.1. Step 1: Text Preprocessing (The "Cleaning" Step)</strong><a class="headerlink" href="#61-step-1-text-preprocessing-the-cleaning-step" title="Permanent link">&para;</a></h2>
+<h2 id="51-step-1-text-preprocessing-the-cleaning-step"><strong>5.1. Step 1: Text Preprocessing (The "Cleaning" Step)</strong><a class="headerlink" href="#51-step-1-text-preprocessing-the-cleaning-step" title="Permanent link">&para;</a></h2>
 <p>First, we clean up the raw text and turn it into a standardized format. This is the "prep work" in a kitchen—getting your ingredients (the words) ready before you start cooking (the analysis).</p>
 <ul>
 <li><strong>Tokenization:</strong> Splitting a long string of text into smaller pieces, or "tokens."<ul>
@@ -681,100 +733,377 @@ A key breakthrough called Self-Supervised Learning (SSL) allowed models to learn
 <li><strong>Stemming &amp; Lemmatization:</strong> Reducing words to their "root" form (e.g., "running," "ran," and "runs" all become "run").</li>
 <li><strong>Text Cleaning:</strong> Removing punctuation, special characters (@, #), numbers, etc.</li>
 </ul>
-<h2 id="62-step-2-feature-extraction-the-converting-step"><strong>6.2. Step 2: Feature Extraction (The "Converting" Step)</strong><a class="headerlink" href="#62-step-2-feature-extraction-the-converting-step" title="Permanent link">&para;</a></h2>
+<h2 id="52-step-2-feature-extraction-the-converting-step"><strong>5.2. Step 2: Feature Extraction (The "Converting" Step)</strong><a class="headerlink" href="#52-step-2-feature-extraction-the-converting-step" title="Permanent link">&para;</a></h2>
 <p>This is a critical step. <strong>Computers do not understand words; they only understand numbers.</strong> Feature extraction converts the clean text tokens into a numerical representation (a "vector") that a machine can actually analyze.</p>
-<h3 id="621-the-old-way-statistical-counts">6.2.1. The "Old Way" (Statistical Counts)<a class="headerlink" href="#621-the-old-way-statistical-counts" title="Permanent link">&para;</a></h3>
+<h3 id="521-the-old-way-statistical-counts">5.2.1. The "Old Way" (Statistical Counts)<a class="headerlink" href="#521-the-old-way-statistical-counts" title="Permanent link">&para;</a></h3>
 <p>Before we had powerful neural networks, we relied on <strong>statistics and word counts</strong>. These models were clever but lacked any <em>real</em> understanding.</p>
-<p><img alt="image.png" src="../../assets/DAY%203%20DEEP%20LEARNING%20%26%20NLP/image%204.png" /></p>
-<ul>
-<li><strong>Bag-of-Words (BoW):</strong><ul>
-<li><strong>How it Works:</strong> The simplest method. It treats a sentence as a "bag" (a jumbled set) of words, ignoring order. It just <em>counts</em> how many times each word appears.</li>
-<li><strong>Example:</strong> To a BoW model, "The man bit the dog" and "The dog bit the man" are <em>exactly the same</em>. They both contain <code>{"the": 2, "man": 1, "bit": 1, "dog": 1}</code>.</li>
-<li><strong>Limitation:</strong> It has zero understanding of context or grammar.</li>
-</ul>
-</li>
-<li><strong>TF-IDF (Term Frequency-Inverse Document Frequency):</strong><ul>
-<li><strong>How it Works:</strong> A "smarter" version of BoW. It scores words not just on <em>frequency</em>, but on <em>importance</em>. A word gets a high score if it's frequent in <em>this</em> document but <em>rare</em> in all other documents.</li>
-<li><strong>Example:</strong> In a set of news articles, the word "the" is common everywhere (low score). The word "astrophysics" is rare, so in an article about space, it gets a <em>very high</em> score.</li>
-<li><strong>Limitation:</strong> It's great for search engines, but it still has no <em>semantic meaning</em>. It doesn't know that "cat" and "kitten" are related. To TF-IDF, they are just two different, meaningless tokens.</li>
-</ul>
-</li>
-<li><strong>One-Hot Encoding</strong><ul>
-<li><strong>Idea:</strong> Create a giant list (a vector) for your entire vocabulary (e.g., 50,000 words). Each word gets a vector of all zeros, except for a single "1" at its own position.</li>
-</ul>
-</li>
-</ul>
 <p><img alt="image.png" src="../../assets/DAY%203%20DEEP%20LEARNING%20%26%20NLP/image%205.png" /></p>
-<p><strong>Problem with this solution:</strong></p>
-<ol>
-<li><strong>It's HUGE:</strong> If you have 50,000 words, <em>each word</em> is a vector with 50,000 numbers. This is wildly inefficient.</li>
-<li><strong>No Meaning (No Semantics):</strong> The vectors for "cat" and "dog" are mathematically unrelated. The model can't tell that "cat" and "dog" are more similar than "cat" and "car."</li>
-</ol>
-<p>These statistical models (like <strong>Naïve Bayes</strong> and <strong>Support Vector Machines</strong>) were the standard for tasks like spam filtering for years, but they hit a hard wall. They couldn't <em>understand</em> language.</p>
-<h3 id="622-the-modern-way-contextual-embeddings"><strong>6.2.2. The "Modern Way" (Contextual Embeddings)</strong><a class="headerlink" href="#622-the-modern-way-contextual-embeddings" title="Permanent link">&para;</a></h3>
-<p>Instead of <em>counting</em>, we <em>learn</em> the meaning of words.</p>
+<h3 id="i-bag-of-words-bow"><strong>i. Bag-of-Words (BoW):</strong><a class="headerlink" href="#i-bag-of-words-bow" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
-<p><strong>Word2Vec (Word to Vector):</strong></p>
-<ul>
-<li><strong>How it Works:</strong> We train a simple neural network on a "fake" task: "Given a word (like <em>fox</em>), predict the words around it (<em>quick, brown, jumps, over</em>)." We train this on billions of sentences.</li>
-<li><strong>The "Aha!" Moment:</strong> We don't care about the network's predictions. We <em>steal its weights</em>. This learned weight matrix becomes a lookup table where each word has its own 300-dimension vector (its "embedding").</li>
-</ul>
-<p><img alt="image.png" src="../../assets/DAY%203%20DEEP%20LEARNING%20%26%20NLP/image%206.png" /></p>
-<ul>
-<li>
-<p><strong>Advantages:</strong></p>
-<ul>
-<li>This was the first method to capture <strong>semantic meaning</strong>.</li>
-<li>It created the famous analogy: <code>Vector("King") - Vector("Man") + Vector("Woman") ≈ Vector("Queen")</code>.</li>
-</ul>
-<p><img alt="image.png" src="../../assets/DAY%203%20DEEP%20LEARNING%20%26%20NLP/image%207.png" /></p>
+<p><strong>How it Works:</strong></p>
+<p>Treats a sentence as a collection (“bag”) of words. Ignores grammar and word order.</p>
 </li>
 <li>
-<p><strong>Limitations:</strong></p>
-<ul>
-<li><strong>Out-of-Vocabulary (OOV):</strong> If a word like "brunchfast" wasn't in its training data, Word2Vec has no vector for it.</li>
-<li><strong>Polysemy (Many Meanings):</strong> The word "bank" (river bank vs. money bank) has <em>only one vector</em>. That vector is a blurry, "average" of all its meanings.</li>
-</ul>
+<p><strong>Example Sentence:</strong></p>
+<p><strong>“The cat sat on the mat”</strong></p>
+</li>
+<li>
+<p><strong>Vocabulary (example):</strong></p>
+<p><code>["the", "cat", "sat", "on", "mat"]</code></p>
+</li>
+<li>
+<p><strong>BoW Vector:</strong></p>
+<p>Count how many times each word appears:</p>
+<table>
+<thead>
+<tr>
+<th>Word</th>
+<th>the</th>
+<th>cat</th>
+<th>sat</th>
+<th>on</th>
+<th>mat</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Count</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>BoW Vector:</strong> → <strong>[2, 1, 1, 1, 1]</strong></p>
+</li>
+<li>
+<p><strong>Limitation:</strong></p>
+<p>“The cat chased the dog” and “The dog chased the cat” would look almost identical.</p>
 </li>
 </ul>
-</li>
-</ul>
-<p>Word2Vec was just the start. Other models iterated on this idea.</p>
-<ul>
-<li><strong>GloVe (Global Vectors):</strong><ul>
-<li><strong>How it Works:</strong> Word2Vec learns from "local" windows (a few words at a time). GloVe learns from "global" statistics. It first builds a giant co-occurrence matrix of <em>how often every word appears near every other word</em> in the entire corpus. It then uses a technique (matrix factorization) to "compress" this giant matrix down into the same kind of word vectors.</li>
-<li><strong>Advantages:</strong> Often performs better at capturing global relationships and analogies than Word2Vec.</li>
-<li><strong>Limitations:</strong> Same as Word2Vec. It still has the <strong>OOV problem</strong> and the <strong>polysemy ("bank") problem</strong>.</li>
-</ul>
-</li>
-</ul>
-<p><img alt="image.png" src="../../assets/DAY%203%20DEEP%20LEARNING%20%26%20NLP/image%208.png" /></p>
+<hr />
+<h3 id="ii-tf-idf-term-frequency-inverse-document-frequency"><strong>ii. TF-IDF (Term Frequency-Inverse Document Frequency):</strong><a class="headerlink" href="#ii-tf-idf-term-frequency-inverse-document-frequency" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
-<p><strong>fastText (from Facebook):</strong></p>
+<p><strong>How it Works:</strong></p>
+<p>Gives high importance to words that are <em>frequent in this document</em> but <em>rare across all documents</em>.</p>
+</li>
+<li>
+<p><strong>Example Sentence:</strong></p>
+<p><strong>“The cat sat on the mat”</strong></p>
+</li>
+<li>
+<p><strong>Vocabulary:</strong> same as before.</p>
+</li>
+<li>
+<p><strong>TF-IDF Vector (example values):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Word</th>
+<th>the</th>
+<th>cat</th>
+<th>sat</th>
+<th>on</th>
+<th>mat</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TF-IDF</td>
+<td>0.0</td>
+<td>0.52</td>
+<td>0.64</td>
+<td>0.48</td>
+<td>0.64</td>
+</tr>
+</tbody>
+</table>
+<p>→ <strong>TF-IDF Vector:</strong> <strong>[0.0, 0.52, 0.64, 0.48, 0.64]</strong></p>
+<p>(“the” gets <strong>0.0</strong> because it appears everywhere in the dataset, so IDF ≈ 0)</p>
+</li>
+<li>
+<p><strong>Limitation:</strong></p>
+<p>Still no understanding of meaning (e.g., “cat” ≠ “kitten” to TF-IDF).</p>
+</li>
+</ul>
+<h3 id="iii-one-hot-encoding"><strong>iii. One-Hot Encoding</strong><a class="headerlink" href="#iii-one-hot-encoding" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>How it Works:</strong> This model's insight was brilliant. It <em>doesn't</em> learn vectors for words. It learns vectors for <strong>character n-grams</strong> (sub-word pieces).</li>
-<li><strong>Example:</strong> The vector for "brunch" is the <em>sum</em> of the vectors for its parts (e.g., <code>&lt;br</code>, <code>bru</code>, <code>run</code>, <code>unc</code>, <code>nch</code>, <code>ch&gt;</code>).</li>
+<li>
+<p><strong>Idea:</strong></p>
+<p>Every word gets a giant vector full of zeros except <strong>one 1</strong> at its index in the global vocabulary.</p>
+</li>
+<li>
+<p><strong>Vocabulary Example (size = 5):</strong></p>
+<p><code>["the", "cat", "sat", "on", "mat"]</code></p>
+</li>
 </ul>
-<p><img alt="image.png" src="../../assets/DAY%203%20DEEP%20LEARNING%20%26%20NLP/image%209.png" /></p>
+<table>
+<thead>
+<tr>
+<th>Word</th>
+<th>Vector</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>the</td>
+<td>[1, 0, 0, 0, 0]</td>
+</tr>
+<tr>
+<td>cat</td>
+<td>[0, 1, 0, 0, 0]</td>
+</tr>
+<tr>
+<td>sat</td>
+<td>[0, 0, 1, 0, 0]</td>
+</tr>
+<tr>
+<td>on</td>
+<td>[0, 0, 0, 1, 0]</td>
+</tr>
+<tr>
+<td>mat</td>
+<td>[0, 0, 0, 0, 1]</td>
+</tr>
+<tr>
+<td>- <strong>Sentence Representation:</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<pre><code>Usually stored as 5 separate one-hot vectors (one per word), e.g.:
+
+**“The cat sat on the mat” →**
+
+[1,0,0,0,0]
+[0,1,0,0,0]
+[0,0,1,0,0]
+[0,0,0,1,0]
+[1,0,0,0,0]
+[0,0,0,0,1]
+</code></pre>
 <ul>
-<li><strong>Advantages:</strong><ol>
-<li><strong>Solves the OOV problem:</strong> It can create a vector for <em>any</em> word, even misspelled ones ("brunchfastly"), by summing its sub-word parts.</li>
-<li><strong>Understands Morphology:</strong> It knows "run" and "running" are related because they share many character n-grams.</li>
-</ol>
-</li>
-<li><strong>Limitations:</strong><ol>
-<li><strong>Still has the polysemy ("bank") problem.</strong> (This isn't solved until Transformers).</li>
-<li><strong>Storage:</strong> The dictionary of all n-grams is <em>massive</em>, making the model files very large.</li>
-</ol>
-</li>
+<li><strong>Problems:</strong><ul>
+<li>If vocab = 50,000 → each word is a 50,000-length vector</li>
+<li>No semantic meaning at all</li>
+<li>“cat”, “dog”, and “car” all look equally unrelated</li>
 </ul>
 </li>
 </ul>
-<h2 id="63-step-3-text-analysis-the-understanding-step"><strong>6.3. Step 3: Text Analysis (The "Understanding" Step)</strong><a class="headerlink" href="#63-step-3-text-analysis-the-understanding-step" title="Permanent link">&para;</a></h2>
+<h3 id="522-the-modern-way-contextual-embeddings"><strong>5.2.2. The "Modern Way" (Contextual Embeddings)</strong><a class="headerlink" href="#522-the-modern-way-contextual-embeddings" title="Permanent link">&para;</a></h3>
+<p>Instead of <em>counting</em>, modern NLP systems <em>learn</em> the <strong>meaning</strong> of words by training neural networks on billions of sentences.</p>
+<hr />
+<h3 id="i-word2vec-word-vector"><strong>i. Word2Vec (Word → Vector)</strong><a class="headerlink" href="#i-word2vec-word-vector" title="Permanent link">&para;</a></h3>
+<p><strong>How it works :</strong></p>
+<p>We train a tiny neural network.</p>
+<p>Its task is <strong>fake</strong>:</p>
+<blockquote>
+<p>“Given a word, predict the words around it.”
+</p>
+</blockquote>
+<p>Example window size = <strong>2</strong></p>
+<p>Sentence: <strong>“the cat sat on the mat”</strong></p>
+<p>For each center word, the model tries to predict nearby words:</p>
+<table>
+<thead>
+<tr>
+<th>Center</th>
+<th>Words predicted (window = 2)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cat</td>
+<td>the, sat</td>
+</tr>
+<tr>
+<td>sat</td>
+<td>cat, on</td>
+</tr>
+<tr>
+<td>on</td>
+<td>sat, the</td>
+</tr>
+<tr>
+<td>mat</td>
+<td>the</td>
+</tr>
+</tbody>
+</table>
+<p>Each training step:</p>
+<p><strong>Input = one word → Output = probabilities of surrounding words</strong></p>
+<hr />
+<p><strong>The Weight Matrix (What We Steal) :</strong></p>
+<p>Inside Word2Vec is a <strong>big matrix of weights.</strong></p>
+<p>Suppose vocabulary size = 10,000</p>
+<p>Embedding dimension = 300</p>
+<p>Matrix shape: <strong>10,000 × 300</strong></p>
+<pre><code>        dim1 dim2 dim3 ... dim300
+word1   0.12 0.88 0.01     0.33
+word2   0.55 0.02 0.19     0.44
+word3   0.90 0.10 0.77     0.12
+ ...
+</code></pre>
+<p>Each <strong>row</strong> is a word’s embedding — a 300-dimensional vector.</p>
+<hr />
+<h3 id="what-is-a-300-dimensional-vector"><strong>What is a 300-dimensional vector?</strong><a class="headerlink" href="#what-is-a-300-dimensional-vector" title="Permanent link">&para;</a></h3>
+<p>Think of it like a <strong>profile</strong> of a word, described by 300 “features” the model learns by itself.</p>
+<p>Example (tiny version using only 4 dims):</p>
+<p>Vector(“cat”) =</p>
+<pre><code>[0.8,  0.1,  0.3,  0.9]
+</code></pre>
+<p>Vector(“dog”) =</p>
+<pre><code>[0.79, 0.12, 0.31, 0.91]
+</code></pre>
+<p>The numbers are <strong>not human-interpretable</strong>.</p>
+<p>But the <strong>patterns</strong> let the model recognize similarity (cat ≈ dog).</p>
+<p>A 300-dimensional vector is just a longer version:</p>
+<pre><code>[0.23, -0.18, 0.04, 1.22, ..., 0.09]  ← 300 numbers
+</code></pre>
+<p>Higher dimension → more information about meaning.</p>
+<hr />
+<h3 id="detailed-example"><strong>Detailed Example:</strong><a class="headerlink" href="#detailed-example" title="Permanent link">&para;</a></h3>
+<p><strong>Sentence: the cat sat on the mat</strong></p>
+<p><strong>Window size = 2 (predict 2 words left &amp; right)</strong></p>
+<p>Below is every training pair Word2Vec creates:</p>
+<p><strong>1. Center word: “the”</strong></p>
+<p>Neighbors: <em>cat</em></p>
+<p>Training: the → cat</p>
+<p><strong>2. Center word: “cat”</strong></p>
+<p>Neighbors: the, sat</p>
+<p>Training: cat → (the, sat)</p>
+<p><strong>3. Center word: “sat”</strong></p>
+<p>Neighbors: cat, on</p>
+<p>Training: sat → (cat, on)</p>
+<p><strong>4. Center word: “on”</strong></p>
+<p>Neighbors: sat, the</p>
+<p>Training: on → (sat, the)</p>
+<p><strong>5. Center word: “the”</strong></p>
+<p>Neighbors: on, mat</p>
+<p>Training: the → (on, mat)</p>
+<p><strong>6. Center word: “mat”</strong></p>
+<p>Neighbors: the</p>
+<p>Training: mat → the</p>
+<p>This is done across <strong>millions</strong> of sentences.</p>
+<p>The neural network slowly learns which words occur in similar contexts.</p>
+<p>After training, we <strong>throw away the network</strong> and <strong>keep the weight matrix</strong>.</p>
+<p>That matrix becomes:</p>
+<ul>
+<li>a dictionary</li>
+<li>where every word = a learned vector</li>
+<li>that captures meaning</li>
+</ul>
+<p>This is the famous Word2Vec trick.</p>
+<h3 id="ii-glove-global-co-occurrence-matrix"><strong>ii. GloVe (Global Co-occurrence Matrix)</strong><a class="headerlink" href="#ii-glove-global-co-occurrence-matrix" title="Permanent link">&para;</a></h3>
+<p>GloVe does <strong>NOT</strong> predict windows.</p>
+<p>It builds one giant table counting <strong>how often words appear near each other</strong>.</p>
+<p>Using the SAME sentence:</p>
+<p>We count how many times each pair appears within a window of 2:</p>
+<table>
+<thead>
+<tr>
+<th>Word</th>
+<th>the</th>
+<th>cat</th>
+<th>sat</th>
+<th>on</th>
+<th>mat</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>the</td>
+<td>—</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>cat</td>
+<td>1</td>
+<td>—</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>sat</td>
+<td>0</td>
+<td>1</td>
+<td>—</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>on</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>—</td>
+<td>1</td>
+</tr>
+<tr>
+<td>mat</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Some examples from above:</p>
+<ul>
+<li>“cat” and “the” appear together once</li>
+<li>“cat” and “sat” appear together once</li>
+<li>“on” and “mat” appear together once</li>
+<li>“sat” and “mat” never appear together</li>
+</ul>
+<p>GloVe then <strong>factorizes</strong> this co-occurrence matrix into two smaller matrices (like compressing it).</p>
+<p>The result of the factorization is:</p>
+<pre><code>the → 300D vector
+cat → 300D vector
+sat → 300D vector
+on  → 300D vector
+mat → 300D vector
+</code></pre>
+<p>Same output format as Word2Vec — but learned differently.</p>
+<hr />
+<h3 id="iii-fasttext-breaks-words-into-character-pieces"><strong>iii. fastText (Breaks words into character pieces)</strong><a class="headerlink" href="#iii-fasttext-breaks-words-into-character-pieces" title="Permanent link">&para;</a></h3>
+<p>fastText uses the SAME sentence, but it <strong>doesn’t learn vectors for whole words directly</strong>.</p>
+<p>Using:</p>
+<p><strong>“the cat sat on the mat”</strong></p>
+<p>Instead of learning a vector for “cat”, fastText breaks it into character n-grams:</p>
+<p>For n=3 (trigrams):</p>
+<pre><code>&lt;ca, cat, at&gt;   → for &quot;cat&quot;
+&lt;sa, sat, at&gt;   → for &quot;sat&quot;
+&lt;ma, mat, at&gt;   → for &quot;mat&quot;
+&lt;th, the, he&gt;   → for &quot;the&quot;
+&lt;on&gt;            → for &quot;on&quot;
+</code></pre>
+<p>Then fastText learns vectors for all these pieces.</p>
+<p>Example (simplified):</p>
+<pre><code>Vector(&quot;cat&quot;) = Vector(&quot;&lt;ca&quot;) + Vector(&quot;cat&quot;) + Vector(&quot;at&quot;)
+Vector(&quot;mat&quot;) = Vector(&quot;&lt;ma&quot;) + Vector(&quot;mat&quot;) + Vector(&quot;at&quot;)
+</code></pre>
+<p>Since “cat” and “mat” share the subword “at”, their vectors become similar.</p>
+<p>That’s why fastText can handle:</p>
+<ul>
+<li>misspellings</li>
+<li>new words</li>
+<li>rare words</li>
+<li>morphological changes (“sitting”, “sits”, “sat”)</li>
+</ul>
+<p>Even if the full word wasn't seen during training.</p>
+<hr />
+<h2 id="53-step-3-text-analysis-the-understanding-step"><strong>5.3. Step 3: Text Analysis (The "Understanding" Step)</strong><a class="headerlink" href="#53-step-3-text-analysis-the-understanding-step" title="Permanent link">&para;</a></h2>
 <p>Now that our text is in a clean, numerical format, the real work can begin. This step involves feeding the numerical data into a <strong>model architecture</strong> (the "brain") to interpret and extract meaningful information.</p>
-<h3 id="631-traditional-analysis-tasks">6.3.1. Traditional Analysis Tasks<a class="headerlink" href="#631-traditional-analysis-tasks" title="Permanent link">&para;</a></h3>
+<h3 id="531-traditional-analysis-tasks">5.3.1. Traditional Analysis Tasks<a class="headerlink" href="#531-traditional-analysis-tasks" title="Permanent link">&para;</a></h3>
 <p>This is <em>what</em> we want the model to do:</p>
 <ul>
 <li><strong>Part-of-Speech (POS) Tagging:</strong> Identifying nouns, verbs, adjectives, etc.</li>
@@ -782,27 +1111,137 @@ A key breakthrough called Self-Supervised Learning (SSL) allowed models to learn
 <li><strong>Sentiment Analysis:</strong> Determining if the tone is positive or negative.</li>
 <li><strong>Topic Modeling:</strong> Finding the main themes in a document.</li>
 </ul>
-<h3 id="632-modern-model-architectures-the-brain">6.3.2. Modern Model Architectures (The "Brain")<a class="headerlink" href="#632-modern-model-architectures-the-brain" title="Permanent link">&para;</a></h3>
-<p>This is the <em>engine</em> that performs those tasks.</p>
-<p>A standard ANN has no "memory." If you input "how" and then "are," it forgets "how" by the time it sees "are." This is a problem for sequential data (like text or stock prices) where order matters.</p>
+<h3 id="532-modern-model-architectures-the-brain"><strong>5.3.2. Modern Model Architectures (The "Brain")</strong><a class="headerlink" href="#532-modern-model-architectures-the-brain" title="Permanent link">&para;</a></h3>
+<p>A standard ANN has no memory. If you give it:</p>
+<pre><code>Input 1: “how”
+Input 2: “are”
+</code></pre>
+<p>It completely forgets “how” when it receives “are”.</p>
+<p>But language is <strong>sequential</strong>. Meaning depends on <em>order</em>.</p>
+<p>So we need models that can “remember” previous inputs.</p>
+<hr />
 <h3 id="i-recurrent-neural-networks-rnns"><strong>i. Recurrent Neural Networks (RNNs)</strong><a class="headerlink" href="#i-recurrent-neural-networks-rnns" title="Permanent link">&para;</a></h3>
-<p><img alt="image.png" src="../../assets/DAY%203%20DEEP%20LEARNING%20%26%20NLP/image%2010.png" /></p>
-<p>An RNN solves this with a <strong>"loop"</strong>. When an RNN processes an input, its output is not only used for the prediction but is also <strong>fed back into itself</strong> as part of the input for the <em>next</em> step.</p>
-<p>This loop acts as a "memory," allowing the network to retain information from previous steps.</p>
+<p><img alt="image.png" src="../../assets/DAY%203%20DEEP%20LEARNING%20%26%20NLP/image%206.png" /></p>
+<p>An RNN adds a <strong>loop</strong> so that information can be passed from one step to the next.</p>
+<pre><code>Input x₁ → (RNN) → h₁ → output
+Input x₂ → (RNN) → h₂ → output
+Input x₃ → (RNN) → h₃ → output
+</code></pre>
+<p>Where:</p>
 <ul>
-<li><strong>The Problem with RNNs:</strong> They suffer from the <strong>vanishing gradient problem</strong>. Their "memory" is very short-term. They might remember the last few words, but they'll forget the beginning of a long paragraph, making it hard to understand long-range context.</li>
+<li><strong>xₜ = word embedding at time t</strong></li>
+<li><strong>hₜ = hidden state (RNN’s memory)</strong></li>
 </ul>
+<p>The hidden state is updated as:</p>
+<pre><code>hₜ = tanh(Wx * xₜ + Wh * hₜ₋₁)
+</code></pre>
+<h3 id="example-encode-a-4-word-sentence-step-by-step"><strong>Example: Encode a 4-word sentence step-by-step</strong><a class="headerlink" href="#example-encode-a-4-word-sentence-step-by-step" title="Permanent link">&para;</a></h3>
+<p>Sentence: <strong>“I love deep learning”</strong></p>
+<p>Assume each word is turned into a 4-dimensional vector (tiny example to understand the process).</p>
+<p>Let the embeddings be:</p>
+<pre><code>I          → [1, 0, 0, 0]
+love       → [0, 1, 0, 0]
+deep       → [0, 0, 1, 0]
+learning   → [0, 0, 0, 1]
+</code></pre>
+<p>Start with <strong>h₀ = [0,0,0,0]</strong> (zero memory).</p>
+<hr />
+<p><strong>Step 1: word = “I”</strong></p>
+<pre><code>x₁ = [1, 0, 0, 0]
+h₁ = tanh(Wx*x₁ + Wh*h₀)
+</code></pre>
+<p>Hidden state might become something like:</p>
+<pre><code>h₁ = [0.6, -0.1, 0.2, 0.0]
+</code></pre>
+<hr />
+<p><strong>Step 2: word = “love”</strong></p>
+<pre><code>x₂ = [0, 1, 0, 0]
+h₂ = tanh(Wx*x₂ + Wh*h₁)
+</code></pre>
+<p>Now memory includes both <strong>I</strong> + <strong>love</strong>:</p>
+<pre><code>h₂ = [0.40, 0.55, -0.10, 0.20]
+</code></pre>
+<hr />
+<p><strong>Step 3: word = “deep”</strong></p>
+<pre><code>h₃ = tanh(Wx*x₃ + Wh*h₂)
+</code></pre>
+<p>Memory grows again:</p>
+<pre><code>h₃ = [0.10, 0.62, 0.33, 0.45]
+</code></pre>
+<hr />
+<p><strong>Step 4: word = “learning”</strong></p>
+<pre><code>h₄ = tanh(Wx*x₄ + Wh*h₃)
+</code></pre>
+<p>Final encoding of the entire sentence:</p>
+<pre><code>h₄ = [0.21, 0.70, 0.55, 0.63]
+</code></pre>
+<p><strong>This final <code>h₄</code> is the vector representation of the whole sentence.</strong></p>
+<p>This is how RNNs represent sequences.</p>
+<hr />
+<p><strong>Why RNNs Struggle:</strong> They only have <strong>one state (<code>hₜ</code>)</strong>. Over many steps, early information fades → <strong>vanishing gradient problem</strong>.</p>
+<hr />
 <h3 id="ii-long-short-term-memory-lstms"><strong>ii. Long Short-Term Memory (LSTMs)</strong><a class="headerlink" href="#ii-long-short-term-memory-lstms" title="Permanent link">&para;</a></h3>
-<p><strong>LSTMs</strong> are a specialized, more advanced type of RNN, designed specifically to solve the long-term memory problem.</p>
-<p><img alt="image.png" src="../../assets/DAY%203%20DEEP%20LEARNING%20%26%20NLP/image%2011.png" /></p>
-<p>An LSTM doesn't just have a simple loop; it has a complex internal structure based on a "cell state" and three "gates":</p>
+<p><img alt="image.png" src="../../assets/DAY%203%20DEEP%20LEARNING%20%26%20NLP/image%207.png" /></p>
+<p>LSTMs fix this by adding <strong>two memory paths</strong>:</p>
+<ol>
+<li><strong>Hidden state (hₜ)</strong> → short-term memory</li>
+<li><strong>Cell state (cₜ)</strong> → long-term memory (highway through time)</li>
+</ol>
+<p>Each step uses <strong>three gates</strong>:</p>
 <ul>
-<li><strong>Cell State:</strong> A "conveyor belt" that carries relevant information through the entire sequence.</li>
-<li><strong>Forget Gate:</strong> A "doorman" that looks at the new input and decides what old information (if any) to <em>remove</em> from the cell state.</li>
-<li><strong>Input Gate:</strong> Decides what <em>new</em> information from the current input is important enough to <em>add</em> to the cell state.</li>
-<li><strong>Output Gate:</strong> Decides what part of the cell state to <em>use</em> to make the final prediction for the current step.</li>
+<li><strong>Forget gate</strong> → remove useless old info</li>
+<li><strong>Input gate</strong> → add important new info</li>
+<li><strong>Output gate</strong> → decide what to reveal as the hidden state</li>
 </ul>
-<p>By using these gates, an LSTM can learn to "remember" important information from long ago (e.g., the subject of a sentence) and "forget" irrelevant details.</p>
+<hr />
+<h3 id="example-same-sentence-encoded-with-lstm"><strong>Example: Same sentence encoded with LSTM</strong><a class="headerlink" href="#example-same-sentence-encoded-with-lstm" title="Permanent link">&para;</a></h3>
+<p>Sentence: <strong>“I love deep learning”</strong></p>
+<p>Each step outputs <strong>two vectors</strong>:</p>
+<ul>
+<li>hidden state <strong>hₜ</strong></li>
+<li>cell state <strong>cₜ</strong></li>
+</ul>
+<p>Start with:</p>
+<pre><code>h₀ = [0,0,0,0]
+c₀ = [0,0,0,0]
+</code></pre>
+<hr />
+<p><strong>Step 1: “I”</strong></p>
+<p>The gates decide what to store.</p>
+<p>Example (illustration):</p>
+<pre><code>c₁ = [0.9, -0.1, 0.1, 0.0]
+h₁ = [0.7, -0.05, 0.15, 0.0]
+</code></pre>
+<hr />
+<p><strong>Step 2: “love”</strong></p>
+<p>Forget gate removes irrelevant parts of <code>c₁</code>.</p>
+<p>Input gate adds new info.</p>
+<pre><code>c₂ = [0.85, 0.40, 0.25, 0.10]
+h₂ = [0.62, 0.55, 0.20, 0.15]
+</code></pre>
+<hr />
+<p><strong>Step 3: “deep”</strong></p>
+<pre><code>c₃ = [0.80, 0.57, 0.60, 0.33]
+h₃ = [0.55, 0.60, 0.45, 0.40]
+</code></pre>
+<hr />
+<p><strong>Step 4: “learning”</strong></p>
+<p>Final states:</p>
+<pre><code>c₄ = [0.90, 0.70, 0.85, 0.75]
+h₄ = [0.60, 0.75, 0.65, 0.58]
+</code></pre>
+<hr />
+<p>RNN: Only <strong>h₄</strong> contains the meaning of the whole sentence.</p>
+<p>LSTM: Both <strong>h₄</strong> and <strong>c₄</strong> represent the final sentence meaning.</p>
+<ul>
+<li><code>h₄</code>: what the model is “focusing on” at the last word</li>
+<li><code>c₄</code>: deep long-term memory preserved across the sentence</li>
+</ul>
+<p>You can think of LSTM like:</p>
+<pre><code>hₜ = short-term note
+cₜ = long-term diary
+</code></pre>
+<p>This is why LSTMs understand <strong>long sentences</strong> much better than basic RNNs.</p>
 <hr />
 <h3 id="iii-the-modern-revolution-the-transformer"><strong>iii. The Modern Revolution (The Transformer)</strong><a class="headerlink" href="#iii-the-modern-revolution-the-transformer" title="Permanent link">&para;</a></h3>
 <p>Even LSTMs struggle with very long sentences, and their sequential nature (processing one word at a time) makes them slow to train. The <strong>Transformer</strong> architecture solved this.</p>
@@ -813,14 +1252,14 @@ A key breakthrough called Self-Supervised Learning (SSL) allowed models to learn
 <li><strong>Decoder:</strong> A "decoder" (another RNN) takes that <em>one</em> vector and "decodes" it into the output sentence (e.g., "¿Cómo estás?").</li>
 <li><strong>The Problem:</strong> This single context vector is a <strong>bottleneck</strong>. It's hard to cram the entire meaning of a 50-word sentence into one vector.</li>
 </ol>
-<p><img alt="image.png" src="../../assets/DAY%203%20DEEP%20LEARNING%20%26%20NLP/image%2012.png" /></p>
+<p><img alt="image.png" src="../../assets/DAY%203%20DEEP%20LEARNING%20%26%20NLP/image%208.png" /></p>
 <h3 id="b-the-breakthrough-the-attention-mechanism"><strong>b) The Breakthrough: The Attention Mechanism</strong><a class="headerlink" href="#b-the-breakthrough-the-attention-mechanism" title="Permanent link">&para;</a></h3>
 <p><strong>Attention</strong> solved the bottleneck. Instead of forcing the decoder to rely on <em>one</em> vector, it allows the decoder to "look back" at <em>all</em> the encoder's outputs from the <em>entire</em> input sentence at every step.</p>
 <p>It learns to "pay attention" to the specific input words that are most relevant for generating the <em>current</em> output word. This was a massive leap in performance.</p>
 <ul>
 <li><strong>Advantage:</strong> It's <strong>highly parallelizable</strong> (much faster to train) and can capture <em>extremely</em> long-range dependencies, making it the new state-of-the-art.</li>
 </ul>
-<p><img alt="image.png" src="../../assets/DAY%203%20DEEP%20LEARNING%20%26%20NLP/image%2013.png" /></p>
+<p><img alt="image.png" src="../../assets/DAY%203%20DEEP%20LEARNING%20%26%20NLP/image%209.png" /></p>
 <h3 id="iv-modern-models-bert-gpt"><strong>iv. Modern Models: BERT &amp; GPT</strong><a class="headerlink" href="#iv-modern-models-bert-gpt" title="Permanent link">&para;</a></h3>
 <p>These are the two most famous models built on the Transformer architecture.</p>
 <h3 id="a-bert-bidirectional-encoder-representations-from-transformers"><strong>a) BERT (Bidirectional Encoder Representations from Transformers)</strong><a class="headerlink" href="#a-bert-bidirectional-encoder-representations-from-transformers" title="Permanent link">&para;</a></h3>
@@ -837,9 +1276,9 @@ A key breakthrough called Self-Supervised Learning (SSL) allowed models to learn
 <li><strong>Key Feature:</strong> It's <strong>auto-regressive</strong> (one-way). It only looks <em>backward</em> (at the words that came before).</li>
 <li><strong>Best For:</strong> <strong>Generation</strong> tasks. Because it's trained to "predict the next word," it is exceptional at writing essays, holding conversations, summarizing text, and generating creative content.</li>
 </ul>
-<p><img alt="image.png" src="../../assets/DAY%203%20DEEP%20LEARNING%20%26%20NLP/image%2014.png" /></p>
+<p><img alt="image.png" src="../../assets/DAY%203%20DEEP%20LEARNING%20%26%20NLP/image%2010.png" /></p>
 <hr />
-<h2 id="64-step-4-model-training-the-learning-step"><strong>6.4. Step 4: Model Training (The "Learning" Step)</strong><a class="headerlink" href="#64-step-4-model-training-the-learning-step" title="Permanent link">&para;</a></h2>
+<h2 id="54-step-4-model-training-the-learning-step"><strong>5.4. Step 4: Model Training (The "Learning" Step)</strong><a class="headerlink" href="#54-step-4-model-training-the-learning-step" title="Permanent link">&para;</a></h2>
 <p>This step is the <em>process</em> that "teaches" the model architectures from Step 3.</p>
 <p>This is where the model "learns" by looking for patterns and relationships within the data.</p>
 <ol>
@@ -851,7 +1290,7 @@ A key breakthrough called Self-Supervised Learning (SSL) allowed models to learn
 </ol>
 <p>This process is repeated millions or even billions of times. Once "trained," this model can be saved and used in Step 3 to make predictions on new, unseen data.</p>
 <hr />
-<h1 id="7-why-is-nlp-so-hard"><strong>7. Why is NLP So Hard?</strong><a class="headerlink" href="#7-why-is-nlp-so-hard" title="Permanent link">&para;</a></h1>
+<h1 id="6-why-is-nlp-so-hard"><strong>6. Why is NLP So Hard?</strong><a class="headerlink" href="#6-why-is-nlp-so-hard" title="Permanent link">&para;</a></h1>
 <p>Human language is incredibly complex and messy. Even the best NLP models struggle with the same things humans do. These "ambiguities" are the biggest challenge.</p>
 <ul>
 <li><strong>Biased Training Data:</strong> If the data used to train a model is biased (e.g., pulled from biased parts of the web), the model's answers will also be biased. This is a major risk, especially in sensitive fields like healthcare or HR.</li>
@@ -866,7 +1305,7 @@ A key breakthrough called Self-Supervised Learning (SSL) allowed models to learn
 <li><strong>New and Evolving Language:</strong> New words are invented all the time ("rizz," "skibidi"), and grammar rules evolve. Models can't keep up unless they are constantly retrained.</li>
 </ul>
 <hr />
-<h1 id="8-where-is-nlp-used"><strong>8. Where is NLP Used?</strong><a class="headerlink" href="#8-where-is-nlp-used" title="Permanent link">&para;</a></h1>
+<h1 id="7-where-is-nlp-used"><strong>7. Where is NLP Used?</strong><a class="headerlink" href="#7-where-is-nlp-used" title="Permanent link">&para;</a></h1>
 <p>You can find NLP applications in almost every major industry.</p>
 <ul>
 <li><strong>Finance:</strong> NLP models instantly read financial reports, news articles, and social media to help make split-second trading decisions.</li>
@@ -876,15 +1315,15 @@ A key breakthrough called Self-Supervised Learning (SSL) allowed models to learn
 </ul>
 <p>A computer can't just "read" a sentence. To get from raw human language to a useful insight, it follows a strict "assembly line" process.</p>
 <hr />
-<h1 id="9-practical-implementation-next-word-prediction-using-pre-trained-model"><strong>9. Practical Implementation: Next-Word Prediction using Pre-Trained Model</strong><a class="headerlink" href="#9-practical-implementation-next-word-prediction-using-pre-trained-model" title="Permanent link">&para;</a></h1>
+<h1 id="8-practical-implementation-next-word-prediction-using-pre-trained-model"><strong>8. Practical Implementation: Next-Word Prediction using Pre-Trained Model</strong><a class="headerlink" href="#8-practical-implementation-next-word-prediction-using-pre-trained-model" title="Permanent link">&para;</a></h1>
 <h2 id="fine-tuning-bert-on-harry-potter-corpus">Fine-Tuning BERT on Harry Potter Corpus<a class="headerlink" href="#fine-tuning-bert-on-harry-potter-corpus" title="Permanent link">&para;</a></h2>
 <p><strong>Open the Colab Link, Make a Copy and Upload the dataset on Colab</strong></p>
 <p><strong>📓 Colab Notebook:</strong></p>
 <p><a href="https://colab.research.google.com/drive/1RGcpQuLJz-I7EYQPfaEYDR01m6IqEMfG?usp=sharing">Open in Google Colab</a> </p>
-<p><strong>📊 Dataset:</strong>  </p>
+<p><strong>📊 Dataset:</strong>  </p>
 <p><a href="../../files/day3/harry_potter_corpus.txt">harry_potter_corpus.txt</a></p>
 <hr />
-<h1 id="10-summary">10. Summary<a class="headerlink" href="#10-summary" title="Permanent link">&para;</a></h1>
+<h1 id="9-summary">9. Summary<a class="headerlink" href="#9-summary" title="Permanent link">&para;</a></h1>
 <ul>
 <li>Covered <strong>Deep Learning basics</strong>, including artificial neurons, neural networks, and how models learn using <strong>forward pass, loss, backpropagation, and gradient descent</strong>.</li>
 <li>Explored <strong>why deep learning outperforms traditional ML</strong>, handling unstructured data and learning features automatically.</li>

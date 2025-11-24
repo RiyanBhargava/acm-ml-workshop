@@ -25,7 +25,7 @@
 
 ### **📊 Dataset:**
 
-[harry_potter_corpus.txt](..\files\day3\harry_potter_corpus.txt)
+[harry_potter_corpus.txt](../files/day3/harry_potter_corpus.txt)
 
 ---
 
@@ -69,13 +69,13 @@ Here's its job, step-by-step:
 3. **It Has a Bias (b):** A **bias** is an extra "nudge." It's a number that helps the neuron decide how easy or hard it is to fire. (e.g., "Don't fire unless you are *really* sure").
 4. **It Calculates an Output (Y):** The neuron multiplies each input by its weight, adds them all up, adds the bias, and then passes this total through an **Activation Function**. This function just squashes the number (e.g., to be between 0 and 1) to make it a clean, final output signal.
 
-![image.png](DAY%203%20DEEP%20LEARNING%20&%20NLP/image.png)
+![image.png](../assets/DAY%203%20DEEP%20LEARNING%20&%20NLP/image.png)
 
 ## 3.4. Building a "Deep" Brain: The Neural Network
 
 A "deep" network is just many layers of these neurons stacked together. This is where the magic happens!
 
-![image.png](DAY%203%20DEEP%20LEARNING%20&%20NLP/image%201.png)
+![image.png](../assets/DAY%203%20DEEP%20LEARNING%20&%20NLP/image%201.png)
 
 For example: Recognizing a handwritten digit
 
@@ -86,13 +86,13 @@ For example: Recognizing a handwritten digit
     - **Layer 3** might combine those loops to recognize a full "8" or "9".
 3. **Output Layer:** This layer gives the final answer (e.g., 10 neurons, one for each digit 0-9, where the "9" neuron fires the strongest).
 
-![Screenshot 2025-11-15 at 9.16.03 PM.png](DAY%203%20DEEP%20LEARNING%20&%20NLP/Screenshot_2025-11-15_at_9.16.03_PM.png)
+![Screenshot 2025-11-15 at 9.16.03 PM.png](../assets/DAY%203%20DEEP%20LEARNING%20&%20NLP/Screenshot_2025-11-15_at_9.16.03_PM.png)
 
 ## 3.5. How Does it Learn? (The Training Process)
 
 The power of a neural network is its ability to find the optimal **weights** and **biases** that map inputs to correct outputs. It achieves this by iteratively "learning from its mistakes" through a process driven by **Backpropagation** and **Gradient Descent**.
 
-![image.png](DAY%203%20DEEP%20LEARNING%20&%20NLP/image%202.png)
+![image.png](../assets/DAY%203%20DEEP%20LEARNING%20&%20NLP/image%202.png)
 
 This learning process is a four-step cycle:
 
@@ -113,7 +113,7 @@ This is the core of the learning mechanism, enabled by **Backpropagation** (shor
 
 Finally, the network applies the correction using **Gradient Descent**.
 
-![image.png](DAY%203%20DEEP%20LEARNING%20&%20NLP/image%203.png)
+![image.png](../assets/DAY%203%20DEEP%20LEARNING%20&%20NLP/image%203.png)
 
 **A. Gradient Descent — What It Actually Does:**
 

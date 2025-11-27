@@ -15,6 +15,8 @@
         <link rel="canonical" href="https://riyanbhargava.github.io/acm-ml-workshop/day4/day4/">
       
       
+        <link rel="prev" href="../../day3/day3/">
+      
       
       
       <link rel="icon" href="../../assets/favicon.ico">
@@ -22,7 +24,7 @@
     
     
       
-        <title>Coming Soon - ML Workshop</title>
+        <title>DL with CNN and Image Detection - ML Workshop</title>
       
     
     
@@ -74,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#coming-soon" class="md-skip">
+        <a href="#welcome-to-day-4-of-the-bootcamp" class="md-skip">
           Skip to content
         </a>
       
@@ -109,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Coming Soon
+              DL with CNN and Image Detection
             
           </span>
         </div>
@@ -286,6 +288,27 @@
   
 
       
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  DL with CNN and Image Detection
+
+      </a>
+    </li>
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -424,6 +447,369 @@
   
 
     
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    DL with CNN and Image Detection
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    DL with CNN and Image Detection
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#welcome-to-day-4-of-the-bootcamp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Welcome to Day 4 of the Bootcamp!!!
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-artificial-neural-networks-anns" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Artificial Neural Networks (ANNs)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Artificial Neural Networks (ANNs)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-what-are-anns" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 What are ANN's?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-key-terms" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 Key Terms
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-convolutional-neural-networks-cnns" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Convolutional Neural Networks (CNNs)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Convolutional Neural Networks (CNNs)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-what-are-cnns" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 What are CNN's?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-how-cnns-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 How CNNs Work?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 How CNNs Work?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221-convolution-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2.1 Convolution Layer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222-pooling-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2.2 Pooling Layer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#223-fully-connected-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2.3 Fully Connected Layer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-basic-evolution-of-cnn" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Basic Evolution of CNN
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Basic Evolution of CNN">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-lenet-1998" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 LeNet (1998)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-alexnet-2012" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 AlexNet (2012)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-vggnet-2014" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3 VGGNet (2014)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-googlenetinception-2014" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4 GoogLeNet/Inception (2014)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-resnet-2015" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.5 ResNet (2015)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-differences-between-ann-and-cnn" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Differences between ANN and CNN
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-different-famous-cnn-architectures-concise-specs" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Different Famous CNN Architectures (Concise Specs)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Different Famous CNN Architectures (Concise Specs)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-lenet-5-1998" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1 LeNet-5 (1998)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-alexnet-2012" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2 AlexNet (2012)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-vgg-2014-eg-vgg-16-vgg-19" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.3 VGG (2014) — e.g., VGG-16 / VGG-19
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-resnet-2015" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.4 ResNet (2015)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-advantages-and-disadvantages-of-cnn" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Advantages and Disadvantages of CNN
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Advantages and Disadvantages of CNN">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-advantages" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1 Advantages
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-disadvantages" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.2 Disadvantages
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-hosting-on-hugging-face" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Hosting on Hugging Face
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Hosting on Hugging Face">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.1 Prerequisites
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-steps-to-host" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.2 Steps to Host
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-notes-tips" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.3 Notes / Tips
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -441,8 +827,317 @@
   
   
   
-    
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#welcome-to-day-4-of-the-bootcamp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Welcome to Day 4 of the Bootcamp!!!
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-artificial-neural-networks-anns" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Artificial Neural Networks (ANNs)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Artificial Neural Networks (ANNs)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-what-are-anns" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 What are ANN's?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-key-terms" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 Key Terms
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-convolutional-neural-networks-cnns" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Convolutional Neural Networks (CNNs)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Convolutional Neural Networks (CNNs)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-what-are-cnns" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 What are CNN's?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-how-cnns-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 How CNNs Work?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 How CNNs Work?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221-convolution-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2.1 Convolution Layer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222-pooling-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2.2 Pooling Layer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#223-fully-connected-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2.3 Fully Connected Layer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-basic-evolution-of-cnn" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Basic Evolution of CNN
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Basic Evolution of CNN">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-lenet-1998" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 LeNet (1998)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-alexnet-2012" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 AlexNet (2012)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-vggnet-2014" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3 VGGNet (2014)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-googlenetinception-2014" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4 GoogLeNet/Inception (2014)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-resnet-2015" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.5 ResNet (2015)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-differences-between-ann-and-cnn" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Differences between ANN and CNN
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-different-famous-cnn-architectures-concise-specs" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Different Famous CNN Architectures (Concise Specs)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Different Famous CNN Architectures (Concise Specs)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-lenet-5-1998" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1 LeNet-5 (1998)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-alexnet-2012" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2 AlexNet (2012)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-vgg-2014-eg-vgg-16-vgg-19" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.3 VGG (2014) — e.g., VGG-16 / VGG-19
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-resnet-2015" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.4 ResNet (2015)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-advantages-and-disadvantages-of-cnn" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Advantages and Disadvantages of CNN
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Advantages and Disadvantages of CNN">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-advantages" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1 Advantages
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-disadvantages" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.2 Disadvantages
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-hosting-on-hugging-face" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Hosting on Hugging Face
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Hosting on Hugging Face">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.1 Prerequisites
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-steps-to-host" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.2 Steps to Host
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-notes-tips" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.3 Notes / Tips
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -461,7 +1156,241 @@
   
 
 
-<h1 id="coming-soon">Coming Soon<a class="headerlink" href="#coming-soon" title="Permanent link">&para;</a></h1>
+  <h1>DL with CNN and Image Detection</h1>
+
+<h2 id="welcome-to-day-4-of-the-bootcamp"><strong>Welcome to Day 4 of the Bootcamp!!!</strong><a class="headerlink" href="#welcome-to-day-4-of-the-bootcamp" title="Permanent link">&para;</a></h2>
+<p>Today, we'll be learning how <strong>image recognition</strong> happens, and how <strong>Deep Learning (DL)</strong> works!
+CNN_Model_Training colab link: <a href="https://colab.research.google.com/drive/11mLrtD7BT0J9wWm1ugqtHlw1g81FfiAl?usp=sharing">CNN_Model_Training</a></p>
+<hr />
+<h2 id="1-artificial-neural-networks-anns"><strong>1. Artificial Neural Networks (ANNs)</strong><a class="headerlink" href="#1-artificial-neural-networks-anns" title="Permanent link">&para;</a></h2>
+<h3 id="11-what-are-anns"><strong>1.1 What are ANN's?</strong><a class="headerlink" href="#11-what-are-anns" title="Permanent link">&para;</a></h3>
+<p>An <strong>Artificial Neural Network (ANN)</strong> is a type of model in Deep Learning that tries to work like the human brain — it learns by finding patterns in data.</p>
+<ul>
+<li>Just like our brain has neurons that send signals to each other, an ANN has <strong>artificial neurons (nodes)</strong> connected in layers that pass information forward and adjust themselves to learn.</li>
+<li>ANN is made up of layers of neurons:</li>
+<li><strong>Input Layer</strong>: Receives the data.</li>
+<li><strong>Hidden Layers</strong>: Where the actual learning happens — the model adjusts its weights and biases for each neuron during training.</li>
+<li><strong>Output Layer</strong>: Produces the final prediction.</li>
+</ul>
+<p><img alt="Example of an ANN" src="../../assets/ANN.png" /></p>
+<pre><code class="language-python"># Define the model
+model = Sequential([
+    Input(shape=(4,)),            # Input layer (4 features)
+    Dense(4, activation='relu'),  # Hidden layer 1
+    Dense(4, activation='relu'),  # Hidden layer 2
+    Dense(3, activation='sigmoid') # Output layer (multi-class classification)
+])
+
+# Compile the model
+model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+</code></pre>
+<h3 id="12-key-terms"><strong>1.2 Key Terms</strong><a class="headerlink" href="#12-key-terms" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Activation Function</strong>: Adds non-linearity (mathematically) for a neuron, so the model can learn complex patterns instead of simple linear ones.</li>
+<li><strong>Optimizers</strong>: Algorithms that improve model learning by adjusting weights and biases during training to reduce error.</li>
+<li><strong>Loss Function</strong>: Measures how wrong the model’s predictions are — the model tries to minimize this loss while learning.</li>
+</ul>
+<hr />
+<h2 id="2-convolutional-neural-networks-cnns"><strong>2. Convolutional Neural Networks (CNNs)</strong><a class="headerlink" href="#2-convolutional-neural-networks-cnns" title="Permanent link">&para;</a></h2>
+<h3 id="21-what-are-cnns"><strong>2.1 What are CNN's?</strong><a class="headerlink" href="#21-what-are-cnns" title="Permanent link">&para;</a></h3>
+<p>A <strong>Convolutional Neural Network (CNN)</strong> is a type of Deep Learning model specifically designed to handle <strong>grid-like data</strong>, such as images. Images are represented as matrices (2D for grayscale or 3D for RGB) where each element corresponds to a pixel intensity. Parameters are learnable values that the model learns during training, and the parameters that get learnt here are weights and biases.</p>
+<ul>
+<li>Instead of looking at the whole image at once, CNNs look at <strong>small local regions (patches)</strong> to learn patterns like edges, textures, shapes, and then combine them to recognize higher-level features.</li>
+<li><strong>Applications</strong>: Image classification, object detection, face recognition, medical imaging, etc.
+<img alt="Applications of CNN" src="../../assets/Applications-of-CNN.png" /></li>
+</ul>
+<h3 id="22-how-cnns-work"><strong>2.2 How CNNs Work?</strong><a class="headerlink" href="#22-how-cnns-work" title="Permanent link">&para;</a></h3>
+<p>A CNN has <strong>three main types of layers</strong>:</p>
+<h4 id="221-convolution-layer"><strong>2.2.1 Convolution Layer</strong><a class="headerlink" href="#221-convolution-layer" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Responsible for finding features in the data, such as edges, shapes, and textures using <strong>strides</strong> and <strong>kernels</strong>.</li>
+<li>Strides determine how the filter traverses the input image. A stride of 1 indicates that the filter moves 1 pixel at a time, whereas stride of 2 moves 2 pixels at a time. Higher strides produce smaller output feature maps.  </li>
+<li>In a convolutional layer, the kernel (or filter) is a small square matrix that slides over the image to detect patterns like edges or textures. To control the size of the output after this sliding, we use padding.</li>
+<li>Padding is used to control how much the size of an image or feature map shrinks during convolution. With same padding, we add zeros around the edges so that the filter can slide over the image without reducing its size, keeping the output the same height and width as the input. With valid padding, we add no extra zeros, so the filter only moves within the original image boundaries, which naturally makes the output smaller.<br />
+Output size calculation:<br />
+<code>Output size =  (((Input size-Kernel size)+ 2*Padding)/Stride) + 1</code></li>
+</ul>
+<p><img alt="Stride of 3" src="../../assets/stride_of_3.jpg" /></p>
+<h4 id="222-pooling-layer"><strong>2.2.2 Pooling Layer</strong><a class="headerlink" href="#222-pooling-layer" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Reduces the size of the feature maps to make computation easier while retaining the most important features.
+<img alt="Example 1" src="../../assets/eg_1.jpg" />
+<img alt="Solution 1" src="../../assets/eg_2.jpg" />
+<img alt="Continuation" src="../../assets/eg_3.jpg" />
+<img alt="Continuation" src="../../assets/eg_4.jpg" /></li>
+</ul>
+<h4 id="223-fully-connected-layer"><strong>2.2.3 Fully Connected Layer</strong><a class="headerlink" href="#223-fully-connected-layer" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Predicts the outcome based on the extracted features passed to it.</li>
+</ul>
+<p><img alt="Example of a CNN" src="../../assets/cnn.png" />
+<img alt="Intuition" src="../../assets/Intuition.png" /></p>
+<hr />
+<h2 id="3-basic-evolution-of-cnn"><strong>3. Basic Evolution of CNN</strong><a class="headerlink" href="#3-basic-evolution-of-cnn" title="Permanent link">&para;</a></h2>
+<h3 id="31-lenet-1998"><strong>3.1 LeNet (1998)</strong><a class="headerlink" href="#31-lenet-1998" title="Permanent link">&para;</a></h3>
+<ul>
+<li>One of the earliest CNNs, designed for handwritten digit recognition (e.g., MNIST dataset).</li>
+<li>Introduced <strong>convolution</strong> and <strong>pooling layers</strong>.</li>
+</ul>
+<h3 id="32-alexnet-2012"><strong>3.2 AlexNet (2012)</strong><a class="headerlink" href="#32-alexnet-2012" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Popularized deep CNNs by winning the ImageNet competition.</li>
+<li>Used <strong>ReLU activation</strong>, <strong>dropout</strong>, and <strong>GPU training</strong>.</li>
+</ul>
+<h3 id="33-vggnet-2014"><strong>3.3 VGGNet (2014)</strong><a class="headerlink" href="#33-vggnet-2014" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Used very deep networks with small (3×3) convolution filters.</li>
+<li>Demonstrated that <strong>increasing depth improves performance</strong>.</li>
+</ul>
+<h3 id="34-googlenetinception-2014"><strong>3.4 GoogLeNet/Inception (2014)</strong><a class="headerlink" href="#34-googlenetinception-2014" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Introduced <strong>inception modules</strong> for multi-scale feature extraction.</li>
+<li>Used <strong>global average pooling</strong> instead of fully connected layers.</li>
+</ul>
+<h3 id="35-resnet-2015"><strong>3.5 ResNet (2015)</strong><a class="headerlink" href="#35-resnet-2015" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Introduced <strong>residual connections (skip connections)</strong> to solve vanishing gradient problems.</li>
+<li>Enabled training of very deep networks (50+ layers).</li>
+</ul>
+<p><img alt="CNN architectures timeline" src="../../assets/CNN_archs_timeline.jpg" /></p>
+<hr />
+<h2 id="4-differences-between-ann-and-cnn"><strong>4. Differences between ANN and CNN</strong><a class="headerlink" href="#4-differences-between-ann-and-cnn" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th><strong>Aspect</strong></th>
+<th><strong>ANN (Artificial Neural Network)</strong></th>
+<th><strong>CNN (Convolutional Neural Network)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Main Idea</strong></td>
+<td>Fully connected layers that learn global patterns</td>
+<td>Uses convolutional filters to learn local spatial patterns</td>
+</tr>
+<tr>
+<td><strong>Typical Input</strong></td>
+<td>1D feature vectors (tabular data)</td>
+<td>2D/3D grid data (images, videos, volumes)</td>
+</tr>
+<tr>
+<td><strong>Connectivity</strong></td>
+<td>Dense connections between neurons</td>
+<td>Local connectivity (receptive fields) + sparse connections</td>
+</tr>
+<tr>
+<td><strong>Parameter Sharing</strong></td>
+<td>No (each weight is unique)</td>
+<td>Yes (same filter applied across spatial locations)</td>
+</tr>
+<tr>
+<td><strong>Feature Learning</strong></td>
+<td>Learns global relationships</td>
+<td>Learns hierarchical features (edges → textures → objects)</td>
+</tr>
+<tr>
+<td><strong>Translation Invariance</strong></td>
+<td>Limited</td>
+<td>Stronger (due to convolutions and pooling)</td>
+</tr>
+<tr>
+<td><strong>Common Layers</strong></td>
+<td>Dense (fully connected), activation</td>
+<td>Convolution, pooling, batch norm, fully connected</td>
+</tr>
+<tr>
+<td><strong>Typical Use Cases</strong></td>
+<td>Tabular data, simple classification/regression</td>
+<td>Image classification, object detection, segmentation</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="5-different-famous-cnn-architectures-concise-specs"><strong>5. Different Famous CNN Architectures (Concise Specs)</strong><a class="headerlink" href="#5-different-famous-cnn-architectures-concise-specs" title="Permanent link">&para;</a></h2>
+<h3 id="51-lenet-5-1998"><strong>5.1 LeNet-5 (1998)</strong><a class="headerlink" href="#51-lenet-5-1998" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Input</strong>: 32×32 grayscale</li>
+<li><strong>Convs</strong>: 3 conv layers (C1: 6 filters, C3: 16 filters, C5: 120 filters) + pooling layers</li>
+<li><strong>Fully Connected</strong>: 2 (F6 and output)</li>
+<li><strong>Total Params</strong>: ~60k</li>
+<li><strong>Notes</strong>: Designed for MNIST; simple, small model for digit recognition.
+<img alt="LeNet-5 architecture" src="../../assets/lenet.png" /></li>
+</ul>
+<h3 id="52-alexnet-2012"><strong>5.2 AlexNet (2012)</strong><a class="headerlink" href="#52-alexnet-2012" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Input</strong>: 224×224 RGB (original used 227×227)</li>
+<li><strong>Convs</strong>: 5 conv layers + max-pooling layers</li>
+<li><strong>Fully Connected</strong>: 3 FC layers</li>
+<li><strong>Total Params</strong>: ~60M</li>
+<li><strong>Notes</strong>: ReLU, dropout, GPU training, large kernels in early layers (11×11, 5×5).
+<img alt="AlexNet architecture" src="../../assets/alexnet.png" /></li>
+</ul>
+<h3 id="53-vgg-2014-eg-vgg-16-vgg-19"><strong>5.3 VGG (2014) — e.g., VGG-16 / VGG-19</strong><a class="headerlink" href="#53-vgg-2014-eg-vgg-16-vgg-19" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Input</strong>: 224×224 RGB</li>
+<li><strong>Convs</strong>: VGG-16 = 13 conv layers (stacked 3×3 filters) + 5 max-pool layers; VGG-19 = 16 conv</li>
+<li><strong>Fully Connected</strong>: 3 FC layers</li>
+<li><strong>Total Params</strong>: VGG-16 ≈ 138M</li>
+<li><strong>Notes</strong>: Very deep with uniform 3×3 filters; high parameter count.
+<img alt="VGG architecture" src="../../assets/vgg.png" /></li>
+</ul>
+<h3 id="54-resnet-2015"><strong>5.4 ResNet (2015)</strong><a class="headerlink" href="#54-resnet-2015" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Input</strong>: 224×224 RGB</li>
+<li><strong>Convs</strong>: ResNet-50 uses bottleneck blocks totaling 49 conv layers + 1 FC (counted as 50); ResNet-101 deeper</li>
+<li><strong>Fully Connected</strong>: 1 final FC (after global pooling)</li>
+<li><strong>Total Params</strong>: ResNet-50 ≈ 25M</li>
+<li><strong>Notes</strong>: Residual (skip) connections that enable very deep networks and ease training. Skip connections were added to make deep networks trainable.
+<img alt="ResNet-50 architecture" src="../../assets/resnet50.png" /></li>
+</ul>
+<hr />
+<h2 id="6-advantages-and-disadvantages-of-cnn"><strong>6. Advantages and Disadvantages of CNN</strong><a class="headerlink" href="#6-advantages-and-disadvantages-of-cnn" title="Permanent link">&para;</a></h2>
+<h3 id="61-advantages"><strong>6.1 Advantages</strong><a class="headerlink" href="#61-advantages" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Learns hierarchical spatial features</strong> (edges → textures → objects).  </li>
+<li><strong>Parameter sharing &amp; local connectivity</strong> → fewer parameters and efficient learning for images.  </li>
+<li><strong>State-of-the-art</strong> for vision tasks and has efficient variants for edge/mobile.  </li>
+<li><strong>Robust to translation, scaling, and rotation</strong> due to convolution and pooling layers.  </li>
+<li><strong>Feature extraction is automatic</strong> — no need for manual feature engineering.  </li>
+<li><strong>Versatility</strong> — can be applied to images, videos, and even sequential data like audio or text (with modifications).  </li>
+</ul>
+<h3 id="62-disadvantages"><strong>6.2 Disadvantages</strong><a class="headerlink" href="#62-disadvantages" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Data hungry</strong> — needs large labeled datasets for best performance.  </li>
+<li><strong>Compute and memory intensive</strong> (training often requires GPUs/TPUs).  </li>
+<li><strong>Can overfit</strong> on small datasets.  </li>
+<li><strong>Lack of interpretability</strong> — CNNs are often considered "black boxes" due to their complexity.  </li>
+<li><strong>Requires significant hyperparameter tuning</strong> (e.g., kernel size, stride, number of filters) for optimal performance.  </li>
+</ul>
+<hr />
+<h2 id="7-hosting-on-hugging-face"><strong>7. Hosting on Hugging Face</strong><a class="headerlink" href="#7-hosting-on-hugging-face" title="Permanent link">&para;</a></h2>
+<h3 id="71-prerequisites"><strong>7.1 Prerequisites</strong><a class="headerlink" href="#71-prerequisites" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Hugging Face account</strong>: <a href="https://huggingface.co/">Sign up here</a></li>
+<li><strong>Git and Git LFS installed</strong>:</li>
+<li>Windows: <code>git lfs install</code></li>
+<li><strong>Python packages</strong>:
+  <code>bash
+  pip install huggingface_hub torch torchvision</code></li>
+<li>Train your CNN locally and save artifacts (weights, optional config, and helper code).</li>
+</ul>
+<h3 id="72-steps-to-host"><strong>7.2 Steps to Host</strong><a class="headerlink" href="#72-steps-to-host" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Save model artifacts</strong> (e.g., <code>pytorch_model.bin</code>, <code>config.json</code>, <code>model.py</code>).</li>
+<li><strong>Create a repo</strong> on Hugging Face (via CLI or web).</li>
+<li><strong>Push files</strong> using Git + LFS or Python API.</li>
+<li><strong>Add a README</strong> (model card) with usage instructions.</li>
+<li><strong>Enable Inference API</strong> (optional).</li>
+</ol>
+<hr />
+<h3 id="73-notes-tips"><strong>7.3 Notes / Tips</strong><a class="headerlink" href="#73-notes-tips" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Use <strong>Git LFS</strong> for large weight files (&gt;10 MB).</li>
+<li>Provide a <strong>model.py</strong> file to help others reconstruct the architecture.</li>
+<li>Add a <strong>README.md</strong> with usage, dataset, license, and metrics.</li>
+<li>Enable the <strong>Inference API</strong> for remote inference directly on Hugging Face.</li>
+</ul>
 
 
 

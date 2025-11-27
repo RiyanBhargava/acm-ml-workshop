@@ -2,34 +2,38 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://riyanbhargava.github.io/acm-ml-workshop/</loc>
-         <lastmod>2025-11-21</lastmod>
+         <lastmod>2025-11-24</lastmod>
+    </url>
+    <url>
+         <loc>https://riyanbhargava.github.io/acm-ml-workshop/assets/DAY%203%20DEEP%20LEARNING%20%26%20NLP/readme/</loc>
+         <lastmod>2025-11-24</lastmod>
     </url>
     <url>
          <loc>https://riyanbhargava.github.io/acm-ml-workshop/day1/day1/</loc>
-         <lastmod>2025-11-21</lastmod>
+         <lastmod>2025-11-24</lastmod>
     </url>
     <url>
          <loc>https://riyanbhargava.github.io/acm-ml-workshop/day2/day2/</loc>
-         <lastmod>2025-11-21</lastmod>
+         <lastmod>2025-11-24</lastmod>
     </url>
     <url>
          <loc>https://riyanbhargava.github.io/acm-ml-workshop/day3/day3/</loc>
-         <lastmod>2025-11-21</lastmod>
+         <lastmod>2025-11-24</lastmod>
     </url>
     <url>
          <loc>https://riyanbhargava.github.io/acm-ml-workshop/day4/day4/</loc>
-         <lastmod>2025-11-21</lastmod>
+         <lastmod>2025-11-24</lastmod>
     </url>
     <url>
          <loc>https://riyanbhargava.github.io/acm-ml-workshop/files/day3/BERT_%28Harry_Potter%29/</loc>
-         <lastmod>2025-11-21</lastmod>
+         <lastmod>2025-11-24</lastmod>
     </url>
     <url>
          <loc>https://riyanbhargava.github.io/acm-ml-workshop/files/day4/code_which/</loc>
-         <lastmod>2025-11-21</lastmod>
+         <lastmod>2025-11-24</lastmod>
     </url>
     <url>
          <loc>https://riyanbhargava.github.io/acm-ml-workshop/files/day4/simple_cnn/</loc>
-         <lastmod>2025-11-21</lastmod>
+         <lastmod>2025-11-24</lastmod>
     </url>
 </urlset>

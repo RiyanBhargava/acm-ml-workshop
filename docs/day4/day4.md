@@ -15,7 +15,7 @@ An **Artificial Neural Network (ANN)** is a type of model in Deep Learning that 
   - **Hidden Layers**: Where the actual learning happens — the model adjusts its weights and biases for each neuron during training.
   - **Output Layer**: Produces the final prediction.
 
-![Example of an ANN](../assets/ANN.png)
+![Example of an ANN](../assets/assets day4/ANN.png)
 
 ```python
 # Define the model
@@ -39,7 +39,7 @@ model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy']
       - Helps mitigate the vanishing gradient problem (After a point of time, the network stops learning ).  
     **Disadvantages**:  
       - Can suffer from the "dying ReLU" problem, where neurons output zero for all inputs.
-    ![Relu Activation Function](../assets/Relu-activation-function.png)
+    ![Relu Activation Function](../assets/assets day4/Relu-activation-function.png)
 
   - **Sigmoid**: Maps input values to a range between 0 and 1, making it useful for binary classification tasks.  
     **Formula**: `f(x) = 1 / (1 + e^(-x))`  
@@ -47,7 +47,7 @@ model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy']
       - Outputs can be interpreted as probabilities.  
     **Disadvantages**:  
       - Can cause vanishing gradients for very large or small input values.  
-    ![Sigmoid Activation Function](../assets/sigmoid_function.jpg)
+    ![Sigmoid Activation Function](../assets/assets day4/sigmoid_function.jpg)
 
   - **Tanh (Hyperbolic Tangent)**: Similar to Sigmoid but maps inputs to a range between -1 and 1.  
     **Formula**: `f(x) = (e^x - e^(-x)) / (e^x + e^(-x))`  
@@ -55,7 +55,7 @@ model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy']
       - Helps with optimization.  
     **Disadvantages**:  
       - Can still suffer from vanishing gradients.
-    ![TanH Activation Function](../assets/tanh.jpg)
+    ![TanH Activation Function](../assets/assets day4/tanh.jpg)
 
 
   - **Softmax**: Converts raw scores (logits) into probabilities for multi-class classification tasks.  
@@ -64,7 +64,7 @@ model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy']
       - Ensures the output probabilities sum to 1.  
     **Disadvantages**:  
       - Not suitable for hidden layers, only used in the output layer for multi-class classification.
-    ![softmax](../assets/softmax.jpg)
+    ![softmax](../assets/assets day4/softmax.jpg)
 
 - **Optimizers**: Algorithms that improve model learning by adjusting weights and biases during training to reduce error.
 - **Loss Function**: Measures how wrong the model’s predictions are — the model tries to minimize this loss while learning.
@@ -125,7 +125,7 @@ Image classification involves assigning a single label to an entire image. For e
 - **ResNet**: Introduced residual connections, enabling the training of very deep networks.
 - **EfficientNet**: Balances model size, accuracy, and computational efficiency.
 
-![classification](../assets/image_classification.jpg)
+![classification](../assets/assets day4/image_classification.jpg)
 ---
 
 ### **3.2 Image Segmentation**
@@ -135,7 +135,7 @@ Image segmentation involves dividing an image into regions, where each pixel is 
 - **U-Net**: Designed for biomedical image segmentation, uses an encoder-decoder structure.
 - **Mask R-CNN**: Extends Faster R-CNN for instance segmentation.
 
-![segmentation](../assets/segmented_image.jpg)
+![segmentation](../assets/assets day4/segmented_image.jpg)
 ---
 
 ### **3.3 Object Detection**
@@ -146,7 +146,7 @@ Object detection identifies and localizes multiple objects in an image by drawin
 - **SSD (Single Shot MultiBox Detector)**: Balances speed and accuracy for real-time applications.
 - **Faster R-CNN**: Combines region proposal networks with CNNs for high accuracy.
 
-![segmentation](../assets/object_detection.jpg)
+![segmentation](../assets/assets day4/object_detection.jpg)
 ---
 
 ## **4. Convolutional Neural Networks (CNNs)**
@@ -186,13 +186,9 @@ A 3×3 grayscale image might look like this:
 
 An RGB image contains three color channels: **Red**, **Green**, and **Blue**. Each pixel is represented by three values, one for each channel, typically between 0 and 255:
 - **(255, 0, 0)** represents pure red.
-
 - **(0, 255, 0)** represents pure green.
-
 - **(0, 0, 255)** represents pure blue.
-
 - **(255, 255, 255)** represents white (all channels at maximum intensity).
-
 - **(0, 0, 0)** represents black (all channels at zero intensity).
 
 **Example**:  
@@ -431,8 +427,8 @@ If the output of the pooling layer is a 3D tensor of shape `(4, 4, 8)` (Height �
 #### **4.2.4 Fully Connected Layer**
 - Predicts the outcome based on the extracted features passed to it.
 
-![Example of a CNN](../assets/cnn.png)
-![Intuition](../assets/Intuition.png)
+![Example of a CNN](../assets/assets day4/cnn.png)
+![Intuition](../assets/assets day4/Intuition.png)
 
 ---
 
@@ -445,7 +441,7 @@ Even before convolution, the CNN receives a pixel matrix where:
 Dark areas represent the background.
 
 Bright areas represent the handwritten stroke.
-![input image](../assets/input.png)
+![input image](../assets/assets day4/input.png)
 
 ### **5.2 First Convolution Layer (Conv1) – Detecting Simple Edges**
 
@@ -453,29 +449,29 @@ The first convolution layer applies a set of filters to the input image to detec
 
 - Faint vertical edge getting represented in the first feature map.
 
-![input image](../assets/feature_0.png)
+![input image](../assets/assets day4/feature_0.png)
 
 - Vertical and Horizontal edges together, with the corners, are getting represented in the second feature map, representing 7 as an image.
 
-![input image](../assets/feature_1.png)
+![input image](../assets/assets day4/feature_1.png)
 
 - The background gets represented in the third feature map.
 
-![input image](../assets/feature_2.png)
+![input image](../assets/assets day4/feature_2.png)
 
 - The top vertical edge, and the rightmost horizontal edge gets represented, completing the shape in this particular feature map.
 
-![input image](../assets/feature_3.png)
+![input image](../assets/assets day4/feature_3.png)
 
 - The rightmost curve, gets represented in this particular feature map.
 
-![input image](../assets/feature_4.png)
+![input image](../assets/assets day4/feature_4.png)
 
 
 
 - In this feature map, the topmost horizontal curve, and the leftmost vertical curve faintly gets represented.
 
-![input image](../assets/feature_5.png)
+![input image](../assets/assets day4/feature_5.png)
 
 Each feature map is the result of applying a specific filter (kernel) to the input image, followed by the ReLU activation function, which ensures that only positive values are retained. These feature maps are then passed to the next layer for further processing.
 
@@ -617,4 +613,33 @@ Understanding these concepts is crucial for building and optimizing deep learnin
 - **Requires significant hyperparameter tuning** (e.g., kernel size, stride, number of filters) for optimal performance.  
 
 ---
+
+## **8. Hosting on Hugging Face**
+
+### **8.1 Prerequisites**
+- **Hugging Face account**: [Sign up here](https://huggingface.co/)
+- **Git and Git LFS installed**:
+  - Windows: `git lfs install`
+- **Python packages**:
+  ```bash
+  pip install huggingface_hub torch torchvision
+  ```
+- Train your CNN locally and save artifacts (weights, optional config, and helper code).
+
+### **8.2 Steps to Host**
+1. **Save model artifacts** (e.g., `pytorch_model.bin`, `config.json`, `model.py`).
+2. **Create a repo** on Hugging Face (via CLI or web).
+3. **Push files** using Git + LFS or Python API.
+4. **Add a README** (model card) with usage instructions.
+5. **Enable Inference API** (optional).
+
+---
+
+### **8.3 Notes / Tips**
+- Use **Git LFS** for large weight files (>10 MB).
+- Provide a **model.py** file to help others reconstruct the architecture.
+- Add a **README.md** with usage, dataset, license, and metrics.
+- Enable the **Inference API** for remote inference directly on Hugging Face.
+
+
 CNN_Model_Training colab link: [CNN_Model_Training](https://colab.research.google.com/drive/11mLrtD7BT0J9wWm1ugqtHlw1g81FfiAl?usp=sharing)
